@@ -1,0 +1,98 @@
+import * as React from "react";
+
+type GeneralConstructionIconProps = React.SVGProps<SVGSVGElement>;
+
+export default function GeneralConstructionIcon(props: GeneralConstructionIconProps) {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
+      <path
+        d="M20,19H5c-1.1,0-2-0.9-2-2v-4c0-1.1,0.9-2,2-2h6l11,4v2C22,18.1,21.1,19,20,19z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="5"
+        y1="8"
+        x2="5"
+        y2="11"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M21,28H4c-1.6,0-3-1.3-3-3v0c0-1.6,1.3-3,3-3h17c1.6,0,3,1.3,3,3v0C24,26.7,22.7,28,21,28z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <polyline
+        points="26,11 26,19 31,26"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="22"
+        y1="17"
+        x2="26"
+        y2="19"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="5"
+        y1="25"
+        x2="5"
+        y2="25"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="19"
+        y1="25"
+        x2="19"
+        y2="25"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="12"
+        y1="25"
+        x2="12"
+        y2="25"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22,15L20.3,4.7c-0.2-1-1-1.7-2-1.7H13c-1.1,0-2,0.9-2,2v6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <line
+        x1="7"
+        y1="15"
+        x2="11"
+        y2="15"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

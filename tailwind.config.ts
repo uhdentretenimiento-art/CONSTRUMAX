@@ -1,0 +1,60 @@
+import type { Config } from "tailwindcss";
+
+export default {
+  darkMode: "class",
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  theme: {
+
+    extend: {
+      colors: {
+        "construmax-blue": "#1D4ED8",
+        "construmax-blue-light": "#2DD4BF",
+        "construmax-slate": "#374151",
+        "construmax-amber": "#F59E0B",
+        "construmax-mint": "#86EFAC",
+        "construmax-navy": "#1D4ED8",
+        "construmax-navy-dark": "#374151",
+        slate: {
+          50: "#F1F7F8",
+          100: "#DDF2EE",
+          200: "#BFE7DD",
+          300: "#97D7C8",
+          400: "#63C0AF",
+          500: "#2DD4BF",
+          600: "#25A999",
+          700: "#374151",
+          800: "#2F3846",
+          900: "#1F2937",
+          950: "#111827",
+        },
+        gray: {
+          50: "#F1F7F8",
+          100: "#DDF2EE",
+          200: "#BFE7DD",
+          300: "#97D7C8",
+          400: "#63C0AF",
+          500: "#2DD4BF",
+          600: "#25A999",
+          700: "#374151",
+          800: "#2F3846",
+          900: "#1F2937",
+          950: "#111827",
+        },
+        zinc: {
+          50: "#F1F7F8",
+          100: "#DDF2EE",
+          200: "#BFE7DD",
+          300: "#97D7C8",
+          400: "#63C0AF",
+          500: "#2DD4BF",
+          600: "#25A999",
+          700: "#374151",
+          800: "#2F3846",
+          900: "#1F2937",
+          950: "#111827",
+        },
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config;
