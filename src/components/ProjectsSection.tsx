@@ -107,7 +107,7 @@ const featuredImages: FeaturedImage[] = [
 function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
     <div
-      className="flex w-max gap-4 pr-4 md:gap-5 md:pr-5"
+      className="flex w-max shrink-0 gap-4 pr-4 md:gap-5 md:pr-5"
       aria-hidden={ariaHidden}
     >
       {featuredImages.map((image) => (
@@ -138,8 +138,20 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
 export default function ProjectsSection() {
   return (
     <section id="proyectos" className="relative overflow-hidden pb-12 pt-24 text-white">
-      <GlowOrb className="absolute top-1/3 -left-32" color="#2DD4BF" size={400} blur={150} duration={8} />
-      <GlowOrb className="absolute bottom-1/4 -right-32" color="#1D4ED8" size={450} blur={180} duration={10} />
+      <GlowOrb
+        className="absolute top-1/3 -left-32"
+        color="#2DD4BF"
+        size={400}
+        blur={150}
+        duration={8}
+      />
+      <GlowOrb
+        className="absolute bottom-1/4 -right-32"
+        color="#1D4ED8"
+        size={450}
+        blur={180}
+        duration={10}
+      />
 
       <div className="mx-auto max-w-6xl px-4">
         <motion.div
@@ -167,12 +179,19 @@ export default function ProjectsSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="relative"
         >
-          <div className="overflow-hidden">
-            <div className="flex w-max animate-projects-marquee">
-              <FeaturedProjectsStrip />
-              <FeaturedProjectsStrip ariaHidden />
-            </div>
-          </div>
+          <motion.div
+            className="flex w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              duration: 34,
+              ease: "linear",
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "loop",
+            }}
+          >
+            <FeaturedProjectsStrip />
+            <FeaturedProjectsStrip ariaHidden />
+          </motion.div>
         </motion.div>
 
         <motion.div
