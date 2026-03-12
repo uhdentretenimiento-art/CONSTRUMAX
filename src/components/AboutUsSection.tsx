@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Award, CheckCircle2, Clock3, Users } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -53,11 +52,6 @@ export default function AboutUsSection() {
 
   return (
     <section className="relative overflow-hidden py-24 text-white">
-      {/* Background */}
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-      <div className="absolute inset-0 -z-20 opacity-[0.55] bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-black/60 to-transparent" />
-
       {/* Glow Orbs */}
       <GlowOrb className="absolute top-1/4 -left-20" color="#2DD4BF" size={400} blur={150} duration={7} />
       <GlowOrb className="absolute bottom-1/4 -right-20" color="#1D4ED8" size={500} blur={180} duration={9} />

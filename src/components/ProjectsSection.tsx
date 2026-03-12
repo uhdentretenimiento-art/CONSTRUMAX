@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { GlowOrb } from "@/components/ui/FloatingElement";
-import { useParallax } from "@/hooks";
 
 type FeaturedImage = {
   id: string;
@@ -106,18 +105,8 @@ const featuredImages: FeaturedImage[] = [
 ];
 
 export default function ProjectsSection() {
-  const backgroundY = useParallax(-0.01);
-
   return (
-    <section id="proyectos" className="relative overflow-hidden py-24 text-white">
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-      <motion.div
-        className="absolute inset-0 -z-20 opacity-[0.55]"
-        style={{ y: backgroundY }}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
-      </motion.div>
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+    <section id="proyectos" className="relative overflow-hidden pb-0 pt-24 text-white">
 
       <GlowOrb className="absolute top-1/3 -left-32" color="#2DD4BF" size={400} blur={150} duration={8} />
       <GlowOrb className="absolute bottom-1/4 -right-32" color="#1D4ED8" size={450} blur={180} duration={10} />
@@ -187,7 +176,7 @@ export default function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10 text-center"
+          className="mt-8 text-center"
         >
           <Link
             href="/proyectos"
