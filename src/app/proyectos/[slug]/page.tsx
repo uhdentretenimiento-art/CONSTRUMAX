@@ -250,33 +250,6 @@ export default async function ProyectoDetallePage({
                   </span>
                 </div>
 
-                <div className="grid gap-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
-                      Desafío
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">
-                      {caseStudy.challenge}
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
-                      Solución
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">
-                      {caseStudy.solution}
-                    </p>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
-                      Resultado
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">
-                      {caseStudy.result}
-                    </p>
-                  </div>
-                </div>
-
                 <div className="mt-4 flex flex-wrap gap-2">
                   {caseStudy.highlights.map((item) => (
                     <span
@@ -290,11 +263,38 @@ export default async function ProyectoDetallePage({
               </div>
             </div>
 
-            <div>
+            <div className="space-y-6">
               <ProjectGalleryClient
                 title={project.title}
                 normalizedMedia={normalizedMedia as any}
               />
+
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                    Desafío
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/75">
+                    {caseStudy.challenge}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                    Solución
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/75">
+                    {caseStudy.solution}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                    Resultado
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/75">
+                    {caseStudy.result}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
