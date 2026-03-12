@@ -107,9 +107,10 @@ const featuredImages: FeaturedImage[] = [
 function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
   return (
     <div
-      className="flex w-max shrink-0 gap-4 pr-4 md:gap-5 md:pr-5"
+      className="flex w-max shrink-0 gap-1 pr-1 md:gap-1.5 md:pr-1.5"
       aria-hidden={ariaHidden}
     >
+
       {featuredImages.map((image) => (
         <div
           key={`${ariaHidden ? "dup" : "base"}-${image.id}`}
