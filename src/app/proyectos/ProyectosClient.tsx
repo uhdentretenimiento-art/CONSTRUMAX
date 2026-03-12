@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 
 import AnimateOnScroll from "@/components/AnimateOnScroll";
+import { useParallax } from "@/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -32,6 +33,10 @@ import { getProjectCaseStudy } from "@/data/projectCases";
 import { getProjectDescription } from "@/data/projectDescriptions";
 
 const RESUME_DELAY_MS = 900;
+const PROJECTS_HERO_BG =
+  "https://www.construmaxpiscinas.com/images/hero/hero-proyectos.avif";
+const PROJECTS_HERO_BG_MOBILE =
+  "https://www.construmaxpiscinas.com/images/hero/hero-proyectos-mobile.avif";
 
 const getUniqueCities = () => {
   const cities = projects.map((p) => p.location.split(",")[0].trim());
@@ -112,6 +117,7 @@ export default function ProyectosClient() {
   const [isTabVisible, setIsTabVisible] = useState(true);
 
   const prefersReducedMotion = usePrefersReducedMotion();
+  const backgroundY = useParallax(-0.08);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const resumeTimerRef = useRef<number | null>(null);
@@ -282,13 +288,31 @@ export default function ProyectosClient() {
   ]);
 
   return (
-    <>
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-30 overflow-hidden">
+        <motion.div
+          className="absolute inset-x-0 -top-[10%] -bottom-[10%] scale-[1.12] bg-cover bg-center bg-no-repeat md:hidden"
+          style={{
+            y: backgroundY,
+            backgroundImage: `url(${PROJECTS_HERO_BG_MOBILE})`,
+          }}
+        />
+        <motion.div
+          className="absolute inset-x-0 -top-[10%] -bottom-[10%] hidden scale-[1.12] bg-cover bg-center bg-no-repeat md:block"
+          style={{
+            y: backgroundY,
+            backgroundImage: `url(${PROJECTS_HERO_BG})`,
+          }}
+        />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(4,10,24,0.88)_0%,rgba(7,17,34,0.7)_18%,rgba(6,14,28,0.78)_46%,rgba(3,8,18,0.9)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_82%_at_50%_10%,rgba(255,255,255,0.02)_0%,rgba(7,17,34,0.12)_34%,rgba(3,8,18,0.46)_70%,rgba(1,3,10,0.68)_100%),radial-gradient(58%_58%_at_18%_14%,rgba(45,212,191,0.12),transparent_64%),radial-gradient(52%_52%_at_82%_18%,rgba(29,78,216,0.1),transparent_62%)]" />
+
+      <div className="relative z-10">
       {/* Header */}
       {!selectedProject ? (
-        <section className="relative overflow-hidden pt-18 pb-12 text-white md:pt-20">
-          <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-          <div className="absolute inset-0 -z-20 opacity-[0.55] bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
-
+        <section className="relative overflow-hidden pb-12 pt-18 text-white md:pt-20">
           <div className="mx-auto max-w-6xl px-4 text-center">
             <AnimateOnScroll animationType="slide-up">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
@@ -687,22 +711,22 @@ export default function ProyectosClient() {
         </div>
       </section>
 
-      <Lightbox
-        images={normalizedMedia.flatMap((media): LightboxImageItem[] => {
-          const alt = selectedProject?.title || "";
-          if (media.type === "video")
-            return media.sources.map((s) => ({ src: s.src, alt }));
-          return [{ src: media.formats, alt }];
-        })}
-        currentIndex={currentImageIndex}
-        isOpen={lightboxOpen}
-        onClose={() => setLightboxOpen(false)}
-        onIndexChange={(next) => {
-          setCurrentImageIndex(next);
-          handleThumbnailClick(next);
-        }}
-      />
-
-    </>
+        <Lightbox
+          images={normalizedMedia.flatMap((media): LightboxImageItem[] => {
+            const alt = selectedProject?.title || "";
+            if (media.type === "video")
+              return media.sources.map((s) => ({ src: s.src, alt }));
+            return [{ src: media.formats, alt }];
+          })}
+          currentIndex={currentImageIndex}
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          onIndexChange={(next) => {
+            setCurrentImageIndex(next);
+            handleThumbnailClick(next);
+          }}
+        />
+      </div>
+    </section>
   );
 }

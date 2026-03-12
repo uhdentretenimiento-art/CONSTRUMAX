@@ -27,6 +27,15 @@ type FormData = {
 };
 
 export default function ContactSection() {
+  const projectTypeOptions = [
+    "Piscina Nueva",
+    "Remodelación",
+    "Mantenimiento",
+    "Jacuzzi/Spa",
+    "Quinchos",
+    "Otro",
+  ];
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
@@ -147,10 +156,6 @@ export default function ContactSection() {
 
   return (
     <section className="relative overflow-hidden py-20 text-white">
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-      <div className="absolute inset-0 -z-20 opacity-[0.4] bg-[radial-gradient(55%_55%_at_12%_20%,rgba(29,78,216,0.10),transparent_60%),radial-gradient(45%_45%_at_88%_80%,rgba(45,212,191,0.14),transparent_60%)]" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-black/60 to-transparent" />
-
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
           <AnimateOnScroll animationType="slide-right">
@@ -196,11 +201,6 @@ export default function ContactSection() {
                     </div>
                   </div>
                 ))}
-              </div>
-
-              <div className="mt-6 flex items-center gap-2 rounded-xl border border-white/12 bg-white/[0.03] px-3 py-2 text-sm text-white/75">
-                <Clock3 className="h-4 w-4 text-[#2DD4BF]" />
-                Tiempo de respuesta habitual: dentro de 24 horas hábiles.
               </div>
 
               <div className="mt-6 rounded-2xl border border-white/12 bg-white/[0.03] p-4">
@@ -361,15 +361,54 @@ export default function ContactSection() {
                       >
                         Tipo de proyecto
                       </label>
-                      <Input
-                        id="projectType"
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleChange}
-                        disabled={loading}
-                        className={inputBase}
-                        placeholder="Piscina nueva / remodelación / etc."
-                      />
+                      <div className="relative">
+                        <select
+                          id="projectType"
+                          name="projectType"
+                          value={formData.projectType}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              projectType: e.target.value,
+                            }))
+                          }
+                          disabled={loading}
+                          className={`${inputBase} w-full appearance-none pr-10 ${
+                            formData.projectType ? "text-white" : "text-white/35"
+                          }`}
+                        >
+                          <option value="" className="bg-slate-950 text-white/70">
+                            Tipo de proyecto
+                          </option>
+                          {projectTypeOptions.map((option) => (
+                            <option
+                              key={option}
+                              value={option}
+                              className="bg-slate-950 text-white"
+                            >
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-white/45">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M6 9L12 15L18 9"
+                              stroke="currentColor"
+                              strokeWidth="1.8"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -412,6 +451,11 @@ export default function ContactSection() {
                   <p className="text-center text-xs text-white/55">
                     Al enviar, aceptás que te contactemos por WhatsApp o email.
                   </p>
+
+                  <div className="flex items-center gap-2 rounded-xl border border-white/12 bg-white/[0.03] px-3 py-2 text-sm text-white/75">
+                    <Clock3 className="h-4 w-4 text-[#2DD4BF]" />
+                    Tiempo de respuesta habitual: dentro de 24 horas hábiles.
+                  </div>
                 </form>
               )}
             </div>

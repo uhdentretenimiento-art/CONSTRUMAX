@@ -30,7 +30,7 @@ const CASES: Record<string, ProjectCaseStudy> = {
     highlights: ["Escala olímpica", "Alto rendimiento", "Uso intensivo"],
   },
   "agropecuaria-el-guanaco-metan": {
-    category: "Residencial",
+    category: "Institucional",
     challenge:
       "Construir una piscina en un entorno natural con abundante vegetación y caída constante de hojas.",
     solution:
@@ -38,6 +38,16 @@ const CASES: Record<string, ProjectCaseStudy> = {
     result:
       "Piscina funcional de bajo mantenimiento perfectamente integrada al paisaje.",
     highlights: ["Desborde finlandés", "Bajo mantenimiento", "Integración paisajística"],
+  },
+  "hosteria-cabra-corral": {
+    category: "Institucional",
+    challenge:
+      "Desarrollar un espacio acuático atractivo para huéspedes, con buena durabilidad y mantenimiento controlado.",
+    solution:
+      "Ejecución de piscina pensada para uso hotelero, con terminaciones resistentes y planteo técnico acorde a uso frecuente.",
+    result:
+      "Piscina integrada a la propuesta de hospedaje, con imagen cuidada y operación confiable.",
+    highlights: ["Uso hotelero", "Terminación resistente", "Operación confiable"],
   },
   "grand-bourg-1": {
     category: "Residencial Premium",
@@ -98,6 +108,16 @@ const CASES: Record<string, ProjectCaseStudy> = {
     result:
       "Piscina más resistente, moderna y mejor integrada al entorno.",
     highlights: ["Nueva estructura", "Mayor resistencia", "Diseño actualizado"],
+  },
+  "san-salvador-de-jujuy": {
+    category: "Institucional",
+    challenge:
+      "Resolver un proyecto de escala representativa con una propuesta durable y clara en su ejecución.",
+    solution:
+      "Diseño técnico a medida con materiales de primera línea y definición de obra pensada para uso exigente.",
+    result:
+      "Piscina ejecutada con presencia institucional, alta durabilidad y terminación premium.",
+    highlights: ["Escala representativa", "Alta durabilidad", "Terminación premium"],
   },
 };
 
