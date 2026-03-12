@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/data/site";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { FloatingElement, GlowOrb } from "@/components/ui/FloatingElement";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { useParallax } from "@/hooks";
 
 export default function Hero() {
@@ -16,9 +17,9 @@ export default function Hero() {
   const contentY = useParallax(-0.05);
 
   const quickStats = [
-    { value: "25+", label: "Años de trayectoria" },
-    { value: "500+", label: "Proyectos entregados" },
-    { value: "10 años", label: "Garantía de calidad" },
+    { value: 25, suffix: "+", label: "Años de trayectoria" },
+    { value: 500, suffix: "+", label: "Proyectos entregados" },
+    { value: 10, suffix: " años", label: "Garantía de calidad" },
   ];
 
   const title = h.title;
@@ -188,9 +189,11 @@ export default function Hero() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 className="group rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-md transition-all duration-300 hover:border-[#2DD4BF]/30 hover:bg-white/[0.08]"
               >
-                <p className="text-2xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                  {stat.value}
-                </p>
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  className="text-2xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent"
+                />
                 <p className="mt-1 text-xs text-white/60 group-hover:text-white/80 transition-colors">
                   {stat.label}
                 </p>

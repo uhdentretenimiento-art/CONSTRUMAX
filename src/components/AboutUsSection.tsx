@@ -6,6 +6,7 @@ import { Award, CheckCircle2, Clock3, Users } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { GlowOrb } from "@/components/ui/FloatingElement";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { useParallax } from "@/hooks";
 
 const features = [
@@ -18,9 +19,9 @@ const features = [
 ];
 
 const stats = [
-  { icon: Award, value: "25+", label: "Años de experiencia" },
-  { icon: Users, value: "500+", label: "Clientes satisfechos" },
-  { icon: Clock3, value: "25", label: "Días promedio de obra" },
+  { icon: Award, value: 25, suffix: "+", label: "Años de experiencia" },
+  { icon: Users, value: 500, suffix: "+", label: "Clientes satisfechos" },
+  { icon: Clock3, value: 25, suffix: "", label: "Días promedio de obra" },
 ];
 
 export default function AboutUsSection() {
@@ -102,9 +103,11 @@ export default function AboutUsSection() {
                 <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.07] text-[#2DD4BF] transition-all duration-300 group-hover:bg-[#2DD4BF]/20 group-hover:scale-110">
                   <item.icon className="h-5 w-5" />
                 </div>
-                <p className="text-lg font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent md:text-2xl">
-                  {item.value}
-                </p>
+                <AnimatedCounter
+                  value={item.value}
+                  suffix={item.suffix}
+                  className="text-lg font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent md:text-2xl"
+                />
                 <p className="text-[11px] text-white/60 md:text-xs">
                   {item.label}
                 </p>

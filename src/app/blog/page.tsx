@@ -125,9 +125,18 @@ export default function BlogPage() {
                       <SelectValue placeholder="Filtrar por categoría" />
                     </SelectTrigger>
                     <SelectContent className="border-[#86EFAC]/50 bg-white text-[#374151]">
-                      <SelectItem value="all">Todas las categorías</SelectItem>
+                      <SelectItem
+                        value="all"
+                        className="text-[#374151] hover:bg-slate-100 focus:bg-slate-100 [&_svg]:text-[#374151]/70"
+                      >
+                        Todas las categorías
+                      </SelectItem>
                       {categories.map((category) => (
-                        <SelectItem key={category} value={category}>
+                        <SelectItem
+                          key={category}
+                          value={category}
+                          className="text-[#374151] hover:bg-slate-100 focus:bg-slate-100 [&_svg]:text-[#374151]/70"
+                        >
                           {category}
                         </SelectItem>
                       ))}

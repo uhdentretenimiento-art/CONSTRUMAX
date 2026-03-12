@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
@@ -65,9 +64,13 @@ const itemVariants: Variants = {
 
 type ServicesSectionProps = {
   maxItems?: number;
+  inheritBackground?: boolean;
 };
 
-export default function ServicesSection({ maxItems }: ServicesSectionProps) {
+export default function ServicesSection({
+  maxItems,
+  inheritBackground = false,
+}: ServicesSectionProps) {
   const [selected, setSelected] = useState<Service | null>(null);
   const backgroundY = useParallax(-0.012);
 
@@ -386,22 +389,33 @@ export default function ServicesSection({ maxItems }: ServicesSectionProps) {
     <>
       <section className="relative overflow-hidden py-24 text-white">
         {/* Background */}
-        <div className="absolute inset-0 -z-50 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-        <div 
-          className="absolute inset-0 -z-40 bg-cover bg-center opacity-10"
-          style={{ backgroundImage: 'url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)' }}
-        />
-        <motion.div
-          className="absolute inset-0 -z-30 opacity-[0.55]"
-          style={{ y: backgroundY }}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
-        </motion.div>
-        <div className="absolute inset-x-0 bottom-0 -z-20 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+        {!inheritBackground ? (
+          <>
+            <div className="absolute inset-0 -z-50 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
+            <div
+              className="absolute inset-0 -z-40 bg-cover bg-center opacity-10"
+              style={{
+                backgroundImage:
+                  "url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)",
+              }}
+            />
+            <motion.div
+              className="absolute inset-0 -z-30 opacity-[0.55]"
+              style={{ y: backgroundY }}
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
+            </motion.div>
+            <div className="absolute inset-x-0 bottom-0 -z-20 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+          </>
+        ) : null}
 
         {/* Glow Orbs */}
-        <GlowOrb className="absolute top-1/4 -right-32" color="#1D4ED8" size={400} blur={150} duration={8} />
-        <GlowOrb className="absolute bottom-1/3 -left-32" color="#2DD4BF" size={350} blur={130} duration={6} />
+        {!inheritBackground ? (
+          <>
+            <GlowOrb className="absolute top-1/4 -right-32" color="#1D4ED8" size={400} blur={150} duration={8} />
+            <GlowOrb className="absolute bottom-1/3 -left-32" color="#2DD4BF" size={350} blur={130} duration={6} />
+          </>
+        ) : null}
 
         <div className="mx-auto max-w-6xl px-6 text-center">
           {/* Header */}

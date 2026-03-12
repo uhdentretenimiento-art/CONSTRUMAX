@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import ServicesSection from "@/components/ServicesSection";
-import ServicesTrustSection from "@/components/ServicesTrustSection";
+import ServicesPageContent from "@/components/ServicesPageContent";
 
 export const metadata: Metadata = {
   title: "Servicios | Construmax Piscinas",
@@ -20,10 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function ServiciosPage() {
-  return (
-    <>
-      <ServicesSection />
-      <ServicesTrustSection />
-    </>
-  );
+  return <ServicesPageContent />;
 }

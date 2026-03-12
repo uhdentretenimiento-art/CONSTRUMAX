@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { Award, CheckCircle2, Clock3, ShieldCheck, Users } from "lucide-react";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const stats = [
-  { icon: Award, value: "25+", label: "Años construyendo piscinas" },
-  { icon: Users, value: "500+", label: "Clientes satisfechos" },
-  { icon: Clock3, value: "25", label: "Días promedio de ejecución" },
+  { icon: Award, value: 25, suffix: "+", label: "Años construyendo piscinas" },
+  { icon: Users, value: 500, suffix: "+", label: "Clientes satisfechos" },
+  { icon: Clock3, value: 25, suffix: "", label: "Días promedio de ejecución" },
 ];
 
 const bullets = [
@@ -19,12 +20,22 @@ const bullets = [
   "Experiencia comprobada en Salta y Jujuy.",
 ];
 
-export default function ServicesTrustSection() {
+type ServicesTrustSectionProps = {
+  inheritBackground?: boolean;
+};
+
+export default function ServicesTrustSection({
+  inheritBackground = false,
+}: ServicesTrustSectionProps) {
   return (
     <section className="relative overflow-hidden pb-24 pt-6 text-white">
-      <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-      <div className="absolute inset-0 -z-20 opacity-[0.4] bg-[radial-gradient(55%_55%_at_12%_20%,rgba(29,78,216,0.10),transparent_60%),radial-gradient(45%_45%_at_88%_80%,rgba(45,212,191,0.14),transparent_60%)]" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+      {!inheritBackground ? (
+        <>
+          <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
+          <div className="absolute inset-0 -z-20 opacity-[0.4] bg-[radial-gradient(55%_55%_at_12%_20%,rgba(29,78,216,0.10),transparent_60%),radial-gradient(45%_45%_at_88%_80%,rgba(45,212,191,0.14),transparent_60%)]" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-black/60 to-transparent" />
+        </>
+      ) : null}
 
       <div className="mx-auto max-w-6xl px-6">
         <AnimateOnScroll animationType="slide-up">
@@ -55,7 +66,11 @@ export default function ServicesTrustSection() {
                     <div className="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.07] text-[#2DD4BF]">
                       <stat.icon className="h-4.5 w-4.5" />
                     </div>
-                    <p className="text-2xl font-semibold text-white">{stat.value}</p>
+                    <AnimatedCounter
+                      value={stat.value}
+                      suffix={stat.suffix}
+                      className="text-2xl font-semibold text-white"
+                    />
                     <p className="mt-1 text-xs text-white/60">{stat.label}</p>
                   </div>
                 ))}
