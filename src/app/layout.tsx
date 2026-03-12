@@ -192,7 +192,7 @@ export default function RootLayout({
           name: "¿En qué zonas trabajan?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Trabajamos principalmente en Salta y Jujuy. Consultanos si tu proyecto está en otra zona.",
+            text: "Trabajamos principalmente en Salta y Jujuy. Consúltanos si tu proyecto está en otra zona.",
           },
         },
       ],

@@ -110,8 +110,7 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
       className="flex w-max shrink-0 gap-1 pr-1 md:gap-1.5 md:pr-1.5"
       aria-hidden={ariaHidden}
     >
-
-      {featuredImages.map((image) => (
+      {featuredImages.map((image, index) => (
         <div
           key={`${ariaHidden ? "dup" : "base"}-${image.id}`}
           className="group relative aspect-[16/9] w-[78vw] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-black/30 sm:w-[58vw] lg:w-[44vw] xl:w-[38vw]"
@@ -124,8 +123,9 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
               sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, (max-width: 1280px) 44vw, 38vw"
               alt={`Proyecto destacado ${image.id}`}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
+              loading={!ariaHidden && index === 0 ? "eager" : "lazy"}
+              fetchPriority={!ariaHidden && index === 0 ? "high" : "auto"}
+              decoding={!ariaHidden && index === 0 ? "sync" : "async"}
               referrerPolicy="no-referrer"
             />
           </picture>

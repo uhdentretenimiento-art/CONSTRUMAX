@@ -6,7 +6,7 @@ import { ShieldCheck, TimerReset, Handshake } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Proceso de Construccion | Construmax Piscinas",
+  title: "Proceso de Construcción | Construmax Piscinas",
   description:
     "Conoce el proceso profesional de Construmax: diseño, estructura, instalaciones, acabados y entrega con control de calidad.",
   alternates: {
@@ -18,7 +18,7 @@ const processPillars = [
   {
     icon: ShieldCheck,
     title: "Calidad verificable",
-    text: "Materiales premium y controles tecnicos en cada etapa.",
+    text: "Materiales premium y controles técnicos en cada etapa.",
   },
   {
     icon: TimerReset,

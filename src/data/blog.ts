@@ -72,7 +72,7 @@ El costo aumenta proporcionalmente con el tamaño, pero no solo en construcción
 - **Piscinas familiares**: 1m a 1.40m (con pendiente gradual)
 - **Piscinas para adultos**: 1.20m a 1.60m
 - **Con área de hidromasaje**: 0.90m en zona de spa
-- **Con playa humeda**: 0,30m – 0,40m
+- **Con playa húmeda**: 0,30m – 0,40m
 
 **Consejos finales**
 
@@ -264,7 +264,7 @@ El concepto "menos es más":
 - Acabados de alta gama
 - Integración perfecta con el paisaje
 - Hidromasajes integrados
-- Playa humeda
+- Playa húmeda
 
 **5. Integración con áreas sociales**
 
@@ -292,7 +292,7 @@ Tono arena y azules profundos:
 
 - Revestimientos color aren, verdes y azules
 - Venecitas en tonos océano
-- Bordes de piedra natural (piedra Bali o simil Bali)
+- Bordes de piedra natural (piedra Bali o símil Bali)
 - Integración con jardín natural
 
 **8. Seguridad inteligente**
@@ -435,7 +435,7 @@ Imagina poder usar tu piscina en pleno invierno mientras afuera hace frío. La c
 
 5\. **Programador horario**: Calentar solo cuando se usará
 
-En CONSTRUMAX te asesoramos para elegir el sistema de climatización ideal para tu piscina y presupuesto. ¡Consultanos!
+En CONSTRUMAX te asesoramos para elegir el sistema de climatización ideal para tu piscina y presupuesto. ¡Consúltanos!
     `,
     image:
       "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif",
@@ -580,7 +580,7 @@ El revestimiento de tu piscina no sólo define su estética, sino también su du
 
 **Características:**
 
-- **Material Ceramico**
+- **Material Cerámico**
 - **Diversos modelos**
 - **Imitación Venecita**
 
@@ -588,7 +588,7 @@ El revestimiento de tu piscina no sólo define su estética, sino también su du
 
 - **Mejora la limpieza**
 - **Menor cantidad de juntas**
-- **Estetica aceptable**
+- **Estética aceptable**
 - **Menor costo**
 - **Colocación de complejidad baja**
 
@@ -630,7 +630,7 @@ En CONSTRUMAX recomendamos:
 - **Para presupuesto ajustado**: Epoxi de alta calidad o cerámico
 - **Para piscinas elevadas**: Membrana PVC
 
-¿Necesitas asesoramiento personalizado? ¡Contactanos y te ayudamos a elegir!
+¿Necesitas asesoramiento personalizado? ¡Contáctanos y te ayudamos a elegir!
     `,
     image:
       "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/1280w/la-almudena-001-1280w.avif",

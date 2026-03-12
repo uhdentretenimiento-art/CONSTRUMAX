@@ -45,7 +45,7 @@ export default function Navbar() {
     () => [
       { label: "Inicio", href: "/" },
       { label: "Servicios", href: "/servicios" },
-      { label: "Proyectos", href: "/proyectos" },
+      { label: "Proyectos", href: "/proyectos?view=list" },
       { label: "Proceso", href: "/proceso" },
       { label: "Blog", href: "/blog" },
       { label: "Contacto", href: "/contacto" },

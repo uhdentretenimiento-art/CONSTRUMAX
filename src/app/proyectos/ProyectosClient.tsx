@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectSuggestions from "@/components/ProjectSuggestions";
@@ -28,6 +29,7 @@ import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import { normalizeMedia } from "@/lib/media";
 import { getProjectCaseStudy } from "@/data/projectCases";
+import { getProjectDescription } from "@/data/projectDescriptions";
 
 const RESUME_DELAY_MS = 900;
 
@@ -97,6 +99,7 @@ function MiniaturaConFallback({
 }
 
 export default function ProyectosClient() {
+  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -157,12 +160,30 @@ export default function ProyectosClient() {
     });
   }, [searchTerm, selectedCity]);
 
+  const currentProjectIndex = useMemo(() => {
+    if (!selectedProject) return -1;
+    return filteredProjects.findIndex((project) => project.id === selectedProject.id);
+  }, [filteredProjects, selectedProject]);
+
+  const previousProject =
+    currentProjectIndex > 0 ? filteredProjects[currentProjectIndex - 1] : null;
+  const nextProject =
+    currentProjectIndex >= 0 && currentProjectIndex < filteredProjects.length - 1
+      ? filteredProjects[currentProjectIndex + 1]
+      : null;
+
   useEffect(() => {
     if (selectedProject) {
       setActiveThumbIndex(0);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [selectedProject]);
+
+  useEffect(() => {
+    if (searchParams.get("view") === "list") {
+      setSelectedProject(null);
+    }
+  }, [searchParams]);
 
   // Tab visibility
   useEffect(() => {
@@ -332,40 +353,56 @@ export default function ProyectosClient() {
                 exit={{ opacity: 0, y: -16 }}
                 className="mx-auto max-w-5xl"
               >
-                <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                  <button
-                    aria-label="Cerrar detalle de proyecto"
-                    onClick={() => setSelectedProject(null)}
-                    className="flex w-fit items-center gap-2 font-semibold text-[#2DD4BF] hover:underline"
-                  >
-                    <ChevronLeft className="h-5 w-5" /> Volver al listado
-                  </button>
-
-                  <div className="md:text-right">
+                <div className="mb-8">
+                  <div className="text-left">
                     <h2 className="text-3xl font-semibold text-white">
                       {selectedProject.title}
                     </h2>
-                    <span className="mt-1 flex items-center gap-1 text-white/60 md:justify-end">
+                    <span className="mt-1 flex items-center gap-1 text-white/60">
                       <MapPin className="h-4 w-4" /> {selectedProject.location}
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-8">
+                  <div className="grid grid-cols-1 gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-8">
                     <div className="lg:sticky lg:top-24 lg:self-start">
-                      <ProjectSuggestions
-                        currentProjectId={selectedProject.id}
-                        limit={4}
-                      />
+                      {selectedProject ? (() => {
+                        const cs = getProjectCaseStudy(selectedProject);
+                        return (
+                          <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-5 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+                            <div className="mb-4 flex items-center justify-between gap-4">
+                              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                                Caso de estudio
+                              </p>
+                              <span className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                                {cs.category}
+                              </span>
+                            </div>
+
+                            <div className="space-y-3">
+                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Desafío</p>
+                                <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.challenge}</p>
+                              </div>
+                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Solución</p>
+                                <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.solution}</p>
+                              </div>
+                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Resultado</p>
+                                <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.result}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })() : null}
+
                       <div className="mt-4">
-                        <Link
-                          href="/proyectos"
-                          onClick={() => setSelectedProject(null)}
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2 font-semibold text-white/90 transition hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
-                        >
-                          Ver portafolio completo
-                        </Link>
+                        <ProjectSuggestions
+                          currentProjectId={selectedProject.id}
+                          limit={4}
+                        />
                       </div>
                     </div>
 
@@ -538,34 +575,85 @@ export default function ProyectosClient() {
                   </div>
 
                   {selectedProject ? (() => {
-                    const cs = getProjectCaseStudy(selectedProject);
+                    const description = getProjectDescription(selectedProject);
                     return (
-                      <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-6 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
-                        <div className="mb-4 flex items-center justify-between gap-4">
-                          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                            Caso de estudio
-                          </p>
-                          <span className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
-                            {cs.category}
-                          </span>
+                      <div className="space-y-6">
+                        <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-5 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+                          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
+                            <div className="space-y-3 text-sm leading-relaxed text-white/75">
+                              <div className="mb-4">
+                                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                                  Descripcion del proyecto
+                                </p>
+                                {description.heading ? (
+                                  <p className="mt-2 text-base font-semibold text-white/88">
+                                    {description.heading}
+                                  </p>
+                                ) : null}
+                              </div>
+
+                              {description.paragraphs.map((paragraph, idx) => (
+                                <p key={idx}>{paragraph}</p>
+                              ))}
+                            </div>
+
+                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+                              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                                Caracteristicas
+                              </p>
+                              <ul className="mt-3 space-y-2 text-sm text-white/75">
+                                {description.features.map((feature) => (
+                                  <li key={feature} className="flex items-start gap-2">
+                                    <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#2DD4BF]" />
+                                    <span>{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
                         </div>
-                        <div className="grid gap-4 md:grid-cols-3">
-                          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Desafío</p>
-                            <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.challenge}</p>
-                          </div>
-                          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Solución</p>
-                            <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.solution}</p>
-                          </div>
-                          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Resultado</p>
-                            <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.result}</p>
-                          </div>
+
+                        <div className="grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+                          {previousProject ? (
+                            <button
+                              aria-label={`Ver proyecto anterior: ${previousProject.title}`}
+                              onClick={() => setSelectedProject(previousProject)}
+                              className="flex w-fit items-center gap-2 font-semibold text-[#2DD4BF] hover:underline"
+                            >
+                              <ChevronLeft className="h-5 w-5" /> Anterior
+                            </button>
+                          ) : (
+                            <span className="text-sm font-semibold text-white/30">
+                              Anterior
+                            </span>
+                          )}
+
+                          <Link
+                            href="/proyectos"
+                            onClick={() => setSelectedProject(null)}
+                            className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2 font-semibold text-white/90 transition hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 lg:justify-self-center"
+                          >
+                            Ver portafolio completo
+                          </Link>
+
+                          {nextProject ? (
+                            <button
+                              aria-label={`Ver proyecto siguiente: ${nextProject.title}`}
+                              onClick={() => setSelectedProject(nextProject)}
+                              className="flex w-fit items-center gap-2 font-semibold text-[#2DD4BF] hover:underline lg:justify-self-end"
+                            >
+                              Siguiente <ChevronRight className="h-5 w-5" />
+                            </button>
+                          ) : (
+                            <span className="text-sm font-semibold text-white/30 lg:justify-self-end">
+                              Siguiente
+                            </span>
+                          )}
                         </div>
                       </div>
                     );
                   })() : null}
+
                 </div>
               </motion.div>
             ) : (

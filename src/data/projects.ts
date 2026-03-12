@@ -135,7 +135,7 @@ const baseProjects: Project[] = [
       {
             id: "el-prado-eco-village",
             title: "El Prado Eco Village",
-            location: "Salta",
+            location: "Salta Capital",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/1920w/el-prado-eco-village-001-1920w.avif",
@@ -239,7 +239,7 @@ const baseProjects: Project[] = [
       {
             id: "gral-guemes",
             title: "General Güemes",
-            location: "Salta",
+            location: "General Güemes, Salta",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/gral-guemes/responsive/1920w/gral-guemes-002-1920w.avif",
@@ -258,32 +258,6 @@ const baseProjects: Project[] = [
                         "webp": "https://www.construmaxpiscinas.com/images/portfolio/gral-guemes/responsive/1280w/gral-guemes-004-1280w.avif",
                         "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/gral-guemes/thumbnails/480w/sm-gral-guemes-004-480w.avif",
                         "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/gral-guemes/thumbnails/320w/sm-gral-guemes-004-320w.avif"
-                  }
-            
-            ],
-      },
-      {
-            id: "grand-bourg-2",
-            title: "Grand Bourg II",
-            location: "Salta Capital",
-            images: [
-                  {
-                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-002-1920w.avif",
-                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-002-1280w.avif",
-                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-002-480w.avif",
-                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-002-320w.avif"
-                  },
-                  {
-                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-003-1920w.avif",
-                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-003-1280w.avif",
-                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-003-480w.avif",
-                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-003-320w.avif"
-                  },
-                  {
-                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-004-1920w.avif",
-                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-004-1280w.avif",
-                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-004-480w.avif",
-                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-004-320w.avif"
                   }
             
             ],
@@ -334,6 +308,32 @@ const baseProjects: Project[] = [
                         "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/1280w/grand-bourg-1-008-1280w.avif",
                         "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/480w/sm-grand-bourg-1-008-480w.avif",
                         "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/320w/sm-grand-bourg-1-008-320w.avif"
+                  }
+            
+            ],
+      },
+      {
+            id: "grand-bourg-2",
+            title: "Grand Bourg II",
+            location: "Salta Capital",
+            images: [
+                  {
+                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-002-1920w.avif",
+                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-002-1280w.avif",
+                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-002-480w.avif",
+                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-002-320w.avif"
+                  },
+                  {
+                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-003-1920w.avif",
+                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-003-1280w.avif",
+                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-003-480w.avif",
+                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-003-320w.avif"
+                  },
+                  {
+                        "avif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1920w/grand-bourg-2-004-1920w.avif",
+                        "webp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/responsive/1280w/grand-bourg-2-004-1280w.avif",
+                        "smAvif": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/480w/sm-grand-bourg-2-004-480w.avif",
+                        "smWebp": "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-2/thumbnails/320w/sm-grand-bourg-2-004-320w.avif"
                   }
             
             ],
@@ -431,7 +431,7 @@ const baseProjects: Project[] = [
       {
             id: "joaquin-v-gonzalez",
             title: "Joaquín V. González",
-            location: "Salta",
+            location: "Joaquín V. González, Salta",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/joaquin-v-gonzalez/responsive/1920w/joaquin-v-gonzalez-002-1920w.avif",
@@ -469,7 +469,7 @@ const baseProjects: Project[] = [
       {
             id: "la-almudena",
             title: "La Almudena",
-            location: "Salta",
+            location: "San Lorenzo, Salta",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/1920w/la-almudena-001-1920w.avif",
@@ -489,7 +489,7 @@ const baseProjects: Project[] = [
       {
             id: "la-vertiente",
             title: "La Vertiente",
-            location: "Salta",
+            location: "Rosario de Lerma, Salta",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/la-vertiente/responsive/1920w/la-vertiente-001-1920w.avif",
@@ -503,7 +503,7 @@ const baseProjects: Project[] = [
       {
             id: "los-psicologos",
             title: "Barrio Los Psicólogos",
-            location: "Salta",
+            location: "Salta Capital",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/1920w/los-psicologos-001-1920w.avif",
@@ -523,7 +523,7 @@ const baseProjects: Project[] = [
       {
             id: "mirasoles",
             title: "Los Mirasoles",
-            location: "Salta",
+            location: "Salta Capital",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/1920w/mirasoles-002-1920w.avif",
@@ -761,7 +761,7 @@ const baseProjects: Project[] = [
       {
             id: "vaqueros",
             title: "Vaqueros",
-            location: "Salta",
+            location: "La Caldera, Salta",
             images: [
                   {
                         "avif": "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/1920w/vaqueros-001-1920w.avif",

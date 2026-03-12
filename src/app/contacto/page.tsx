@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contacto - Solicitá tu Presupuesto Gratis",
   description:
-    "Contactanos para obtener un presupuesto personalizado sin compromiso. Atención en Salta, Jujuy y toda la región. Tel: +54 387 2782626",
+    "Contáctanos para obtener un presupuesto personalizado sin compromiso. Atención en Salta, Jujuy y toda la región. Tel: +54 387 2782626",
   keywords: [
     "contacto",
     "presupuesto",
@@ -42,7 +42,7 @@ export default function Contacto() {
 
           <p className="mx-auto mb-12 max-w-3xl text-lg leading-relaxed text-white/75 md:text-xl">
             Estamos listos para ayudarte a hacer realidad la piscina de tus
-            sueños. Contactanos y recibí un presupuesto personalizado sin
+            sueños. Contáctanos y recibí un presupuesto personalizado sin
             compromiso.
           </p>
 
