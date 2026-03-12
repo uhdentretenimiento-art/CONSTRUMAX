@@ -5,7 +5,6 @@ import { projects } from "@/data/projects";
 import { normalizeMedia } from "@/lib/media";
 import StructuredData from "@/components/StructuredData";
 import ProjectGalleryClient from "@/components/ProjectGalleryClient";
-import ProjectSuggestions from "@/components/ProjectSuggestions";
 import { getProjectCaseStudy } from "@/data/projectCases";
 
 const SITE_URL = "https://www.construmaxpiscinas.com";
@@ -239,36 +238,42 @@ export default async function ProyectoDetallePage({
         <div className="absolute inset-0 -z-20 opacity-[0.35] bg-[radial-gradient(55%_55%_at_12%_20%,rgba(29,78,216,0.10),transparent_60%),radial-gradient(45%_45%_at_88%_80%,rgba(45,212,191,0.14),transparent_60%)]" />
 
         <div className="mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-8">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-8">
             <div className="lg:sticky lg:top-24 lg:self-start">
-              <ProjectSuggestions currentProjectId={project.id} limit={5} />
-            </div>
-
-            <div className="space-y-6">
-              <ProjectGalleryClient title={project.title} normalizedMedia={normalizedMedia as any} />
-
               <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-6 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
-                <div className="mb-4 flex items-center justify-between gap-4">
+                <div className="mb-4 flex flex-col gap-2">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                     Caso de estudio
                   </p>
-                  <span className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                  <span className="w-fit rounded-full border border-white/12 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
                     {caseStudy.category}
                   </span>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-3">
+                <div className="grid gap-3">
                   <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Desafío</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">{caseStudy.challenge}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                      Desafío
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/75">
+                      {caseStudy.challenge}
+                    </p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Solución</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">{caseStudy.solution}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                      Solución
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/75">
+                      {caseStudy.solution}
+                    </p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Resultado</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/75">{caseStudy.result}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                      Resultado
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/75">
+                      {caseStudy.result}
+                    </p>
                   </div>
                 </div>
 
@@ -283,6 +288,13 @@ export default async function ProyectoDetallePage({
                   ))}
                 </div>
               </div>
+            </div>
+
+            <div>
+              <ProjectGalleryClient
+                title={project.title}
+                normalizedMedia={normalizedMedia as any}
+              />
             </div>
           </div>
         </div>
