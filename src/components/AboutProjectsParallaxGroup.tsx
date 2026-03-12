@@ -36,10 +36,11 @@ export default function AboutProjectsParallaxGroup() {
 
   return (
     <section className="relative overflow-hidden">
-      <motion.div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden" style={{ y: backgroundY }}>
-        <video
+      <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+        <motion.video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover"
+          className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+          style={{ y: backgroundY }}
           autoPlay
           loop
           muted
@@ -49,8 +50,8 @@ export default function AboutProjectsParallaxGroup() {
         >
           <source src={ABOUT_BG_WEBM} type="video/webm" />
           <source src={ABOUT_BG_MP4} type="video/mp4" />
-        </video>
-      </motion.div>
+        </motion.video>
+      </div>
 
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/72 via-slate-950/60 to-black/78" />
       <div className="pointer-events-none absolute inset-0 -z-[9] opacity-[0.34] bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
