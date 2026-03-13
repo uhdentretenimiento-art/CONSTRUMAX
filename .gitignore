@@ -25,3 +25,6 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 .dyad/
+
+# local lighthouse reports
+reports/*.json
