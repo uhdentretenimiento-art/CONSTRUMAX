@@ -68,7 +68,7 @@ export default function AboutUsSection() {
           style={{ y: imageY }}
         >
           <SpotlightCard
-            className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.04] shadow-[0_30px_90px_-55px_rgba(0,0,0,0.9)] backdrop-blur-xl"
+            className="relative overflow-hidden rounded-3xl border border-white/12 bg-white/[0.04] shadow-[0_30px_90px_-55px_rgba(0,0,0,0.9)] md:backdrop-blur-xl"
             spotlightColor="45, 212, 191"
             spotlightSize={400}
             spotlightOpacity={0.1}
@@ -105,7 +105,7 @@ export default function AboutUsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto -mt-10 grid w-[94%] grid-cols-3 gap-3 rounded-2xl border border-white/12 bg-white/[0.06] p-4 shadow-[0_24px_80px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl md:gap-4 md:p-5"
+            className="mx-auto mt-4 grid w-full grid-cols-3 gap-3 rounded-2xl border border-white/12 bg-black/35 p-4 shadow-[0_24px_80px_-60px_rgba(0,0,0,0.9)] md:-mt-10 md:w-[94%] md:bg-white/[0.06] md:backdrop-blur-xl md:gap-4 md:p-5"
           >
             {stats.map((item, index) => (
               <motion.div
@@ -181,7 +181,7 @@ export default function AboutUsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}
                 whileHover={{ x: 4, backgroundColor: "rgba(255,255,255,0.08)" }}
-                className="group flex items-start gap-2.5 rounded-2xl border border-white/12 bg-white/[0.04] px-4 py-3 backdrop-blur transition-all duration-300 cursor-default"
+                className="group flex items-start gap-2.5 rounded-2xl border border-white/12 bg-black/20 px-4 py-3 transition-all duration-300 cursor-default md:bg-white/[0.04] md:backdrop-blur"
               >
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2DD4BF]/20 mt-0.5">
                   <CheckCircle2 className="h-3 w-3 text-[#2DD4BF]" />

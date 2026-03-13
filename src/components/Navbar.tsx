@@ -178,10 +178,10 @@ export default function Navbar() {
             "h-20 border-b transition-all duration-500",
             shouldBeTransparent
               ? "border-transparent bg-transparent"
-              : "border-white/10 bg-zinc-950/60 backdrop-blur-xl",
+              : "border-white/10 bg-zinc-950/88 md:bg-zinc-950/60 md:backdrop-blur-xl",
             shrink &&
               !shouldBeTransparent &&
-              "bg-zinc-950/72 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.65)]"
+              "bg-zinc-950/94 md:bg-zinc-950/72 md:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.65)]"
           )}
         >
           <div
@@ -374,7 +374,7 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:hidden overflow-hidden border-b border-white/10 bg-zinc-950/90 backdrop-blur-xl"
+              className="lg:hidden overflow-hidden border-b border-white/10 bg-zinc-950"
             >
               <div className="mx-auto max-w-6xl px-4 py-4">
                 <div className="flex flex-col gap-1">
@@ -430,7 +430,7 @@ export default function Navbar() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="mt-3 rounded-2xl border border-white/10 bg-white/[0.05] p-3 text-xs text-white/70"
+                    className="mt-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-xs text-white/70"
                   >
                     <div className="flex items-center justify-center gap-4">
                       <span className="flex items-center gap-1.5">
@@ -460,7 +460,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-black/60 lg:hidden"
           />
         )}
       </AnimatePresence>

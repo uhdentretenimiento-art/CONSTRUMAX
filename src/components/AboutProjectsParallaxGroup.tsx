@@ -5,8 +5,10 @@ import AboutUsSection from "@/components/AboutUsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import { useParallax } from "@/hooks";
 
-const ABOUT_BG_VIDEO =
+const ABOUT_BG_DESKTOP =
   "https://www.construmaxpiscinas.com/videos/hero/video-about.avif";
+const ABOUT_BG_MOBILE =
+  "https://www.construmaxpiscinas.com/videos/hero/video-about-mobile.mp4";
 
 export default function AboutProjectsParallaxGroup() {
   const backgroundY = useParallax(-0.04);
@@ -14,11 +16,22 @@ export default function AboutProjectsParallaxGroup() {
   return (
     <section className="relative isolate overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <motion.video
+          className="absolute inset-0 h-full w-full scale-[1.15] object-cover md:hidden"
+          style={{ y: backgroundY }}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
+          <source src={ABOUT_BG_MOBILE} type="video/mp4" />
+        </motion.video>
         <motion.img
-          src={ABOUT_BG_VIDEO}
+          src={ABOUT_BG_DESKTOP}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+          className="absolute inset-0 hidden h-full w-full scale-[1.15] object-cover md:block"
           style={{ y: backgroundY }}
           decoding="async"
         />

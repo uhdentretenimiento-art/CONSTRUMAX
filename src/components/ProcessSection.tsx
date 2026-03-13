@@ -180,7 +180,7 @@ export default function ProcessSection({
             className="absolute inset-0 -z-20 bg-black"
             style={{ opacity: overlayOpacity }}
           />
-          <div className="absolute inset-0 -z-10 opacity-70 bg-[radial-gradient(60%_60%_at_20%_10%,rgba(94,234,212,0.22),transparent_60%),radial-gradient(55%_55%_at_85%_20%,rgba(29,78,216,0.18),transparent_60%)]" />
+          <div className="absolute inset-0 -z-10 hidden opacity-70 md:block bg-[radial-gradient(60%_60%_at_20%_10%,rgba(94,234,212,0.22),transparent_60%),radial-gradient(55%_55%_at_85%_20%,rgba(29,78,216,0.18),transparent_60%)]" />
           <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-black/70 to-transparent" />
 
           {/* Glow Orbs */}
@@ -262,7 +262,7 @@ export default function ProcessSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/20 bg-white/10 px-6 py-4 text-center backdrop-blur md:mt-12"
+            className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/20 bg-black/30 px-6 py-4 text-center md:mt-12 md:bg-white/10 md:backdrop-blur"
           >
             <p className="text-sm text-white/80 md:text-base">
               <span className="inline-flex items-center gap-2 text-[#2DD4BF]">

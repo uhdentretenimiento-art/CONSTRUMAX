@@ -36,8 +36,8 @@ export default function Hero() {
         </picture>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/70 to-zinc-950/95" />
-      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_12%_10%,rgba(45,212,191,0.18),transparent_60%),radial-gradient(55%_55%_at_86%_18%,rgba(29,78,216,0.16),transparent_62%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/88 via-zinc-950/76 to-zinc-950/95" />
+      <div className="absolute inset-0 hidden md:block bg-[radial-gradient(60%_60%_at_12%_10%,rgba(45,212,191,0.18),transparent_60%),radial-gradient(55%_55%_at_86%_18%,rgba(29,78,216,0.16),transparent_62%)]" />
 
       <div
         aria-hidden
@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-4 pb-20 pt-12">
         <div>
           <div>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/75 backdrop-blur">
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/75 md:bg-white/[0.06] md:backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-[#2DD4BF]" />
               {h.badge}
             </span>
@@ -90,7 +90,7 @@ export default function Hero() {
             {quickStats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-md"
+                className="rounded-2xl border border-white/12 bg-black/30 p-4 md:bg-white/[0.05] md:backdrop-blur-md"
               >
                 <p className="text-2xl font-bold text-white">{stat.value}</p>
                 <p className="mt-1 text-xs text-white/60">{stat.label}</p>
