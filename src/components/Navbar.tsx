@@ -203,6 +203,8 @@ export default function Navbar() {
                 <img
                   src={NAVBAR_LOGO}
                   alt="Construmax"
+                  width={230}
+                  height={56}
                   className={cn(
                     "w-auto select-none",
                     shrink ? "h-12" : "h-14"

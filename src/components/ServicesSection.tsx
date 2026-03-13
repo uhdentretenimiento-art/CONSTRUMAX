@@ -85,7 +85,7 @@ export default function ServicesSection({
           "Diseño y construcción tradicional con los más altos estándares de calidad y experiencia comprobable que nos avalan.",
         fullDescription:
           "Construimos piscinas personalizadas adaptadas a tus necesidades y espacio disponible. Utilizamos materiales de primera calidad y técnicas constructivas probadas que garantizan durabilidad y resistencia. Nuestro equipo de arquitectos e ingenieros trabaja contigo desde el diseño inicial hasta la entrega final.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Diseño 3D personalizado",
           "Materiales de alta calidad",
@@ -136,7 +136,7 @@ export default function ServicesSection({
           "Venta e instalación de equipos profesionales: bombas, filtros, sistemas de control y automatización para tu piscina.",
         fullDescription:
           "Proveemos e instalamos equipamiento de primera calidad para garantizar el funcionamiento óptimo de tu piscina. Trabajamos con las mejores marcas del mercado y ofrecemos asesoramiento personalizado para elegir el equipo adecuado según tus necesidades.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Bombas de filtrado de alta eficiencia",
           "Filtros de arena y cartucho",
@@ -161,7 +161,7 @@ export default function ServicesSection({
           "Construcción de jacuzzi e hidromasajes para convertir tu hogar en un verdadero spa.",
         fullDescription:
           "Diseñamos y construimos hidromasajes y spa de lujo que transforman tu espacio en un oasis de relajación. Sistemas de hidromasaje terapéutico con múltiples jets configurables.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Sistemas de hidromasaje terapéutico",
           "Control de temperatura digital",
@@ -210,7 +210,7 @@ export default function ServicesSection({
           "Sistemas de calefacción para disfrutar tu piscina durante todo el año. Instalación de calderas y bombas de calor.",
         fullDescription:
           "Extiende la temporada de uso de tu piscina con nuestros sistemas de climatización. Ofrecemos soluciones eficientes para mantener el agua a la temperatura ideal, reduciendo costos operativos.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Bombas de calor de alta eficiencia",
           "Calderas a gas",
@@ -234,7 +234,7 @@ export default function ServicesSection({
           "Iluminación subacuática que transforma tu piscina en un espectáculo nocturno.",
         fullDescription:
           "Transforma tu piscina en un espectáculo visual con nuestras soluciones de iluminación LED. Colores vibrantes, control remoto y tecnología de bajo consumo para crear el ambiente perfecto.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Luces LED sumergibles",
           "Control por app/remoto",
@@ -282,7 +282,7 @@ export default function ServicesSection({
           "Cascadas decorativas e instalación de opciones en acero inoxidable.",
         fullDescription:
           "Agregá un toque de elegancia y relajación con nuestras cascadas decorativas. Diseños personalizados que se integran perfectamente con tu piscina y paisajismo.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Cascadas de acero inoxidable",
           "Diseños de piedra natural",
@@ -313,7 +313,7 @@ export default function ServicesSection({
         ),
         fullDescription:
           "Ofrecemos una amplia variedad de revestimientos de alta calidad para el interior de tu piscina. Desde clásicas venecitas hasta modernos sistemas de desborde infinito que crean un efecto visual impresionante.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Venecitas de colores variados",
           "Piedra Bali natural",
@@ -361,7 +361,7 @@ export default function ServicesSection({
         shortDescription: "Quinchos, fogoneros, pérgolas y ampliaciones.",
         fullDescription:
           "Complementamos tu piscina con construcciones adicionales que crean el ambiente perfecto para el entretenimiento al aire libre. Desde quinchos completos hasta pérgolas elegantes.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
         features: [
           "Quinchos con parrilla",
           "Fogoneros y hogares",
@@ -412,8 +412,8 @@ export default function ServicesSection({
         {/* Glow Orbs */}
         {!inheritBackground ? (
           <>
-            <GlowOrb className="absolute top-1/4 -right-32" color="#1D4ED8" size={400} blur={150} duration={8} />
-            <GlowOrb className="absolute bottom-1/3 -left-32" color="#2DD4BF" size={350} blur={130} duration={6} />
+            <GlowOrb className="absolute top-1/4 -right-32 hidden md:block" color="#1D4ED8" size={400} blur={150} duration={8} />
+            <GlowOrb className="absolute bottom-1/3 -left-32 hidden md:block" color="#2DD4BF" size={350} blur={130} duration={6} />
           </>
         ) : null}
 

@@ -9,7 +9,6 @@ type FeaturedImage = {
   id: string;
   thumb320: string;
   thumb480: string;
-  src1280: string;
   srcset: string;
 };
 
@@ -20,10 +19,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/thumbnails/320w/sm-el-tipal-2-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/thumbnails/480w/sm-el-tipal-2-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/responsive/1280w/el-tipal-2-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/responsive/768w/el-tipal-2-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/responsive/1280w/el-tipal-2-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/responsive/1920w/el-tipal-2-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/thumbnails/320w/sm-el-tipal-2-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/thumbnails/480w/sm-el-tipal-2-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/el-tipal-2/responsive/768w/el-tipal-2-001-768w.avif 768w",
   },
   {
     id: "hosteria-cabra-corral-001",
@@ -31,10 +28,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/320w/sm-hosteria-cabra-corral-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/480w/sm-hosteria-cabra-corral-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1920w/hosteria-cabra-corral-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/320w/sm-hosteria-cabra-corral-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/480w/sm-hosteria-cabra-corral-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif 768w",
   },
   {
     id: "club-ate-001",
@@ -42,10 +37,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/320w/sm-club-ate-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/480w/sm-club-ate-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1920w/club-ate-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/320w/sm-club-ate-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/480w/sm-club-ate-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif 768w",
   },
   {
     id: "grand-bourg-1-001",
@@ -53,10 +46,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/320w/sm-grand-bourg-1-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/480w/sm-grand-bourg-1-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/1280w/grand-bourg-1-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/768w/grand-bourg-1-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/1280w/grand-bourg-1-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/1920w/grand-bourg-1-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/320w/sm-grand-bourg-1-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/thumbnails/480w/sm-grand-bourg-1-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/grand-bourg-1/responsive/768w/grand-bourg-1-001-768w.avif 768w",
   },
   {
     id: "agropecuaria-el-guanaco-metan-001",
@@ -64,10 +55,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/320w/sm-agropecuaria-el-guanaco-metan-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/480w/sm-agropecuaria-el-guanaco-metan-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1920w/agropecuaria-el-guanaco-metan-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/320w/sm-agropecuaria-el-guanaco-metan-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/480w/sm-agropecuaria-el-guanaco-metan-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif 768w",
   },
   {
     id: "vaqueros-001",
@@ -75,10 +64,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/thumbnails/320w/sm-vaqueros-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/thumbnails/480w/sm-vaqueros-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/1280w/vaqueros-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/768w/vaqueros-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/1280w/vaqueros-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/1920w/vaqueros-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/vaqueros/thumbnails/320w/sm-vaqueros-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/vaqueros/thumbnails/480w/sm-vaqueros-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/vaqueros/responsive/768w/vaqueros-001-768w.avif 768w",
   },
   {
     id: "el-prado-eco-village-001",
@@ -86,10 +73,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/thumbnails/320w/sm-el-prado-eco-village-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/thumbnails/480w/sm-el-prado-eco-village-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/1280w/el-prado-eco-village-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/768w/el-prado-eco-village-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/1280w/el-prado-eco-village-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/1920w/el-prado-eco-village-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/thumbnails/320w/sm-el-prado-eco-village-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/thumbnails/480w/sm-el-prado-eco-village-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/el-prado-eco-village/responsive/768w/el-prado-eco-village-001-768w.avif 768w",
   },
   {
     id: "san-luis-4-001",
@@ -97,10 +82,8 @@ const featuredImages: FeaturedImage[] = [
       "https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/thumbnails/320w/sm-san-luis-4-001-320w.avif",
     thumb480:
       "https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/thumbnails/480w/sm-san-luis-4-001-480w.avif",
-    src1280:
-      "https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/responsive/1280w/san-luis-4-001-1280w.avif",
     srcset:
-      "https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/responsive/768w/san-luis-4-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/responsive/1280w/san-luis-4-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/responsive/1920w/san-luis-4-001-1920w.avif 1920w",
+      "https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/thumbnails/320w/sm-san-luis-4-001-320w.avif 320w, https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/thumbnails/480w/sm-san-luis-4-001-480w.avif 480w, https://www.construmaxpiscinas.com/images/portfolio/san-luis-4/responsive/768w/san-luis-4-001-768w.avif 768w",
   },
 ];
 
@@ -118,11 +101,13 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
           <picture>
             <source media="(max-width: 640px)" srcSet={image.thumb320} />
             <img
-              src={image.thumb480 || image.src1280}
+              src={image.thumb480}
               srcSet={image.srcset}
-              sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, (max-width: 1280px) 44vw, 38vw"
+              sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, (max-width: 1280px) 566px, 566px"
               alt={`Proyecto destacado ${image.id}`}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              width={480}
+              height={270}
               loading={!ariaHidden && index === 0 ? "eager" : "lazy"}
               fetchPriority={!ariaHidden && index === 0 ? "high" : "auto"}
               decoding={!ariaHidden && index === 0 ? "sync" : "async"}
@@ -140,14 +125,14 @@ export default function ProjectsSection() {
   return (
     <section id="proyectos" className="relative overflow-hidden pb-12 pt-24 text-white">
       <GlowOrb
-        className="absolute top-1/3 -left-32"
+        className="absolute top-1/3 -left-32 hidden md:block"
         color="#2DD4BF"
         size={400}
         blur={150}
         duration={8}
       />
       <GlowOrb
-        className="absolute bottom-1/4 -right-32"
+        className="absolute bottom-1/4 -right-32 hidden md:block"
         color="#1D4ED8"
         size={450}
         blur={180}

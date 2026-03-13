@@ -46,8 +46,8 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Glow Orbs */}
-      <GlowOrb className="absolute top-1/3 -right-32" color="#1D4ED8" size={400} blur={150} duration={6} />
-      <GlowOrb className="absolute bottom-1/4 -left-32" color="#2DD4BF" size={350} blur={130} duration={8} />
+      <GlowOrb className="absolute top-1/3 -right-32 hidden md:block" color="#1D4ED8" size={400} blur={150} duration={6} />
+      <GlowOrb className="absolute bottom-1/4 -left-32 hidden md:block" color="#2DD4BF" size={350} blur={130} duration={8} />
 
       <div className="mx-auto max-w-6xl px-4">
         {/* Header */}

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
-import ImageProtectionProvider from "@/components/ImageProtectionProvider";
+
+const Footer = dynamic(() => import("@/components/Footer"));
+const ScrollToTop = dynamic(() => import("@/components/ScrollToTop"));
+const ImageProtectionProvider = dynamic(
+  () => import("@/components/ImageProtectionProvider")
+);
 
 const manrope = Manrope({
   subsets: ["latin"],

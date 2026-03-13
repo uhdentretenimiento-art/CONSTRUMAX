@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import StructuredData from "@/components/StructuredData";
@@ -27,10 +28,10 @@ export const metadata: Metadata = {
 export default function ProyectosPage() {
   return (
     <>
-      {/* ✅ SEO (PRO): ItemList del portfolio para Google */}
       <StructuredData data={getProjectsListSchema(projects)} />
-
-      <ProyectosClient />
+      <Suspense fallback={null}>
+        <ProyectosClient />
+      </Suspense>
     </>
   );
 }

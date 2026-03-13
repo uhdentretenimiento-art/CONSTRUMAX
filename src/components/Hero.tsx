@@ -1,209 +1,105 @@
-"use client";
-
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { site } from "@/data/site";
-import { MagneticButton } from "@/components/ui/MagneticButton";
-import { FloatingElement, GlowOrb } from "@/components/ui/FloatingElement";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { useParallax } from "@/hooks";
+
+const HERO_MOBILE_IMAGE =
+  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
 
 export default function Hero() {
   const h = site.hero;
 
-  const shouldReduceMotion = useReducedMotion();
-  const imageY = useParallax(0.04);
-  const contentOpacity = 1;
-  const contentY = useParallax(-0.05);
-
   const quickStats = [
-    { value: 25, suffix: "+", label: "Años de trayectoria" },
-    { value: 500, suffix: "+", label: "Proyectos entregados" },
-    { value: 10, suffix: " años", label: "Garantía de calidad" },
+    { value: "25+", label: "Años de trayectoria" },
+    { value: "500+", label: "Proyectos entregados" },
+    { value: "10 años", label: "Garantía de calidad" },
   ];
 
   const title = h.title;
   const premiumIndex = title.toLowerCase().lastIndexOf("premium");
   const titlePrefix = premiumIndex >= 0 ? title.slice(0, premiumIndex) : title;
-  const titleSuffix = premiumIndex >= 0 ? title.slice(premiumIndex + "premium".length) : "";
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1] as const,
-      },
-    },
-  };
-
-  const heroMobileImage = "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
-  const heroDesktopImage = h.image.src;
+  const titleSuffix =
+    premiumIndex >= 0 ? title.slice(premiumIndex + "premium".length) : "";
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden -mt-16 pt-16">
-      {/* Mobile Hero Image */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 will-change-transform md:hidden"
-        style={{ y: shouldReduceMotion ? 0 : imageY }}
-      >
-        <Image
-          src={heroMobileImage}
-          alt={h.image.alt}
-          fill
-          priority
-          sizes="(max-width: 767px) 100vw, 0px"
-          className="object-cover object-top"
-        />
-      </motion.div>
+      <div aria-hidden className="absolute inset-0">
+        <picture className="block h-full w-full">
+          <source media="(min-width: 768px)" srcSet={h.image.src} />
+          <img
+            src={HERO_MOBILE_IMAGE}
+            alt={h.image.alt}
+            fetchPriority="high"
+            decoding="async"
+            width={1040}
+            height={975}
+            className="h-full w-full object-cover object-top md:object-cover"
+          />
+        </picture>
+      </div>
 
-      {/* Desktop Hero Image */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-0 will-change-transform hidden md:block"
-        style={{ y: shouldReduceMotion ? 0 : imageY }}
-      >
-        <Image
-          src={heroDesktopImage}
-          alt={h.image.alt}
-          fill
-          priority
-          sizes="(max-width: 767px) 0px, 100vw"
-          className="object-cover"
-        />
-      </motion.div>
-
-      {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/70 to-zinc-950/95" />
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_12%_10%,rgba(45,212,191,0.18),transparent_60%),radial-gradient(55%_55%_at_86%_18%,rgba(29,78,216,0.16),transparent_62%)]" />
 
-      {/* Floating Glow Orbs */}
-      <GlowOrb
-        className="absolute top-1/4 left-1/4"
-        color="#2DD4BF"
-        size={300}
-        blur={120}
-        duration={6}
+      <div
+        aria-hidden
+        className="absolute left-1/4 top-1/4 hidden h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(45,212,191,0.24)_0%,transparent_70%)] blur-[120px] lg:block"
       />
-      <GlowOrb
-        className="absolute bottom-1/3 right-1/4"
-        color="#1D4ED8"
-        size={400}
-        blur={150}
-        duration={8}
+      <div
+        aria-hidden
+        className="absolute bottom-1/3 right-1/4 hidden h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(29,78,216,0.22)_0%,transparent_70%)] blur-[150px] lg:block"
       />
 
-      {/* Content */}
-      <motion.div
-        className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-4 pb-20 pt-12"
-        style={{
-          opacity: shouldReduceMotion ? 1 : contentOpacity,
-          y: shouldReduceMotion ? 0 : contentY,
-        }}
-      >
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Badge */}
-          <motion.div variants={itemVariants}>
-            <FloatingElement duration={4} distance={5}>
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/75 backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2DD4BF] animate-pulse" />
-                {h.badge}
-              </span>
-            </FloatingElement>
-          </motion.div>
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-4 pb-20 pt-12">
+        <div>
+          <div>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-white/75 backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2DD4BF]" />
+              {h.badge}
+            </span>
+          </div>
 
-          {/* Title */}
-          <motion.h1
-            variants={itemVariants}
-            className="max-w-3xl text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl"
-          >
+          <h1 className="max-w-3xl text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
             {titlePrefix}
             {premiumIndex >= 0 ? (
-              <span className="bg-gradient-to-r from-[#2DD4BF] via-[#1D4ED8] to-[#2DD4BF] bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
+              <span className="bg-gradient-to-r from-[#2DD4BF] via-[#1D4ED8] to-[#2DD4BF] bg-clip-text text-transparent">
                 premium
               </span>
             ) : null}
             {titleSuffix}
-          </motion.h1>
+          </h1>
 
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className="mt-6 max-w-2xl text-base text-white/80 sm:text-lg leading-relaxed"
-          >
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
             {h.subtitle}
-          </motion.p>
+          </p>
 
-          {/* CTAs */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
-          >
-            <MagneticButton
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
               href={h.ctaPrimary.href}
-              variant="primary"
-              strength={0.5}
-              className="px-8 py-4 text-base"
+              className="inline-flex items-center justify-center rounded-2xl bg-[#1D4ED8]/90 px-8 py-4 text-base font-semibold text-white ring-1 ring-white/10 transition-colors hover:bg-[#1D4ED8]"
             >
               {h.ctaPrimary.label}
-            </MagneticButton>
-            <MagneticButton
+            </Link>
+            <Link
               href={h.ctaSecondary.href}
-              variant="secondary"
-              strength={0.4}
-              className="px-8 py-4 text-base"
+              className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/[0.10]"
             >
               {h.ctaSecondary.label}
-            </MagneticButton>
-          </motion.div>
+            </Link>
+          </div>
 
-          {/* Quick Stats */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 grid gap-3 sm:grid-cols-3"
-          >
-            {quickStats.map((stat, index) => (
-              <motion.div
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {quickStats.map((stat) => (
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                className="group rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-md transition-all duration-300 hover:border-[#2DD4BF]/30 hover:bg-white/[0.08]"
+                className="rounded-2xl border border-white/12 bg-white/[0.05] p-4 backdrop-blur-md"
               >
-                <AnimatedCounter
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  className="text-2xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent"
-                />
-                <p className="mt-1 text-xs text-white/60 group-hover:text-white/80 transition-colors">
-                  {stat.label}
-                </p>
-              </motion.div>
+                <p className="text-2xl font-bold text-white">{stat.value}</p>
+                <p className="mt-1 text-xs text-white/60">{stat.label}</p>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </div>
+        </div>
+      </div>
 
-      {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
     </section>
   );

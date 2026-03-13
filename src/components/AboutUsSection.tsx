@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Award, CheckCircle2, Clock3, Users } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -23,6 +22,11 @@ const stats = [
   { icon: Users, value: 500, suffix: "+", label: "Clientes satisfechos" },
   { icon: Clock3, value: 25, suffix: "", label: "Días promedio de obra" },
 ];
+
+const ABOUT_IMAGE_DESKTOP =
+  "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif";
+const ABOUT_IMAGE_MOBILE_384 =
+  "https://www.construmaxpiscinas.com/images/index/about-nuevo-mobile-w384.avif";
 
 export default function AboutUsSection() {
   const imageY = useParallax(-0.01);
@@ -54,8 +58,8 @@ export default function AboutUsSection() {
   return (
     <section className="relative overflow-hidden py-24 text-white">
       {/* Glow Orbs */}
-      <GlowOrb className="absolute top-1/4 -left-20" color="#2DD4BF" size={400} blur={150} duration={7} />
-      <GlowOrb className="absolute bottom-1/4 -right-20" color="#1D4ED8" size={500} blur={180} duration={9} />
+      <GlowOrb className="absolute top-1/4 -left-20 hidden md:block" color="#2DD4BF" size={400} blur={150} duration={7} />
+      <GlowOrb className="absolute bottom-1/4 -right-20 hidden md:block" color="#1D4ED8" size={500} blur={180} duration={9} />
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 lg:grid-cols-2 lg:gap-16">
         {/* Image Side */}
@@ -70,15 +74,28 @@ export default function AboutUsSection() {
             spotlightOpacity={0.1}
             tiltAmount={2}
           >
-            <Image
-              src="https://www.construmaxpiscinas.com/images/index/about-nuevo.avif"
-              alt="Proyecto de piscina premium de Construmax"
-              width={1200}
-              height={900}
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="h-[360px] w-full object-cover md:h-[480px]"
-            />
+            <picture className="block">
+              <source
+                media="(min-width: 768px)"
+                srcSet={ABOUT_IMAGE_DESKTOP}
+                sizes="526px"
+              />
+              <source
+                media="(max-width: 767px)"
+                srcSet={ABOUT_IMAGE_MOBILE_384}
+                sizes="(max-width: 767px) calc(100vw - 2rem)"
+              />
+              <img
+                src={ABOUT_IMAGE_DESKTOP}
+                alt="Proyecto de piscina premium de Construmax"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                width={526}
+                height={526}
+                className="h-[360px] w-full object-cover md:h-[480px]"
+              />
+            </picture>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
           </SpotlightCard>
 

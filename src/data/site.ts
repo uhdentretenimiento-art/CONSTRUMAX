@@ -13,7 +13,7 @@ export const site = {
     subtitle:
       "Ejecución técnica, materiales de primera y garantía real en cada obra.",
     image: {
-      src: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero1.avif",
+      src: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
       alt: "Piscina residencial premium construida por Construmax",
     },
     ctaPrimary: { label: "Pedir presupuesto", href: "/contacto" },

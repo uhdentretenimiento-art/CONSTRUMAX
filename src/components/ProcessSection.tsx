@@ -14,6 +14,7 @@ import {
 import ExcavatorIcon from "@/components/ui/ExcavatorIcon";
 import { GlowOrb } from "@/components/ui/FloatingElement";
 import { useScrollProgress } from "@/hooks";
+import { useEffect, useState } from "react";
 
 const POSTER =
   "https://www.construmaxpiscinas.com/images/hero/poster-proceso.avif";
@@ -34,8 +35,17 @@ export default function ProcessSection({
   disableBackgroundMedia = false,
 }: ProcessSectionProps) {
   const { scrollY } = useScrollProgress();
+  const [isDesktop, setIsDesktop] = useState(false);
   const videoScale = Math.max(1, 1.08 - scrollY * 0.00006);
   const overlayOpacity = Math.max(0.7, 0.9 - scrollY * 0.00015);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const steps = [
     {
@@ -141,23 +151,25 @@ export default function ProcessSection({
           </div>
 
           {/* Video with parallax */}
-          <motion.div
-            className="absolute inset-0 -z-30"
-            style={{ scale: videoScale }}
-          >
-            <video
-              className="h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster={POSTER}
+          {isDesktop ? (
+            <motion.div
+              className="absolute inset-0 -z-30"
+              style={{ scale: videoScale }}
             >
-              <source src={VIDEO_AVIF} type="video/avif" />
-              <source src={VIDEO_MP4} type="video/mp4" />
-            </video>
-          </motion.div>
+              <video
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={POSTER}
+              >
+                <source src={VIDEO_AVIF} type="video/avif" />
+                <source src={VIDEO_MP4} type="video/mp4" />
+              </video>
+            </motion.div>
+          ) : null}
         </>
       ) : null}
 
@@ -172,8 +184,8 @@ export default function ProcessSection({
           <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-black/70 to-transparent" />
 
           {/* Glow Orbs */}
-          <GlowOrb className="absolute top-1/4 -left-20" color="#2DD4BF" size={400} blur={150} duration={8} />
-          <GlowOrb className="absolute bottom-1/4 -right-20" color="#1D4ED8" size={450} blur={180} duration={10} />
+          <GlowOrb className="absolute top-1/4 -left-20 hidden md:block" color="#2DD4BF" size={400} blur={150} duration={8} />
+          <GlowOrb className="absolute bottom-1/4 -right-20 hidden md:block" color="#1D4ED8" size={450} blur={180} duration={10} />
         </>
       ) : null}
 
