@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import AboutUsSection from "@/components/AboutUsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import { useParallax } from "@/hooks";
@@ -12,29 +12,49 @@ const ABOUT_BG_MOBILE =
 
 export default function AboutProjectsParallaxGroup() {
   const backgroundY = useParallax(-0.04);
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => {
+      media.removeEventListener("change", update);
+    };
+  }, []);
 
   return (
     <section className="relative isolate overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <motion.video
-          className="absolute inset-0 h-full w-full scale-[1.15] object-cover md:hidden"
-          style={{ y: backgroundY }}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        >
-          <source src={ABOUT_BG_MOBILE} type="video/mp4" />
-        </motion.video>
-        <motion.img
-          src={ABOUT_BG_DESKTOP}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 hidden h-full w-full scale-[1.15] object-cover md:block"
-          style={{ y: backgroundY }}
-          decoding="async"
-        />
+        {isDesktop === true ? (
+          <img
+            src={ABOUT_BG_DESKTOP}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+            style={{ transform: `translateY(${backgroundY}px)` }}
+            decoding="async"
+            loading="lazy"
+            fetchPriority="low"
+          />
+        ) : null}
+
+        {isDesktop === false ? (
+          <video
+            className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
+            style={{ transform: `translateY(${backgroundY}px)` }}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          >
+            <source src={ABOUT_BG_MOBILE} type="video/mp4" />
+          </video>
+        ) : null}
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/72 via-slate-950/60 to-black/78" />

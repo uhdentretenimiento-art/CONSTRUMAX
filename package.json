@@ -1,5 +1,5 @@
 {
-  "name": "clon-slide-ok",
+  "name": "LIGHTHOUSE1",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -10,7 +10,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "check:orphans": "node scripts/check-orphans.mjs"
+    "check:orphans": "node scripts/check-orphans.mjs",
+    "lh:mobile": "node scripts/lighthouse-mobile.mjs",
+    "lh:mobile:avg": "node scripts/lighthouse-mobile-batch.mjs",
+    "lh:desktop": "node scripts/lighthouse-desktop.mjs",
+    "lh:desktop:avg": "node scripts/lighthouse-desktop-batch.mjs",
+    "lh:compare": "node scripts/compare-lighthouse.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import ProcessStepCard from "@/components/ProcessStepCard";
 import {
@@ -14,13 +13,13 @@ import {
 import ExcavatorIcon from "@/components/ui/ExcavatorIcon";
 import { GlowOrb } from "@/components/ui/FloatingElement";
 import { useScrollProgress } from "@/hooks";
-import { useEffect, useState } from "react";
-
-const POSTER =
-  "https://www.construmaxpiscinas.com/images/hero/poster-proceso.avif";
+import { useEffect, useRef, useState } from "react";
 
 const VIDEO_AVIF =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.avif";
+
+const VIDEO_MOBILE_WEBM =
+  "/api/media/proceso-mobile-webm";
 
 const VIDEO_MP4 =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.mp4";
@@ -35,6 +34,7 @@ export default function ProcessSection({
   disableBackgroundMedia = false,
 }: ProcessSectionProps) {
   const { scrollY } = useScrollProgress();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
   const videoScale = Math.max(1, 1.08 - scrollY * 0.00006);
   const overlayOpacity = Math.max(0.7, 0.9 - scrollY * 0.00015);
@@ -46,6 +46,17 @@ export default function ProcessSection({
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+
+    void video.play().catch(() => {
+      // If autoplay is blocked, the black background remains visible.
+    });
+  }, [isDesktop]);
 
   const steps = [
     {
@@ -139,37 +150,31 @@ export default function ProcessSection({
     >
       {!disableBackgroundMedia ? (
         <>
-          {/* Poster base */}
-          <div className="absolute inset-0 -z-40">
-            <Image
-              src={POSTER}
-              alt="Proceso Construmax"
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-
           {/* Video with parallax */}
-          {isDesktop ? (
-            <motion.div
-              className="absolute inset-0 -z-30"
-              style={{ scale: videoScale }}
+          <motion.div
+            className="absolute inset-0 -z-30 bg-black"
+            style={{ scale: videoScale }}
+          >
+            <video
+              key={isDesktop ? "desktop" : "mobile-webm"}
+              ref={videoRef}
+              className="h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
             >
-              <video
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={POSTER}
-              >
-                <source src={VIDEO_AVIF} type="video/avif" />
-                <source src={VIDEO_MP4} type="video/mp4" />
-              </video>
-            </motion.div>
-          ) : null}
+              {isDesktop ? (
+                <>
+                  <source src={VIDEO_AVIF} type="video/avif" />
+                  <source src={VIDEO_MP4} type="video/mp4" />
+                </>
+              ) : (
+                <source src={VIDEO_MOBILE_WEBM} type="video/webm" />
+              )}
+            </video>
+          </motion.div>
         </>
       ) : null}
 

@@ -86,10 +86,10 @@ export default function AboutUsSection() {
                 sizes="(max-width: 767px) calc(100vw - 2rem)"
               />
               <img
-                src={ABOUT_IMAGE_DESKTOP}
+                src={ABOUT_IMAGE_MOBILE_384}
                 alt="Proyecto de piscina premium de Construmax"
-                loading="eager"
-                fetchPriority="high"
+                loading="lazy"
+                fetchPriority="low"
                 decoding="async"
                 width={526}
                 height={526}

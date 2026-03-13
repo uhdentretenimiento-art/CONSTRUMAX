@@ -1,20 +1,50 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useScrollProgress } from "@/hooks";
 
-const POSTER =
-  "https://www.construmaxpiscinas.com/images/hero/poster-proceso.avif";
-
 const VIDEO_AVIF =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.avif";
+
+const VIDEO_MOBILE_WEBM =
+  "/api/media/proceso-mobile-webm";
 
 const VIDEO_MP4 =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.mp4";
 
 export default function ProcesoHeroBackground() {
   const { scrollY } = useScrollProgress();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+
+    const updateIsMobile = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateIsMobile();
+    mediaQuery.addEventListener("change", updateIsMobile);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateIsMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobile === null) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+
+    void video.play().catch(() => {
+      // If autoplay is blocked, the black background remains visible.
+    });
+  }, [isMobile]);
 
   // Scale + slight vertical drift for a smooth parallax feel while scrolling.
   const videoScale = Math.max(1.04, 1.14 - scrollY * 0.00006);
@@ -23,32 +53,28 @@ export default function ProcesoHeroBackground() {
 
   return (
     <>
-      <div className="pointer-events-none fixed inset-0 -z-50">
-        <Image
-          src={POSTER}
-          alt="Proceso Construmax"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
-      </div>
-
       <motion.div
-        className="pointer-events-none fixed inset-0 -z-40"
+        className="pointer-events-none fixed inset-0 -z-40 bg-black"
         style={{ scale: videoScale, y: videoY }}
       >
         <video
+          key={isMobile ? "mobile-webm" : "desktop"}
+          ref={videoRef}
           className="h-full w-full object-cover"
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-          poster={POSTER}
+          preload={isMobile ? "metadata" : "auto"}
         >
-          <source src={VIDEO_AVIF} type="video/avif" />
-          <source src={VIDEO_MP4} type="video/mp4" />
+          {isMobile ? (
+            <source src={VIDEO_MOBILE_WEBM} type="video/webm" />
+          ) : (
+            <>
+              <source src={VIDEO_AVIF} type="video/avif" />
+              <source src={VIDEO_MP4} type="video/mp4" />
+            </>
+          )}
         </video>
       </motion.div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { GlowOrb } from "@/components/ui/FloatingElement";
 
@@ -99,11 +98,11 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
           className="group relative aspect-[16/9] w-[78vw] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-black/30 sm:w-[58vw] lg:w-[44vw] xl:w-[38vw]"
         >
           <picture>
-            <source media="(max-width: 640px)" srcSet={image.thumb320} />
+            <source media="(max-width: 767px)" srcSet={image.thumb320} />
+            <source media="(min-width: 768px)" srcSet={image.srcset} />
             <img
-              src={image.thumb480}
-              srcSet={image.srcset}
-              sizes="(max-width: 640px) 78vw, (max-width: 1024px) 58vw, (max-width: 1280px) 566px, 566px"
+              src={image.thumb320}
+              sizes="(max-width: 767px) 320px, (max-width: 1024px) 58vw, (max-width: 1280px) 566px, 566px"
               alt={`Proyecto destacado ${image.id}`}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               width={480}
@@ -140,13 +139,7 @@ export default function ProjectsSection() {
       />
 
       <div className="mx-auto max-w-6xl px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-14 text-center"
-        >
+        <div className="mb-14 text-center">
           <p className="mb-4 block text-xs font-semibold uppercase tracking-[0.22em] text-white/65">
             Nuestro portafolio
           </p>
@@ -156,44 +149,23 @@ export default function ProjectsSection() {
               destacados
             </span>
           </h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative"
-        >
-          <motion.div
-            className="flex w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 34,
-              ease: "linear",
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: "loop",
-            }}
-          >
+        <div className="relative">
+          <div className="animate-projects-marquee flex w-max">
             <FeaturedProjectsStrip />
             <FeaturedProjectsStrip ariaHidden />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-8 text-center"
-        >
+        <div className="mt-8 text-center">
           <Link
             href="/proyectos"
             className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-8 py-3 text-base font-semibold text-white transition hover:bg-white/[0.10] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
           >
             Ver todos los proyectos
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

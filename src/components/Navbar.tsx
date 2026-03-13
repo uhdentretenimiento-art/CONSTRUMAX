@@ -10,9 +10,7 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Instagram, Facebook } from "lucide-react";
-import { MagneticButton } from "@/components/ui/MagneticButton";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import { site } from "@/data/site";
 import { useScrollProgress } from "@/hooks";
@@ -170,10 +168,7 @@ export default function Navbar() {
           />
         </div>
 
-        <motion.nav
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        <nav
           className={cn(
             "h-20 border-b transition-all duration-500",
             shouldBeTransparent
@@ -192,13 +187,11 @@ export default function Navbar() {
           >
             {/* Brand */}
             <Link href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 rounded-xl">
-              <motion.span
+              <span
                 className={cn(
-                  "block w-[230px] transition-all duration-300",
+                  "block w-[230px] transition-all duration-300 hover:scale-[1.02]",
                   shrink ? "h-12" : "h-14"
                 )}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <img
                   src={NAVBAR_LOGO}
@@ -212,7 +205,7 @@ export default function Navbar() {
                   draggable={false}
                   loading="eager"
                 />
-              </motion.span>
+              </span>
             </Link>
 
             {/* Desktop nav + indicador */}
@@ -222,18 +215,17 @@ export default function Navbar() {
                 className="relative flex items-center gap-0.5"
               >
                 {/* indicador animado */}
-                <motion.span
+                <span
                   aria-hidden
                   className={cn(
-                    "pointer-events-none absolute -bottom-1 h-[2px] rounded-full",
+                    "pointer-events-none absolute -bottom-1 h-[2px] rounded-full transition-[transform,width,opacity] duration-300",
                     "bg-gradient-to-r from-[#2DD4BF] to-[#1D4ED8] shadow-[0_0_14px_rgba(45,212,191,0.5)]"
                   )}
-                  animate={{
-                    x: parseFloat(indicatorStyle.transform?.toString().replace(/[^0-9.-]/g, "") || "0"),
+                  style={{
+                    transform: indicatorStyle.transform,
                     width: indicatorStyle.width,
                     opacity: indicatorStyle.opacity,
                   }}
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
 
                 {navItems.map((item) => {
@@ -241,7 +233,7 @@ export default function Navbar() {
                   const active = isActive(link.href);
 
                   return (
-                    <motion.div
+                    <div
                       key={link.href}
                       onMouseEnter={() => {
                         if (!navWrapRef.current) return;
@@ -275,7 +267,7 @@ export default function Navbar() {
                       >
                         {link.label}
                       </Link>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
@@ -285,97 +277,61 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               {/* Social Media Icons */}
               <div className="flex items-center gap-2">
-                <motion.a
+                <a
                   href={site.brand.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03, y: -1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-colors hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-all hover:-translate-y-0.5 hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
-                </motion.a>
-                <motion.a
+                </a>
+                <a
                   href="https://www.facebook.com/construmaxsalta"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03, y: -1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-colors hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-all hover:-translate-y-0.5 hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
                   aria-label="Facebook"
                 >
                   <Facebook className="h-5 w-5" />
-                </motion.a>
-                <motion.a
+                </a>
+                <a
                   href="https://wa.me/5493872782626"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.03, y: -1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-colors hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-white/70 transition-all hover:-translate-y-0.5 hover:bg-white/[0.1] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
                   aria-label="WhatsApp"
                 >
                   <WhatsAppIcon className="h-5 w-5" />
-                </motion.a>
+                </a>
               </div>
               
-              <MagneticButton
+              <Link
                 href="/contacto"
-                variant="primary"
-                strength={0.4}
-                className="px-6 py-3 text-base"
+                className="inline-flex rounded-2xl bg-[#1D4ED8]/90 px-6 py-3 text-base font-semibold text-white ring-1 ring-white/10 transition-colors hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
               >
                 Pedir presupuesto
-              </MagneticButton>
+              </Link>
             </div>
 
             {/* Mobile toggle */}
-            <motion.button
-              whileTap={{ scale: 0.95 }}
+            <button
               type="button"
               className="lg:hidden inline-flex items-center justify-center rounded-2xl p-2.5 text-white/80 hover:text-white hover:bg-white/[0.08] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 text-xl"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Abrir menú"
               aria-expanded={mobileOpen}
             >
-              <AnimatePresence mode="wait">
-                {mobileOpen ? (
-                  <motion.span
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    ✕
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="open"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    ☰
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
+              <span className="inline-block min-w-[1ch] transition-transform duration-200">
+                {mobileOpen ? "✕" : "☰"}
+              </span>
+            </button>
           </div>
-        </motion.nav>
+        </nav>
 
         {/* Mobile panel */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:hidden overflow-hidden border-b border-white/10 bg-zinc-950"
-            >
+        {mobileOpen && (
+          <div className="lg:hidden overflow-hidden border-b border-white/10 bg-zinc-950">
               <div className="mx-auto max-w-6xl px-4 py-4">
                 <div className="flex flex-col gap-1">
                   {/* Links */}
@@ -384,11 +340,10 @@ export default function Navbar() {
                       const active = isActive(link.href);
 
                       return (
-                        <motion.div
+                        <div
                           key={link.href}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.05 }}
+                          style={{ transitionDelay: `${index * 50}ms` }}
+                          className="transition-opacity duration-200"
                         >
                           <Link
                             href={link.href}
@@ -401,17 +356,12 @@ export default function Navbar() {
                           >
                             {link.label}
                           </Link>
-                        </motion.div>
+                        </div>
                       );
                     })}
 
                   {/* CTA */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="mt-3"
-                  >
+                  <div className="mt-3">
                     <Link
                       href="/contacto"
                       className={cn(
@@ -423,15 +373,10 @@ export default function Navbar() {
                     >
                       Pedir presupuesto
                     </Link>
-                  </motion.div>
+                  </div>
 
                   {/* Detalle pro sutil */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="mt-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-xs text-white/70"
-                  >
+                  <div className="mt-3 rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-xs text-white/70">
                     <div className="flex items-center justify-center gap-4">
                       <span className="flex items-center gap-1.5">
                         <span className="h-1.5 w-1.5 rounded-full bg-[#2DD4BF] animate-pulse" />
@@ -443,27 +388,20 @@ export default function Navbar() {
                         Presupuesto rápido
                       </span>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </div>
+        )}
       </header>
 
       {/* Overlay mobile */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-40 bg-black/60 lg:hidden"
-          />
-        )}
-      </AnimatePresence>
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+        />
+      )}
     </>
   );
 }

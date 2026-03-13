@@ -11,7 +11,7 @@ import { useEffect } from "react";
 export default function ImageProtectionProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   useEffect(() => {
     const handleImageDragStart = (e: DragEvent) => {
@@ -47,5 +47,5 @@ export default function ImageProtectionProvider({
     };
   }, []);
 
-  return <>{children}</>;
+  return <>{children ?? null}</>;
 }

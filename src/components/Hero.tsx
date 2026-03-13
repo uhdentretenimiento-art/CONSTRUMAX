@@ -28,6 +28,7 @@ export default function Hero() {
             src={HERO_MOBILE_IMAGE}
             alt={h.image.alt}
             fetchPriority="high"
+            loading="eager"
             decoding="async"
             width={1040}
             height={975}

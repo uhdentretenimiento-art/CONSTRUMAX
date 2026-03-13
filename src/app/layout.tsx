@@ -83,6 +83,10 @@ export const metadata: Metadata = {
 };
 
 const SITE_URL = "https://www.construmaxpiscinas.com";
+const HERO_MOBILE_IMAGE =
+  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
+const HERO_DESKTOP_IMAGE =
+  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif";
 
 export default function RootLayout({
   children,
@@ -205,18 +209,35 @@ export default function RootLayout({
 
   return (
     <html lang="es-AR" className="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://www.construmaxpiscinas.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.construmaxpiscinas.com" />
+        <link
+          rel="preload"
+          as="image"
+          href={HERO_MOBILE_IMAGE}
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={HERO_DESKTOP_IMAGE}
+          media="(min-width: 768px)"
+          fetchPriority="high"
+        />
+      </head>
       <body className={`${manrope.variable} ${sora.variable} min-h-dvh antialiased`}>
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <ImageProtectionProvider>
-          <Navbar />
-          <div className="pt-16">{children}</div>
-          <Footer />
-          <ScrollToTop />
-        </ImageProtectionProvider>
+        <Navbar />
+        <div className="pt-16">{children}</div>
+        <Footer />
+        <ScrollToTop />
+        <ImageProtectionProvider />
       </body>
     </html>
   );

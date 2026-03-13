@@ -51,7 +51,10 @@ export default function ProcesoPage() {
             </span>
           </h1>
 
-          <p className="mx-auto mb-8 max-w-3xl text-base leading-relaxed text-slate-300 md:text-xl">
+          <p
+            className="mx-auto mb-8 max-w-3xl text-base leading-relaxed text-slate-300 md:text-xl"
+            style={{ fontFamily: '"Segoe UI", Arial, sans-serif' }}
+          >
             Transformamos tu idea en una obra impecable con un proceso
             optimizado durante más de 25 años, lo que garantiza que sea
             ordenado, transparente y enfocado en excelentes resultados.
