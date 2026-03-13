@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode, useRef, useState, useCallback, useEffect } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SpotlightCardProps {
@@ -73,22 +72,13 @@ export function SpotlightCard({
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
       className={cn("relative overflow-hidden", className)}
-      animate={{
-        rotateX: tilt.rotateX,
-        rotateY: tilt.rotateY,
-        scale: isHovering ? scale : 1,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      }}
       style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(${isHovering ? scale : 1})`,
         transformStyle: "preserve-3d",
-        perspective: 1000,
+        transition: "transform 300ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
       {/* Spotlight effect */}
@@ -117,6 +107,6 @@ export function SpotlightCard({
 
       {/* Content */}
       <div className="relative z-10">{children}</div>
-    </motion.div>
+    </div>
   );
 }

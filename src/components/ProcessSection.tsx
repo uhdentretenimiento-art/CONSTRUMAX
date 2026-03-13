@@ -16,7 +16,7 @@ import { useScrollProgress } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 
 const VIDEO_AVIF =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.avif";
+  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.webm";
 
 const VIDEO_MOBILE_WEBM =
   "/api/media/proceso-mobile-webm";
@@ -167,7 +167,7 @@ export default function ProcessSection({
             >
               {isDesktop ? (
                 <>
-                  <source src={VIDEO_AVIF} type="video/avif" />
+                  <source src={VIDEO_AVIF} type="video/webm" />
                   <source src={VIDEO_MP4} type="video/mp4" />
                 </>
               ) : (

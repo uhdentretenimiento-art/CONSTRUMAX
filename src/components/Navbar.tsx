@@ -186,7 +186,7 @@ export default function Navbar() {
             )}
           >
             {/* Brand */}
-            <Link href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 rounded-xl">
+            <Link href="/" prefetch={false} className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 rounded-xl">
               <span
                 className={cn(
                   "block w-[230px] transition-all duration-300 hover:scale-[1.02]",
@@ -255,6 +255,7 @@ export default function Navbar() {
                     >
                       <Link
                         href={link.href}
+                        prefetch={false}
                         ref={(node) => {
                           itemRefs.current[link.href] = node;
                         }}
@@ -308,6 +309,7 @@ export default function Navbar() {
               
               <Link
                 href="/contacto"
+                prefetch={false}
                 className="inline-flex rounded-2xl bg-[#1D4ED8]/90 px-6 py-3 text-base font-semibold text-white ring-1 ring-white/10 transition-colors hover:bg-[#1D4ED8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
               >
                 Pedir presupuesto
@@ -347,6 +349,7 @@ export default function Navbar() {
                         >
                           <Link
                             href={link.href}
+                            prefetch={false}
                             className={cn(
                               "block rounded-2xl px-4 py-3.5 text-base transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50",
                               active
@@ -364,6 +367,7 @@ export default function Navbar() {
                   <div className="mt-3">
                     <Link
                       href="/contacto"
+                      prefetch={false}
                       className={cn(
                         "block w-full rounded-2xl px-5 py-3.5 text-center text-base font-medium text-white transition",
                         "bg-[#1D4ED8]/90 hover:bg-[#1D4ED8]",

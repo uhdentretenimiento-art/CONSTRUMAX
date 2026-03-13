@@ -75,12 +75,14 @@ export default function Hero() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href={h.ctaPrimary.href}
+              prefetch={false}
               className="inline-flex items-center justify-center rounded-2xl bg-[#1D4ED8]/90 px-8 py-4 text-base font-semibold text-white ring-1 ring-white/10 transition-colors hover:bg-[#1D4ED8]"
             >
               {h.ctaPrimary.label}
             </Link>
             <Link
               href={h.ctaSecondary.href}
+              prefetch={false}
               className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/[0.10]"
             >
               {h.ctaSecondary.label}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
 type ServiceCardVariant = "light" | "dark";
@@ -26,7 +25,6 @@ export default function ServiceCard({
   isPopular = false,
   variant = "light",
 }: ServiceCardProps) {
-  const reduceMotion = useReducedMotion();
   const isDark = variant === "dark";
   
   const cardRef = useRef<HTMLDivElement>(null);
@@ -60,7 +58,7 @@ export default function ServiceCard({
 
   useEffect(() => {
     const element = cardRef.current;
-    if (!element || reduceMotion) return;
+    if (!element) return;
 
     element.addEventListener("mousemove", handleMouseMove);
     element.addEventListener("mouseenter", handleMouseEnter);
@@ -71,27 +69,18 @@ export default function ServiceCard({
       element.removeEventListener("mouseenter", handleMouseEnter);
       element.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, reduceMotion]);
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      whileHover={reduceMotion ? undefined : { y: -6 }}
-      animate={{
-        rotateX: reduceMotion ? 0 : tilt.rotateX,
-        rotateY: reduceMotion ? 0 : tilt.rotateY,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      }}
       style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         transformStyle: "preserve-3d",
-        perspective: 1000,
+        transition: "transform 300ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
       className={[
-        "group relative h-full cursor-pointer overflow-visible rounded-3xl",
+        "group relative h-full cursor-pointer overflow-visible rounded-3xl transition-transform duration-300 hover:-translate-y-1.5",
         isDark
           ? "border border-white/12 bg-white/[0.05] backdrop-blur-xl"
           : "border border-slate-200/70 bg-white/70 backdrop-blur-xl",
@@ -102,9 +91,7 @@ export default function ServiceCard({
     >
       {/* Badge "Más solicitado" como solapa */}
       {isPopular && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className={[
             "absolute left-1/2 -translate-x-1/2 -top-5 z-20 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-md shadow-lg",
             isDark
@@ -114,7 +101,7 @@ export default function ServiceCard({
         >
           <Sparkles className="h-3.5 w-3.5" />
           Más solicitado
-        </motion.div>
+        </div>
       )}
 
       {/* Spotlight effect */}
@@ -146,18 +133,14 @@ export default function ServiceCard({
       />
 
       {/* Icono en esquina superior derecha */}
-      <motion.div
-        whileHover={{ scale: 1.05, rotate: 2 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        className="absolute right-7 top-7 z-10"
-      >
+      <div className="absolute right-7 top-7 z-10 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-[2deg]">
         <Icon
           className={[
             "h-5 w-5 transition-transform duration-300 group-hover:scale-110",
             iconColor ?? (isDark ? "text-[#2DD4BF]" : "text-[#1D4ED8]"),
           ].join(" ")}
         />
-      </motion.div>
+      </div>
 
       <div className="relative z-10 p-7">
         <h3
@@ -189,16 +172,11 @@ export default function ServiceCard({
           ].join(" ")}
         >
           <span>Ver más</span>
-          <motion.span
-            className="inline-block"
-            initial={{ x: 0 }}
-            whileHover={{ x: 4 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
+          <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
             →
-          </motion.span>
+          </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

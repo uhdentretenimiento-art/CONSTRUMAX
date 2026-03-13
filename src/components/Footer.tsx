@@ -66,6 +66,7 @@ const Footer = () => {
             <div>
               <Link
                 href="/contacto"
+                prefetch={false}
                 className="inline-flex whitespace-nowrap rounded-2xl bg-[#1D4ED8]/90 px-8 py-4 text-base font-semibold text-white ring-1 ring-white/10 transition-colors hover:bg-[#1D4ED8]"
               >
                 Agendar visita técnica
@@ -144,6 +145,7 @@ const Footer = () => {
                 <li key={service}>
                   <Link
                     href="/servicios"
+                    prefetch={false}
                     className="group inline-flex items-center gap-2 text-sm text-gray-300 transition-colors duration-300 hover:text-[#2DD4BF]"
                   >
                     <span className="h-px w-0 bg-[#2DD4BF] transition-all duration-300 group-hover:w-3" />
@@ -165,6 +167,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     href={link.path}
+                    prefetch={false}
                     className="group inline-flex items-center gap-2 text-sm text-gray-300 transition-colors duration-300 hover:text-[#2DD4BF]"
                   >
                     <span className="h-px w-0 bg-[#2DD4BF] transition-all duration-300 group-hover:w-3" />
@@ -239,6 +242,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
+                  prefetch={false}
                   className="group relative text-gray-400 text-sm hover:text-white transition-colors"
                 >
                   {link.label}

@@ -92,10 +92,11 @@ const baselinePath = process.argv[3] || null;
 const reportsDir = path.resolve("reports");
 fs.mkdirSync(reportsDir, { recursive: true });
 
-const outputFile = path.join(
+const summaryOutputFile = path.join(
   reportsDir,
   `lighthouse-mobile-${formatTimestamp(new Date())}.json`
 );
+const rawOutputFile = summaryOutputFile.replace(/\.json$/, "-full.json");
 
 const cmd = [
   "npx lighthouse",
@@ -104,7 +105,7 @@ const cmd = [
   "--emulated-form-factor=mobile",
   "--throttling-method=simulate",
   "--output=json",
-  `--output-path=\"${outputFile}\"`,
+  `--output-path=\"${rawOutputFile}\"`,
   "--chrome-flags=\"--headless=new --disable-gpu --no-sandbox\"",
 ].join(" ");
 
@@ -116,15 +117,15 @@ try {
   lighthouseFailed = true;
 }
 
-if (!fs.existsSync(outputFile)) {
+if (!fs.existsSync(rawOutputFile)) {
   console.error("Lighthouse did not create a report file.");
   console.error("Check that the URL is reachable:", url);
   process.exit(1);
 }
 
-const rawCurrent = readJson(outputFile);
+const rawCurrent = readJson(rawOutputFile);
 const current = toPerformanceOnlyReport(rawCurrent);
-fs.writeFileSync(outputFile, JSON.stringify(current, null, 2));
+fs.writeFileSync(summaryOutputFile, JSON.stringify(current, null, 2));
 const baseline = baselinePath && fs.existsSync(path.resolve(baselinePath))
   ? readJson(path.resolve(baselinePath))
   : null;
@@ -136,7 +137,8 @@ if (finalUrl.startsWith("chrome-error://")) {
   process.exit(1);
 }
 
-console.log("\nSaved report:", outputFile);
+console.log("\nSaved summary:", summaryOutputFile);
+console.log("Saved full report:", rawOutputFile);
 if (baselinePath && !baseline) {
   console.log("Baseline not found:", baselinePath);
 }

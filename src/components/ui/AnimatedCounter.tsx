@@ -1,6 +1,5 @@
 "use client";
 
-import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface AnimatedCounterProps {
@@ -21,9 +20,47 @@ export function AnimatedCounter({
   once = true,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const isInView = useInView(ref, { once, amount: 0.6 });
-  const shouldReduceMotion = useReducedMotion();
+  const [isInView, setIsInView] = useState(false);
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
   const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setShouldReduceMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          setIsInView(true);
+          if (once) {
+            observer.disconnect();
+          }
+        } else if (!once) {
+          setIsInView(false);
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [once]);
 
   useEffect(() => {
     if (!isInView) {
@@ -38,22 +75,31 @@ export function AnimatedCounter({
       return;
     }
 
-    const controls = animate(0, value, {
-      duration,
-      ease: "easeOut",
-      onUpdate(latest) {
-        setDisplayValue(Math.round(latest));
-      },
-    });
+    let animationFrame = 0;
+    const start = performance.now();
 
-    return () => controls.stop();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      setDisplayValue(Math.round(value * eased));
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(tick);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [duration, isInView, once, shouldReduceMotion, value]);
 
   return (
-    <motion.span ref={ref} className={className}>
+    <span ref={ref} className={className}>
       {prefix}
       {displayValue}
       {suffix}
-    </motion.span>
+    </span>
   );
 }

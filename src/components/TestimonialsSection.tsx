@@ -1,29 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useMemo, useRef, useState, type ElementType, type ReactNode } from "react";
 import TestimonialCard from "@/components/TestimonialCard";
 import { site } from "@/data/site";
 import { GlowOrb } from "@/components/ui/FloatingElement";
 import { useParallax } from "@/hooks";
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
 
 export default function TestimonialsSection() {
   const backgroundY = useParallax(-0.015);
@@ -33,12 +14,12 @@ export default function TestimonialsSection() {
     <section className="relative overflow-hidden py-24 text-white">
       {/* Background */}
       <div className="absolute inset-0 -z-30 bg-gradient-to-b from-zinc-950 via-slate-950 to-zinc-950" />
-      <motion.div
+      <div
         className="absolute inset-0 -z-20 opacity-[0.55]"
-        style={{ y: backgroundY }}
+        style={{ transform: `translate3d(0, ${backgroundY}px, 0)` }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.14),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.12),transparent_60%)]" />
-      </motion.div>
+      </div>
 
       {/* Large quote decoration */}
       <div className="pointer-events-none absolute left-4 top-14 -z-10 select-none text-[180px] font-serif leading-none text-white/[0.04] md:text-[260px]">
@@ -51,62 +32,48 @@ export default function TestimonialsSection() {
 
       <div className="mx-auto max-w-6xl px-4">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+        <Reveal className="text-center" distance={30} amount={0.3} duration={700}>
+          <Reveal
+            as="p"
+            delay={100}
+            duration={500}
             className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65"
           >
             Testimonios
-          </motion.p>
+          </Reveal>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+          <Reveal
+            as="h2"
+            delay={200}
+            duration={500}
             className="mt-4 text-4xl font-semibold leading-[1.1] md:text-5xl lg:text-6xl"
           >
             Lo que dicen nuestros{" "}
             <span className="bg-gradient-to-r from-[#2DD4BF] via-[#1D4ED8] to-[#2DD4BF] bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
               clientes
             </span>
-          </motion.h2>
+          </Reveal>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+          <Reveal
+            as="p"
+            delay={300}
+            duration={500}
             className="mx-auto mt-5 max-w-3xl text-base text-white/75 md:text-lg"
           >
             Familias y empresas que confiaron en Construmax para transformar
             su espacio exterior en un proyecto duradero y de alto nivel.
-          </motion.p>
-
-        </motion.div>
+          </Reveal>
+        </Reveal>
 
         {/* Testimonials Grid */}
-        <motion.div
-          className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {visibleTestimonials.map((testimonial, index) => (
-            <motion.div
+            <Reveal
               key={`${testimonial.name}-${testimonial.location ?? ""}`}
-              variants={itemVariants}
-              custom={index}
+              delay={120 + index * 70}
+              duration={600}
+              distance={30}
+              scaleFrom={0.95}
             >
               <TestimonialCard
                 text={testimonial.text}
@@ -117,17 +84,16 @@ export default function TestimonialsSection() {
                 date={testimonial.date}
                 stars={5}
               />
-            </motion.div>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
 
         {/* Trust indicators */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+        <Reveal
           className="mt-16 flex flex-col items-center justify-center gap-6 sm:flex-row"
+          delay={300}
+          duration={600}
+          distance={30}
         >
           <div className="text-center sm:text-left">
             <p className="text-sm font-semibold text-white">
@@ -152,8 +118,73 @@ export default function TestimonialsSection() {
             </div>
             <span className="text-sm font-semibold text-white">4.9/5</span>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
+  );
+}
+
+function Reveal({
+  as,
+  children,
+  className,
+  delay = 0,
+  duration = 600,
+  distance = 20,
+  amount = 0.15,
+  scaleFrom = 1,
+}: {
+  as?: ElementType;
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  duration?: number;
+  distance?: number;
+  amount?: number;
+  scaleFrom?: number;
+}) {
+  const Component = as ?? "div";
+  const ref = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: amount }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [amount]);
+
+  return (
+    <Component
+      ref={ref}
+      className={className}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? "translate3d(0, 0, 0) scale(1)"
+          : `translate3d(0, ${distance}px, 0) scale(${scaleFrom})`,
+        transitionProperty: "opacity, transform",
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        willChange: "opacity, transform",
+      }}
+    >
+      {children}
+    </Component>
   );
 }

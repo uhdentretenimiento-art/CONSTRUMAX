@@ -99,7 +99,7 @@ function FeaturedProjectsStrip({ ariaHidden }: { ariaHidden?: boolean }) {
         >
           <picture>
             <source media="(max-width: 767px)" srcSet={image.thumb320} />
-            <source media="(min-width: 768px)" srcSet={image.srcset} />
+            <source media="(min-width: 768px)" srcSet={image.thumb480} />
             <img
               src={image.thumb320}
               sizes="(max-width: 767px) 320px, (max-width: 1024px) 58vw, (max-width: 1280px) 566px, 566px"

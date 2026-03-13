@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface FloatingElementProps {
@@ -20,21 +19,16 @@ export function FloatingElement({
   delay = 0,
 }: FloatingElementProps) {
   return (
-    <motion.div
-      className={cn(className)}
-      animate={{
-        y: [0, -distance, 0],
-      }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "easeInOut",
-        delay,
+    <div
+      className={cn("animate-float-soft", className)}
+      style={{
+        ["--float-duration" as string]: `${duration}s`,
+        ["--float-distance" as string]: `${distance}px`,
+        ["--float-delay" as string]: `${delay}s`,
       }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -54,23 +48,17 @@ export function GlowOrb({
   duration = 4,
 }: GlowOrbProps) {
   return (
-    <motion.div
-      className={cn("pointer-events-none absolute rounded-full", className)}
+    <div
+      className={cn(
+        "pointer-events-none absolute rounded-full animate-glow-orb",
+        className
+      )}
       style={{
         width: size,
         height: size,
         background: `radial-gradient(circle, ${color}40 0%, transparent 70%)`,
         filter: `blur(${blur}px)`,
-      }}
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.5, 0.8, 0.5],
-      }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "easeInOut",
+        ["--orb-duration" as string]: `${duration}s`,
       }}
     />
   );

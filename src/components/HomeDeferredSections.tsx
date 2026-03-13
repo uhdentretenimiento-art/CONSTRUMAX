@@ -1,60 +1,61 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
-
-const AboutProjectsParallaxGroup = dynamic(
-  () => import("@/components/AboutProjectsParallaxGroup"),
-  { ssr: false }
-);
-const ServicesSection = dynamic(() => import("@/components/ServicesSection"), {
-  ssr: false,
-});
-const ProcessSection = dynamic(() => import("@/components/ProcessSection"), {
-  ssr: false,
-});
-const TestimonialsSection = dynamic(
-  () => import("@/components/TestimonialsSection"),
-  { ssr: false }
-);
+import {
+  startTransition,
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType,
+} from "react";
 
 export default function HomeDeferredSections() {
   return (
     <>
-      <DeferredSection minHeight={360}>
-        <AboutProjectsParallaxGroup />
-      </DeferredSection>
-      <DeferredSection minHeight={260}>
-        <ServicesSection maxItems={12} />
-      </DeferredSection>
-      <DeferredSection minHeight={220}>
-        <ProcessSection />
-      </DeferredSection>
-      <DeferredSection minHeight={220}>
-        <TestimonialsSection />
-      </DeferredSection>
+      <DeferredSection
+        minHeight={360}
+        load={() => import("@/components/AboutProjectsParallaxGroup")}
+      />
+      <DeferredSection
+        minHeight={260}
+        load={() => import("@/components/ServicesSection")}
+        componentProps={{ maxItems: 12 }}
+      />
+      <DeferredSection
+        minHeight={220}
+        load={() => import("@/components/ProcessSection")}
+      />
+      <DeferredSection
+        minHeight={220}
+        load={() => import("@/components/TestimonialsSection")}
+      />
     </>
   );
 }
 
-function DeferredSection({
-  children,
+type DeferredModule<TProps> = Promise<{ default: ComponentType<TProps> }>;
+
+function DeferredSection<TProps extends object>({
+  load,
+  componentProps,
   minHeight,
 }: {
-  children: React.ReactNode;
+  load: () => DeferredModule<TProps>;
+  componentProps?: TProps;
   minHeight: number;
 }) {
-  const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [LoadedComponent, setLoadedComponent] =
+    useState<ComponentType<TProps> | null>(null);
   const placeholderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (mounted) return;
+    if (isVisible) return;
 
     const target = placeholderRef.current;
     if (!target) return;
 
     if (!("IntersectionObserver" in window)) {
-      setMounted(true);
+      setIsVisible(true);
       return;
     }
 
@@ -62,7 +63,7 @@ function DeferredSection({
       (entries) => {
         const isVisible = entries.some((entry) => entry.isIntersecting);
         if (isVisible) {
-          setMounted(true);
+          setIsVisible(true);
           observer.disconnect();
         }
       },
@@ -73,10 +74,32 @@ function DeferredSection({
     return () => {
       observer.disconnect();
     };
-  }, [mounted]);
+  }, [isVisible]);
 
-  if (mounted) {
-    return <>{children}</>;
+  useEffect(() => {
+    if (!isVisible || LoadedComponent) {
+      return;
+    }
+
+    let cancelled = false;
+
+    load().then((module) => {
+      if (cancelled) {
+        return;
+      }
+
+      startTransition(() => {
+        setLoadedComponent(() => module.default);
+      });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [LoadedComponent, isVisible, load]);
+
+  if (LoadedComponent) {
+    return <LoadedComponent {...(componentProps ?? ({} as TProps))} />;
   }
 
   return (

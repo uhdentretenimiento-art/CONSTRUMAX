@@ -6,7 +6,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import { useParallax } from "@/hooks";
 
 const ABOUT_BG_DESKTOP =
-  "https://www.construmaxpiscinas.com/videos/hero/video-about.avif";
+  "https://www.construmaxpiscinas.com/videos/hero/video-about.webm";
 const ABOUT_BG_MOBILE =
   "https://www.construmaxpiscinas.com/videos/hero/video-about-mobile.mp4";
 
@@ -30,16 +30,18 @@ export default function AboutProjectsParallaxGroup() {
     <section className="relative isolate overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         {isDesktop === true ? (
-          <img
-            src={ABOUT_BG_DESKTOP}
-            alt=""
-            aria-hidden="true"
+          <video
             className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
             style={{ transform: `translateY(${backgroundY}px)` }}
-            decoding="async"
-            loading="lazy"
-            fetchPriority="low"
-          />
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+          >
+            <source src={ABOUT_BG_DESKTOP} type="video/webm" />
+          </video>
         ) : null}
 
         {isDesktop === false ? (

@@ -56,6 +56,8 @@ function mean(values) {
 }
 
 function runSingle(url, outputFile) {
+  const summaryOutputFile = outputFile;
+  const rawOutputFile = outputFile.replace(/\.json$/, "-full.json");
   const cmd = [
     "npx lighthouse",
     url,
@@ -63,7 +65,7 @@ function runSingle(url, outputFile) {
     "--emulated-form-factor=mobile",
     "--throttling-method=simulate",
     "--output=json",
-    `--output-path=\"${outputFile}\"`,
+    `--output-path=\"${rawOutputFile}\"`,
     "--chrome-flags=\"--headless=new --disable-gpu --no-sandbox\"",
   ].join(" ");
 
@@ -74,20 +76,20 @@ function runSingle(url, outputFile) {
     failed = true;
   }
 
-  if (!fs.existsSync(outputFile)) {
+  if (!fs.existsSync(rawOutputFile)) {
     return { ok: false, failed, report: null };
   }
 
-  const report = readJson(outputFile);
+  const report = readJson(rawOutputFile);
   const finalUrl = String(report.finalUrl || "");
   if (finalUrl.startsWith("chrome-error://")) {
     return { ok: false, failed, report: null };
   }
 
   const performanceOnly = toPerformanceOnlyReport(report);
-  fs.writeFileSync(outputFile, JSON.stringify(performanceOnly, null, 2));
+  fs.writeFileSync(summaryOutputFile, JSON.stringify(performanceOnly, null, 2));
 
-  return { ok: true, failed, report: performanceOnly };
+  return { ok: true, failed, report: performanceOnly, rawOutputFile };
 }
 
 const url = process.argv[2] || "http://localhost:3100";
@@ -139,11 +141,13 @@ for (let i = 1; i <= runs; i += 1) {
 
   results.push({
     file: outputFile,
+    rawFile: result.rawOutputFile,
     failed: result.failed,
     report: result.report,
   });
 
   console.log(`Saved: ${outputFile}`);
+  console.log(`Saved full report: ${result.rawOutputFile}`);
   console.log(`Score: ${Math.round(score100(result.report))}`);
 }
 

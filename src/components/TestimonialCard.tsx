@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { Star } from "lucide-react";
 
 type TestimonialCardProps = {
@@ -23,8 +22,6 @@ export default function TestimonialCard({
   date,
   stars = 5,
 }: TestimonialCardProps) {
-  const reduceMotion = useReducedMotion();
-
   const cardRef = useRef<HTMLElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -47,7 +44,7 @@ export default function TestimonialCard({
 
   useEffect(() => {
     const element = cardRef.current;
-    if (!element || reduceMotion) return;
+    if (!element) return;
 
     element.addEventListener("mousemove", handleMouseMove);
     element.addEventListener("mouseenter", handleMouseEnter);
@@ -58,14 +55,12 @@ export default function TestimonialCard({
       element.removeEventListener("mouseenter", handleMouseEnter);
       element.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, reduceMotion]);
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
   return (
-    <motion.article
+    <article
       ref={cardRef}
-      whileHover={{ y: -8, scale: 1.01 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="group relative h-full rounded-3xl border border-white/10 bg-white/[0.05] p-7 backdrop-blur-md overflow-hidden"
+      className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.05] p-7 backdrop-blur-md transition-transform duration-300 hover:-translate-y-2 hover:scale-[1.01]"
     >
       {/* Spotlight effect */}
       <div
@@ -92,11 +87,10 @@ export default function TestimonialCard({
       {/* Stars with stagger animation */}
       <div className="mb-5 flex gap-1">
         {Array.from({ length: 5 }).map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.05, duration: 0.3 }}
+            className="transition-transform duration-300"
+            style={{ transitionDelay: `${i * 40}ms` }}
           >
             <Star
               className={`h-4.5 w-4.5 transition-all duration-300 ${
@@ -108,7 +102,7 @@ export default function TestimonialCard({
                 filter: i < stars ? "drop-shadow(0 0 4px rgba(245, 158, 11, 0.5))" : "none",
               }}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -157,6 +151,6 @@ export default function TestimonialCard({
           opacity: isHovering ? 1 : 0,
         }}
       />
-    </motion.article>
+    </article>
   );
 }

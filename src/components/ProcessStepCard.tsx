@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect, type ElementType } from "react";
-import { motion } from "framer-motion";
 import { HelpCircle, Clock } from "lucide-react";
 
 interface ProcessStepCardProps {
@@ -66,23 +65,14 @@ export default function ProcessStepCard({
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      whileHover={{ y: -6 }}
-      animate={{
-        rotateX: tilt.rotateX,
-        rotateY: tilt.rotateY,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      }}
       style={{
+        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         transformStyle: "preserve-3d",
-        perspective: 1000,
+        transition: "transform 300ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
-      className="group relative h-full overflow-hidden rounded-2xl border border-white/15 bg-slate-900/60 p-5 pt-6 backdrop-blur-xl transition-all duration-300 hover:border-[#2DD4BF]/60 hover:bg-slate-900/80 md:p-6 md:pt-7"
+      className="group relative h-full overflow-hidden rounded-2xl border border-white/15 bg-slate-900/60 p-5 pt-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#2DD4BF]/60 hover:bg-slate-900/80 md:p-6 md:pt-7"
     >
       {/* Spotlight effect */}
       <div
@@ -116,13 +106,9 @@ export default function ProcessStepCard({
         </h3>
 
         {/* Icon */}
-        <motion.div
-          whileHover={{ scale: 1.1, rotate: 3 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          className="shrink-0 self-start pt-0.5 text-[#2DD4BF] transition-all duration-300"
-        >
+        <div className="shrink-0 self-start pt-0.5 text-[#2DD4BF] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[3deg]">
           <Icon className="block h-5 w-5 md:h-5.5 md:w-5.5" />
-        </motion.div>
+        </div>
       </div>
 
       {/* Description */}
@@ -132,16 +118,11 @@ export default function ProcessStepCard({
 
       {/* Duration */}
       {duration ? (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition-all duration-300 group-hover:border-[#2DD4BF]/30 group-hover:bg-[#2DD4BF]/10 group-hover:text-[#2DD4BF]"
-        >
+        <div className="relative mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition-all duration-300 group-hover:border-[#2DD4BF]/30 group-hover:bg-[#2DD4BF]/10 group-hover:text-[#2DD4BF]">
           <Clock className="h-3 w-3" />
           {duration}
-        </motion.div>
+        </div>
       ) : null}
-    </motion.div>
+    </div>
   );
 }
