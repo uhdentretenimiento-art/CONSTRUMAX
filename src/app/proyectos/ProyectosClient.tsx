@@ -31,6 +31,7 @@ import "swiper/css/free-mode";
 import { normalizeMedia } from "@/lib/media";
 import { getProjectCaseStudy } from "@/data/projectCases";
 import { getProjectDescription } from "@/data/projectDescriptions";
+import styles from "./ProyectosClient.module.css";
 
 const RESUME_DELAY_MS = 900;
 const PROJECTS_HERO_BG =
@@ -306,8 +307,8 @@ export default function ProyectosClient() {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(4,10,24,0.88)_0%,rgba(7,17,34,0.7)_18%,rgba(6,14,28,0.78)_46%,rgba(3,8,18,0.9)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_82%_at_50%_10%,rgba(255,255,255,0.02)_0%,rgba(7,17,34,0.12)_34%,rgba(3,8,18,0.46)_70%,rgba(1,3,10,0.68)_100%),radial-gradient(58%_58%_at_18%_14%,rgba(45,212,191,0.12),transparent_64%),radial-gradient(52%_52%_at_82%_18%,rgba(29,78,216,0.1),transparent_62%)]" />
+      <div className={`pointer-events-none absolute inset-0 -z-20 ${styles.overlay}`} />
+      <div className={`pointer-events-none absolute inset-0 -z-10 ${styles.glow}`} />
 
       <div className="relative z-10">
       {/* Header */}
@@ -320,7 +321,7 @@ export default function ProyectosClient() {
               </p>
 
               <h1 className="mt-4 text-4xl font-semibold md:text-6xl">
-                Nuestro <span className="text-[#2DD4BF]">portafolio</span>
+                Nuestro <span className={styles.accentText}>portafolio</span>
               </h1>
 
               <p className="mx-auto mt-4 max-w-xl text-white/70">
@@ -329,7 +330,7 @@ export default function ProyectosClient() {
               </p>
             </AnimateOnScroll>
 
-            <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-white/12 bg-white/[0.04] p-3 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+            <div className={`mx-auto mt-10 max-w-3xl rounded-3xl p-3 ${styles.glassPanel}`}>
               <div className="flex flex-col gap-3 md:flex-row">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
@@ -337,12 +338,12 @@ export default function ProyectosClient() {
                     placeholder="Buscar proyectos..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="border-white/10 bg-white/[0.04] pl-9 text-white placeholder:text-white/40 focus-visible:ring-[#2DD4BF]/30 focus-visible:border-[#2DD4BF]"
+                    className={`pl-9 text-white ${styles.searchInput}`}
                   />
                 </div>
 
                 <Select value={selectedCity} onValueChange={setSelectedCity}>
-                  <SelectTrigger className="w-full border-white/10 bg-white/[0.04] text-white md:w-56">
+                  <SelectTrigger className={`w-full text-white md:w-56 ${styles.selectTrigger}`}>
                     <SelectValue placeholder="Ciudad" />
                   </SelectTrigger>
                   <SelectContent>
@@ -394,27 +395,27 @@ export default function ProyectosClient() {
                       {selectedProject ? (() => {
                         const cs = getProjectCaseStudy(selectedProject);
                         return (
-                          <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-5 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+                          <div className={`rounded-3xl p-5 ${styles.glassPanel}`}>
                             <div className="mb-4 flex items-center justify-between gap-4">
                               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                                 Caso de estudio
                               </p>
-                              <span className="rounded-full border border-white/12 bg-white/[0.03] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                              <span className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70 ${styles.glassTag}`}>
                                 {cs.category}
                               </span>
                             </div>
 
                             <div className="space-y-3">
-                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Desafío</p>
+                              <div className={`rounded-2xl p-4 ${styles.detailBox}`}>
+                                <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${styles.sectionLabel}`}>Desafío</p>
                                 <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.challenge}</p>
                               </div>
-                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Solución</p>
+                              <div className={`rounded-2xl p-4 ${styles.detailBox}`}>
+                                <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${styles.sectionLabel}`}>Solución</p>
                                 <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.solution}</p>
                               </div>
-                              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">Resultado</p>
+                              <div className={`rounded-2xl p-4 ${styles.detailBox}`}>
+                                <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${styles.sectionLabel}`}>Resultado</p>
                                 <p className="mt-2 text-sm leading-relaxed text-white/75">{cs.result}</p>
                               </div>
                             </div>
@@ -506,7 +507,7 @@ export default function ProyectosClient() {
                                   : activeThumbIndex - 1
                               );
                             }}
-                            className="pointer-events-auto rounded-full border border-white/15 bg-white/[0.08] p-3 text-white backdrop-blur-md transition hover:bg-white/[0.14]"
+                            className={`pointer-events-auto rounded-full border border-white/15 p-3 text-white backdrop-blur-md transition ${styles.carouselButton}`}
                           >
                             <ChevronLeft className="h-6 w-6" />
                           </button>
@@ -519,7 +520,7 @@ export default function ProyectosClient() {
                                 (activeThumbIndex + 1) % normalizedMedia.length
                               );
                             }}
-                            className="pointer-events-auto rounded-full border border-white/15 bg-white/[0.08] p-3 text-white backdrop-blur-md transition hover:bg-white/[0.14]"
+                            className={`pointer-events-auto rounded-full border border-white/15 p-3 text-white backdrop-blur-md transition ${styles.carouselButton}`}
                           >
                             <ChevronRight className="h-6 w-6" />
                           </button>
@@ -559,7 +560,7 @@ export default function ProyectosClient() {
                                 className={[
                                   "relative aspect-video overflow-hidden rounded-xl border-2 transition-all",
                                   activeThumbIndex === idx
-                                    ? "border-[#2DD4BF] shadow-[0_0_0_1px_rgba(45,212,191,0.25),0_18px_45px_-30px_rgba(0,0,0,0.85)] scale-[1.02]"
+                                    ? styles.activeThumb
                                     : "border-white/10 opacity-70 hover:opacity-100",
                                 ].join(" ") }
                               >
@@ -602,7 +603,7 @@ export default function ProyectosClient() {
                     const description = getProjectDescription(selectedProject);
                     return (
                       <div className="space-y-6">
-                        <div className="rounded-3xl border border-white/12 bg-white/[0.04] p-5 shadow-[0_20px_70px_-50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+                        <div className={`rounded-3xl p-5 ${styles.glassPanel}`}>
                           <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
                             <div className="space-y-3 text-sm leading-relaxed text-white/75">
                               <div className="mb-4">
@@ -621,14 +622,14 @@ export default function ProyectosClient() {
                               ))}
                             </div>
 
-                            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/55">
+                            <div className={`rounded-2xl p-4 ${styles.detailBox}`}>
+                              <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${styles.sectionLabel}`}>
                                 Caracteristicas
                               </p>
                               <ul className="mt-3 space-y-2 text-sm text-white/75">
                                 {description.features.map((feature) => (
                                   <li key={feature} className="flex items-start gap-2">
-                                    <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#2DD4BF]" />
+                                    <span className={`mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full ${styles.featureDot}`} />
                                     <span>{feature}</span>
                                   </li>
                                 ))}
@@ -642,7 +643,7 @@ export default function ProyectosClient() {
                             <button
                               aria-label={`Ver proyecto anterior: ${previousProject.title}`}
                               onClick={() => setSelectedProject(previousProject)}
-                              className="flex w-fit items-center gap-2 font-semibold text-[#2DD4BF] hover:underline"
+                              className={`flex w-fit items-center gap-2 font-semibold hover:underline ${styles.accentText}`}
                             >
                               <ChevronLeft className="h-5 w-5" /> Anterior
                             </button>
@@ -655,7 +656,7 @@ export default function ProyectosClient() {
                           <Link
                             href="/proyectos"
                             onClick={() => setSelectedProject(null)}
-                            className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-6 py-2 font-semibold text-white/90 transition hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50 lg:justify-self-center"
+                            className={`inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-2 font-semibold text-white/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/50 lg:justify-self-center ${styles.portfolioLink}`}
                           >
                             Ver portafolio completo
                           </Link>
@@ -664,7 +665,7 @@ export default function ProyectosClient() {
                             <button
                               aria-label={`Ver proyecto siguiente: ${nextProject.title}`}
                               onClick={() => setSelectedProject(nextProject)}
-                              className="flex w-fit items-center gap-2 font-semibold text-[#2DD4BF] hover:underline lg:justify-self-end"
+                              className={`flex w-fit items-center gap-2 font-semibold hover:underline lg:justify-self-end ${styles.accentText}`}
                             >
                               Siguiente <ChevronRight className="h-5 w-5" />
                             </button>

@@ -44,12 +44,51 @@ function DeferredSection<TProps extends object>({
   minHeight: number;
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isInteractionReady, setIsInteractionReady] = useState(false);
   const [LoadedComponent, setLoadedComponent] =
     useState<ComponentType<TProps> | null>(null);
   const placeholderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (isVisible) return;
+    if (isInteractionReady) {
+      return;
+    }
+
+    if (!("matchMedia" in window)) {
+      setIsInteractionReady(true);
+      return;
+    }
+
+    const requiresInteraction = window.matchMedia("(max-width: 767px)").matches;
+    if (!requiresInteraction) {
+      setIsInteractionReady(true);
+      return;
+    }
+
+    const unlock = () => {
+      setIsInteractionReady(true);
+    };
+
+    if (window.scrollY > 0) {
+      unlock();
+      return;
+    }
+
+    window.addEventListener("scroll", unlock, { passive: true, once: true });
+    window.addEventListener("touchstart", unlock, { passive: true, once: true });
+    window.addEventListener("wheel", unlock, { passive: true, once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+
+    return () => {
+      window.removeEventListener("scroll", unlock);
+      window.removeEventListener("touchstart", unlock);
+      window.removeEventListener("wheel", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
+  }, [isInteractionReady]);
+
+  useEffect(() => {
+    if (isVisible || !isInteractionReady) return;
 
     const target = placeholderRef.current;
     if (!target) return;
@@ -67,14 +106,14 @@ function DeferredSection<TProps extends object>({
           observer.disconnect();
         }
       },
-      { rootMargin: "160px 0px" }
+      { rootMargin: "64px 0px", threshold: 0.15 }
     );
 
     observer.observe(target);
     return () => {
       observer.disconnect();
     };
-  }, [isVisible]);
+  }, [isInteractionReady, isVisible]);
 
   useEffect(() => {
     if (!isVisible || LoadedComponent) {

@@ -1,0 +1,69 @@
+.heroTexture {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+");
+}
+
+.heroBadge {
+  border-color: rgb(134 239 172 / 0.45);
+  background: rgb(134 239 172 / 0.1);
+  color: #86efac;
+}
+
+.accentText {
+  color: #2dd4bf;
+}
+
+.resultsBadge {
+  border-color: rgb(134 239 172 / 0.4);
+  background: rgb(134 239 172 / 0.1);
+  color: #86efac;
+}
+
+.searchIcon {
+  color: rgb(55 65 81 / 0.7);
+}
+
+.controlText {
+  color: #374151;
+}
+
+.controlText::placeholder {
+  color: rgb(55 65 81 / 0.6);
+}
+
+.controlText svg {
+  color: rgb(55 65 81 / 0.7);
+}
+
+.selectContent {
+  border-color: rgb(134 239 172 / 0.5);
+  color: #374151;
+}
+
+.selectItem {
+  color: #374151;
+}
+
+.selectItem svg {
+  color: rgb(55 65 81 / 0.7);
+}
+
+.gridGlow {
+  background-image: radial-gradient(
+    ellipse at top,
+    rgb(37 99 235 / 0.1),
+    transparent 60%
+  );
+}
+
+.ctaPanel {
+  background-image: linear-gradient(
+    90deg,
+    rgb(2 6 23 / 0.95),
+    rgb(17 24 39 / 0.95),
+    rgb(15 23 42 / 0.95)
+  );
+}
+
+.ctaButton {
+  box-shadow: 0 18px 40px -20px rgb(29 78 216 / 0.8);
+}
