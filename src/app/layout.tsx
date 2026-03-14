@@ -6,9 +6,6 @@ import Navbar from "@/components/Navbar";
 
 const Footer = dynamic(() => import("@/components/Footer"));
 const ScrollToTop = dynamic(() => import("@/components/ScrollToTop"));
-const ImageProtectionProvider = dynamic(
-  () => import("@/components/ImageProtectionProvider")
-);
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -87,6 +84,28 @@ const HERO_MOBILE_IMAGE =
   "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
 const HERO_DESKTOP_IMAGE =
   "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif";
+const IMAGE_PROTECTION_SCRIPT = `(function () {
+  const handleDragStart = (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    if (target.matches('img, picture, video') || target.closest('img, picture, video')) {
+      event.preventDefault();
+    }
+  };
+
+  const handleContextMenu = (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    if (target.tagName.toLowerCase() === 'img') {
+      event.preventDefault();
+    }
+  };
+
+  document.addEventListener('dragstart', handleDragStart);
+  document.addEventListener('contextmenu', handleContextMenu);
+})();`;
 
 export default function RootLayout({
   children,
@@ -237,7 +256,7 @@ export default function RootLayout({
         <div className="pt-16">{children}</div>
         <Footer />
         <ScrollToTop />
-        <ImageProtectionProvider />
+        <script dangerouslySetInnerHTML={{ __html: IMAGE_PROTECTION_SCRIPT }} />
       </body>
     </html>
   );

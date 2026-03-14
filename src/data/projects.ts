@@ -912,6 +912,12 @@ const baseProjects: Project[] = [
             
             ],
       },
+                  {
+                        id: "estacion-alvarado",
+                        title: "Estacion Alvarado",
+                        location: "Salta Capital",
+                        images: [],
+                  },
 ];
 
 const portfolioByProject = portfolioAvifData as Record<string, PortfolioItem[]>;

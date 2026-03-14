@@ -110,14 +110,214 @@ const CASES: Record<string, ProjectCaseStudy> = {
     highlights: ["Nueva estructura", "Mayor resistencia", "Diseño actualizado"],
   },
   "san-salvador-de-jujuy": {
+    category: "Residencial",
+    challenge:
+      "Construir una piscina funcional adaptada a un entorno urbano.",
+    solution:
+      "Construcción completa de piscina con impermeabilización estructural.",
+    result:
+      "Piscina moderna integrada al espacio exterior.",
+    highlights: ["Entorno urbano", "Impermeabilización", "Piscina moderna"],
+  },
+  "grand-bourg-2": {
+    category: "Residencial Premium",
+    challenge:
+      "Desarrollar una piscina moderna que se integre al entorno residencial y al espacio exterior del jardín.",
+    solution:
+      "Construcción completa de piscina con desarrollo estructural del vaso y revestimiento especializado para piscinas.",
+    result:
+      "Piscina moderna, funcional y perfectamente integrada al entorno del jardín.",
+    highlights: ["Construcción completa", "Revestimiento", "Integración"],
+  },
+  "hotel-puscana-cachi": {
     category: "Institucional",
     challenge:
-      "Resolver un proyecto de escala representativa con una propuesta durable y clara en su ejecución.",
+      "Construir una piscina que acompañe la estética del hotel y el paisaje natural de Cachi.",
     solution:
-      "Diseño técnico a medida con materiales de primera línea y definición de obra pensada para uso exigente.",
+      "Construcción de piscina con revestimiento símil Bali y preparación completa de superficies.",
     result:
-      "Piscina ejecutada con presencia institucional, alta durabilidad y terminación premium.",
-    highlights: ["Escala representativa", "Alta durabilidad", "Terminación premium"],
+      "Piscina con estética natural y efecto visual profundo integrada al paisaje.",
+    highlights: ["Símil Bali", "Paisaje natural", "Efecto visual"],
+  },
+  "joaquin-v-gonzalez": {
+    category: "Residencial",
+    challenge:
+      "Desarrollar una piscina residencial funcional integrada al espacio exterior.",
+    solution:
+      "Construcción completa de piscina con estructura e impermeabilización.",
+    result:
+      "Piscina resistente y diseñada para uso familiar.",
+    highlights: ["Uso familiar", "Impermeabilización", "Piscina resistente"],
+  },
+  "estacion-alvarado": {
+    category: "Residencial",
+    challenge:
+      "Construir una piscina residencial integrada al entorno del jardín.",
+    solution:
+      "Desarrollo estructural completo con impermeabilización y terminaciones resistentes.",
+    result:
+      "Piscina funcional preparada para uso cotidiano.",
+    highlights: ["Entorno", "Impermeabilización", "Uso cotidiano"],
+  },
+  "jardines-de-san-lorenzo": {
+    category: "Residencial",
+    challenge:
+      "Construir una piscina segura en un terreno con características de suelo aluvional.",
+    solution:
+      "Desarrollo estructural adaptado al terreno y construcción completa del vaso de la piscina.",
+    result:
+      "Piscina estable y segura integrada al entorno residencial.",
+    highlights: ["Suelo aluvional", "Estabilidad", "Entorno residencial"],
+  },
+  "la-almudena": {
+    category: "Residencial",
+    challenge:
+      "Recuperar el estado estético y funcional de una piscina de fibra de vidrio cuya pintura se encontraba deteriorada por el paso del tiempo y la exposición constante al agua y a las condiciones climáticas.",
+    solution:
+      "Se realizó una renovación completa mediante limpieza profunda, preparación de superficies y aplicación de pintura especializada para piscinas, asegurando una correcta adherencia y mayor durabilidad del revestimiento.",
+    result:
+      "La piscina recuperó su aspecto original, con una terminación uniforme y resistente, prolongando su vida útil y mejorando su apariencia general.",
+    highlights: ["Fibra de vidrio", "Renovación total", "Mayor durabilidad"],
+  },
+  "la-vertiente": {
+    category: "Residencial Premium",
+    challenge:
+      "Diseñar una piscina que aproveche la vista del entorno y genere un impacto visual.",
+    solution:
+      "Construcción de piscina con sistema de desborde infinito y diseño estructural especializado.",
+    result:
+      "Piscina con efecto visual infinito integrada al paisaje.",
+    highlights: ["Desborde infinito", "Impacto visual", "Paisaje"],
+  },
+  "los-psicologos": {
+    category: "Residencial",
+    challenge:
+      "Crear una piscina adaptada al espacio disponible y a las necesidades del cliente.",
+    solution:
+      "Diseño personalizado y construcción completa de piscina residencial.",
+    result:
+      "Piscina única integrada al entorno del jardín.",
+    highlights: ["Diseño personalizado", "Espacio disponible", "Entorno"],
+  },
+  "mirasoles": {
+    category: "Residencial",
+    challenge:
+      "Diseñar una piscina con identidad propia que se adapte al estilo de la vivienda.",
+    solution:
+      "Construcción de piscina con diseño personalizado y terminaciones de alta calidad.",
+    result:
+      "Piscina moderna y funcional integrada al entorno residencial.",
+    highlights: ["Diseño personalizado", "Alta calidad", "Entorno residencial"],
+  },
+  "san-lorenzo-1": {
+    category: "Residencial",
+    challenge:
+      "Construir una piscina residencial integrada al entorno natural del jardín.",
+    solution:
+      "Construcción completa de piscina con estructura resistente e impermeabilización.",
+    result:
+      "Piscina funcional integrada al espacio exterior de la vivienda.",
+    highlights: ["Entorno natural", "Estructura resistente", "Piscina funcional"],
+  },
+  "san-lorenzo-2": {
+    category: "Residencial",
+    challenge:
+      "Recuperar una piscina antigua deteriorada por el paso del tiempo.",
+    solution:
+      "Reparación estructural y renovación completa de superficies.",
+    result:
+      "Piscina recuperada con estética renovada y mayor durabilidad.",
+    highlights: ["Reparación", "Renovación", "Durabilidad"],
+  },
+  "san-luis-1": {
+    category: "Residencial",
+    challenge:
+      "Construir una piscina residencial funcional adaptada al espacio disponible.",
+    solution:
+      "Construcción completa de piscina con estructura e impermeabilización.",
+    result:
+      "Piscina integrada al jardín pensada para uso familiar.",
+    highlights: ["Uso familiar", "Estructura", "Jardín"],
+  },
+  "san-luis-2": {
+    category: "Residencial",
+    challenge:
+      "Desarrollar una piscina residencial con diseño funcional y estética equilibrada.",
+    solution:
+      "Construcción estructural completa y terminaciones resistentes al agua.",
+    result:
+      "Piscina moderna integrada al espacio exterior.",
+    highlights: ["Diseño funcional", "Terminación resistente", "Espacio exterior"],
+  },
+  "san-luis-3": {
+    category: "Residencial",
+    challenge:
+      "Crear un espacio recreativo que integre piscina y área social.",
+    solution:
+      "Construcción de piscina junto a quincho con diseño integrado.",
+    result:
+      "Área de esparcimiento completa para reuniones y recreación.",
+    highlights: ["Piscina", "Quincho", "Área social"],
+  },
+  "san-luis-4": {
+    category: "Residencial",
+    challenge:
+      "Reparar una piscina deteriorada por el uso y el paso del tiempo.",
+    solution:
+      "Reacondicionamiento estructural y renovación de superficies.",
+    result:
+      "Piscina recuperada con mejor estética y funcionalidad.",
+    highlights: ["Reacondicionamiento", "Superficies", "Funcionalidad"],
+  },
+  "vaqueros": {
+    category: "Residencial",
+    challenge:
+      "Reemplazar piscinas antiguas que habían llegado al final de su vida útil.",
+    solution:
+      "Remoción de estructuras existentes y construcción de nuevas piscinas.",
+    result:
+      "Piscinas renovadas con mayor seguridad y durabilidad.",
+    highlights: ["Reemplazo", "Seguridad", "Durabilidad"],
+  },
+  "villa-rebeca-1": {
+    category: "Residencial",
+    challenge:
+      "Crear un espacio de esparcimiento que combine piscina y áreas de descanso.",
+    solution:
+      "Diseño y construcción de piscina integrada al entorno exterior.",
+    result:
+      "Sector recreativo funcional para uso familiar.",
+    highlights: ["Esparcimiento", "Uso familiar", "Entorno exterior"],
+  },
+  "villa-rebeca-2": {
+    category: "Residencial",
+    challenge:
+      "Actualizar la estética de una piscina existente sin modificar su estructura.",
+    solution:
+      "Preparación de superficies y aplicación de pintura especializada.",
+    result:
+      "Piscina renovada con estética moderna y mayor protección.",
+    highlights: ["Pintura", "Protección", "Estética moderna"],
+  },
+  "zona-centro-1": {
+    category: "Residencial",
+    challenge:
+      "Diseñar una piscina adaptada a las características de una propiedad urbana.",
+    solution:
+      "Proyecto de diseño personalizado y construcción completa.",
+    result:
+      "Piscina funcional optimizada para el espacio disponible.",
+    highlights: ["Diseño personalizado", "Espacio disponible", "Entorno urbano"],
+  },
+  "zona-centro-2": {
+    category: "Residencial",
+    challenge:
+      "Desarrollar una piscina práctica dentro de un entorno urbano.",
+    solution:
+      "Construcción completa de piscina adaptada al terreno.",
+    result:
+      "Piscina funcional integrada al espacio exterior.",
+    highlights: ["Entorno urbano", "Terreno", "Espacio exterior"],
   },
 };
 

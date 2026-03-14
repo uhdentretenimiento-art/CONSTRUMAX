@@ -8,6 +8,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type MouseEvent as ReactMouseEvent,
   type CSSProperties,
 } from "react";
 import { Instagram, Facebook } from "lucide-react";
@@ -16,6 +17,8 @@ import { site } from "@/data/site";
 import { useScrollProgress } from "@/hooks";
 
 type NavLink = { label: string; href: string };
+
+const PROJECTS_LIST_EVENT = "projects:show-list";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -43,7 +46,7 @@ export default function Navbar() {
     () => [
       { label: "Inicio", href: "/" },
       { label: "Servicios", href: "/servicios" },
-      { label: "Proyectos", href: "/proyectos?view=list" },
+      { label: "Proyectos", href: "/proyectos" },
       { label: "Proceso", href: "/proceso" },
       { label: "Blog", href: "/blog" },
       { label: "Contacto", href: "/contacto" },
@@ -66,6 +69,18 @@ export default function Navbar() {
     if (pathname?.startsWith("/contacto")) return "/contacto";
     return pathname || "/";
   }, [pathname]);
+
+  function handleNavItemClick(
+    event: ReactMouseEvent<HTMLAnchorElement>,
+    href: string
+  ) {
+    if (href !== "/proyectos" || pathname !== "/proyectos") return;
+
+    event.preventDefault();
+    setMobileOpen(false);
+    window.dispatchEvent(new CustomEvent(PROJECTS_LIST_EVENT));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   // Scroll: transparente (sólo home) arriba, sólida al bajar + shrink suave
   useEffect(() => {
@@ -256,6 +271,7 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         prefetch={false}
+                        onClick={(event) => handleNavItemClick(event, link.href)}
                         ref={(node) => {
                           itemRefs.current[link.href] = node;
                         }}
@@ -350,6 +366,7 @@ export default function Navbar() {
                           <Link
                             href={link.href}
                             prefetch={false}
+                            onClick={(event) => handleNavItemClick(event, link.href)}
                             className={cn(
                               "block rounded-2xl px-4 py-3.5 text-base transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50",
                               active

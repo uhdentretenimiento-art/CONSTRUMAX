@@ -38,6 +38,7 @@ const PROJECTS_HERO_BG =
   "https://www.construmaxpiscinas.com/images/hero/hero-proyectos.avif";
 const PROJECTS_HERO_BG_MOBILE =
   "https://www.construmaxpiscinas.com/images/hero/hero-proyectos-mobile.avif";
+const PROJECTS_LIST_EVENT = "projects:show-list";
 
 const getUniqueCities = () => {
   const cities = projects.map((p) => p.location.split(",")[0].trim());
@@ -152,7 +153,8 @@ export default function ProyectosClient() {
   const cities = useMemo(() => getUniqueCities(), []);
 
   const filteredProjects = useMemo(() => {
-    return projects.filter((project) => {
+    return projects
+      .filter((project) => {
       const q = searchTerm.toLowerCase();
       const matchesSearch =
         q === "" ||
@@ -163,8 +165,9 @@ export default function ProyectosClient() {
         selectedCity === "all" ||
         project.location.toLowerCase().includes(selectedCity.toLowerCase());
 
-      return matchesSearch && matchesCity;
-    });
+        return matchesSearch && matchesCity;
+      })
+      .sort((a, b) => a.title.localeCompare(b.title, "es", { sensitivity: "base" }));
   }, [searchTerm, selectedCity]);
 
   const currentProjectIndex = useMemo(() => {
@@ -191,6 +194,18 @@ export default function ProyectosClient() {
       setSelectedProject(null);
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    const handleShowList = () => {
+      setSelectedProject(null);
+      setLightboxOpen(false);
+      setCurrentImageIndex(0);
+      setActiveThumbIndex(0);
+    };
+
+    window.addEventListener(PROJECTS_LIST_EVENT, handleShowList);
+    return () => window.removeEventListener(PROJECTS_LIST_EVENT, handleShowList);
+  }, []);
 
   // Tab visibility
   useEffect(() => {
@@ -444,56 +459,66 @@ export default function ProyectosClient() {
                         onFocusCapture={interactionStart}
                         onBlurCapture={interactionEnd}
                       >
-
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={activeThumbIndex}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="h-full w-full cursor-zoom-in"
-                            onClick={() => {
-                              setCurrentImageIndex(activeThumbIndex);
-                              setLightboxOpen(true);
-                            }}
-                          >
-                            {normalizedMedia[activeThumbIndex]?.type === "video" ? (
-                              <video
-                                autoPlay
-                                muted
-                                playsInline
-                                className="h-full w-full object-contain"
-                                onEnded={() =>
-                                  handleThumbnailClick(
-                                    (activeThumbIndex + 1) % normalizedMedia.length
-                                  )
-                                }
-                              >
-                                {normalizedMedia[activeThumbIndex].sources.map((s) => (
-                                  <source key={s.src} src={s.src} type={s.type} />
-                                ))}
-                                Tu navegador no soporta el video.
-                              </video>
-                            ) : (
-                              <img
-                                src={
-                                  normalizedMedia[activeThumbIndex]?.formats?.webp ??
-                                  normalizedMedia[activeThumbIndex]?.formats?.smAvif ??
-                                  normalizedMedia[activeThumbIndex]?.formats?.smWebp
-                                }
-                                srcSet={
-                                  normalizedMedia[activeThumbIndex]?.formats?.srcSet
-                                }
-                                sizes="(max-width: 1024px) 100vw, 72vw"
-                                alt={selectedProject.title}
-                                className="h-full w-full object-contain"
-                                loading="lazy"
-                                decoding="async"
-                                referrerPolicy="no-referrer"
-                              />
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
+                        {normalizedMedia.length > 0 ? (
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={activeThumbIndex}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              className="h-full w-full cursor-zoom-in"
+                              onClick={() => {
+                                setCurrentImageIndex(activeThumbIndex);
+                                setLightboxOpen(true);
+                              }}
+                            >
+                              {normalizedMedia[activeThumbIndex]?.type === "video" ? (
+                                <video
+                                  autoPlay
+                                  muted
+                                  playsInline
+                                  className="h-full w-full object-contain"
+                                  onEnded={() =>
+                                    handleThumbnailClick(
+                                      (activeThumbIndex + 1) % normalizedMedia.length
+                                    )
+                                  }
+                                >
+                                  {normalizedMedia[activeThumbIndex].sources.map((s) => (
+                                    <source key={s.src} src={s.src} type={s.type} />
+                                  ))}
+                                  Tu navegador no soporta el video.
+                                </video>
+                              ) : (
+                                <img
+                                  src={
+                                    normalizedMedia[activeThumbIndex]?.formats?.webp ??
+                                    normalizedMedia[activeThumbIndex]?.formats?.smAvif ??
+                                    normalizedMedia[activeThumbIndex]?.formats?.smWebp
+                                  }
+                                  srcSet={
+                                    normalizedMedia[activeThumbIndex]?.formats?.srcSet
+                                  }
+                                  sizes="(max-width: 1024px) 100vw, 72vw"
+                                  alt={selectedProject.title}
+                                  className="h-full w-full object-contain"
+                                  loading="lazy"
+                                  decoding="async"
+                                  referrerPolicy="no-referrer"
+                                />
+                              )}
+                            </motion.div>
+                          </AnimatePresence>
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-6 text-center text-white/60">
+                            <div>
+                              <p className="text-base font-semibold text-white/80">Fotos proximamente</p>
+                              <p className="mt-2 text-sm leading-relaxed text-white/55">
+                                Estacion Alvarado ya figura en proyectos. Solo falta cargar sus imagenes.
+                              </p>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Controls */}
                         <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 opacity-0 transition-opacity group-hover:opacity-100">
@@ -508,6 +533,7 @@ export default function ProyectosClient() {
                               );
                             }}
                             className={`pointer-events-auto rounded-full border border-white/15 p-3 text-white backdrop-blur-md transition ${styles.carouselButton}`}
+                            disabled={normalizedMedia.length === 0}
                           >
                             <ChevronLeft className="h-6 w-6" />
                           </button>
@@ -521,6 +547,7 @@ export default function ProyectosClient() {
                               );
                             }}
                             className={`pointer-events-auto rounded-full border border-white/15 p-3 text-white backdrop-blur-md transition ${styles.carouselButton}`}
+                            disabled={normalizedMedia.length === 0}
                           >
                             <ChevronRight className="h-6 w-6" />
                           </button>
@@ -528,74 +555,76 @@ export default function ProyectosClient() {
                       </div>
 
                       {/* Thumbs */}
-                      <div
-                        className="py-2"
-                        onMouseEnter={interactionStart}
-                        onMouseLeave={interactionEnd}
-                        onTouchStart={interactionStart}
-                        onTouchEnd={interactionEnd}
-                      >
-                        <Swiper
-                          onSwiper={(swiper) => {
-                            swiperRef.current = swiper;
-                            attachSwiperListeners(swiper);
-                          }}
-                          onSlideChange={(swiper) =>
-                            setActiveThumbIndex(swiper.activeIndex)
-                          }
-                          modules={[FreeMode, Navigation]}
-                          spaceBetween={12}
-                          slidesPerView={3}
-                          breakpoints={{
-                            640: { slidesPerView: 4 },
-                            1024: { slidesPerView: 6 },
-                          }}
-                          freeMode
-                          className="rounded-xl"
+                      {normalizedMedia.length > 0 ? (
+                        <div
+                          className="py-2"
+                          onMouseEnter={interactionStart}
+                          onMouseLeave={interactionEnd}
+                          onTouchStart={interactionStart}
+                          onTouchEnd={interactionEnd}
                         >
-                          {normalizedMedia.map((media, idx) => (
-                            <SwiperSlide key={idx}>
-                              <div
-                                onClick={() => handleThumbnailClick(idx)}
-                                className={[
-                                  "relative aspect-video overflow-hidden rounded-xl border-2 transition-all",
-                                  activeThumbIndex === idx
-                                    ? styles.activeThumb
-                                    : "border-white/10 opacity-70 hover:opacity-100",
-                                ].join(" ") }
-                              >
-                                {media.type === "video" ? (
-                                  <VideoThumbnail
-                                    sources={media.sources}
-                                    className="absolute inset-0"
-                                  />
-                                ) : media.formats?.smAvif || media.formats?.smWebp ? (
-                                  <MiniaturaConFallback
-                                    src={media.formats.smAvif ?? media.formats.smWebp}
-                                    srcSet={
-                                      [
-                                        media.formats.smWebp
-                                          ? `${media.formats.smWebp} 320w`
-                                          : undefined,
-                                        media.formats.smAvif
-                                          ? `${media.formats.smAvif} 480w`
-                                          : undefined,
-                                      ]
-                                        .filter(Boolean)
-                                        .join(", ") || undefined
-                                    }
-                                    sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 160px"
-                                  />
-                                ) : (
-                                  <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-xs text-white/45">
-                                    Miniatura no disponible
-                                  </div>
-                                )}
-                              </div>
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                      </div>
+                          <Swiper
+                            onSwiper={(swiper) => {
+                              swiperRef.current = swiper;
+                              attachSwiperListeners(swiper);
+                            }}
+                            onSlideChange={(swiper) =>
+                              setActiveThumbIndex(swiper.activeIndex)
+                            }
+                            modules={[FreeMode, Navigation]}
+                            spaceBetween={12}
+                            slidesPerView={3}
+                            breakpoints={{
+                              640: { slidesPerView: 4 },
+                              1024: { slidesPerView: 6 },
+                            }}
+                            freeMode
+                            className="rounded-xl"
+                          >
+                            {normalizedMedia.map((media, idx) => (
+                              <SwiperSlide key={idx}>
+                                <div
+                                  onClick={() => handleThumbnailClick(idx)}
+                                  className={[
+                                    "relative aspect-video overflow-hidden rounded-xl border-2 transition-all",
+                                    activeThumbIndex === idx
+                                      ? styles.activeThumb
+                                      : "border-white/10 opacity-70 hover:opacity-100",
+                                  ].join(" ") }
+                                >
+                                  {media.type === "video" ? (
+                                    <VideoThumbnail
+                                      sources={media.sources}
+                                      className="absolute inset-0"
+                                    />
+                                  ) : media.formats?.smAvif || media.formats?.smWebp ? (
+                                    <MiniaturaConFallback
+                                      src={media.formats.smAvif ?? media.formats.smWebp}
+                                      srcSet={
+                                        [
+                                          media.formats.smWebp
+                                            ? `${media.formats.smWebp} 320w`
+                                            : undefined,
+                                          media.formats.smAvif
+                                            ? `${media.formats.smAvif} 480w`
+                                            : undefined,
+                                        ]
+                                          .filter(Boolean)
+                                          .join(", ") || undefined
+                                      }
+                                      sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 160px"
+                                    />
+                                  ) : (
+                                    <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-xs text-white/45">
+                                      Miniatura no disponible
+                                    </div>
+                                  )}
+                                </div>
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
 

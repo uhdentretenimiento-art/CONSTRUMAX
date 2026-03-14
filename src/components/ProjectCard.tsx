@@ -119,13 +119,22 @@ export default function ProjectCard({
 
       {/* Image Container */}
       <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src={imageSrc}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-center text-sm text-white/60">
+            <div className="px-6">
+              <p className="font-medium text-white/80">Fotos proximamente</p>
+              <p className="mt-1 text-xs text-white/50">Este proyecto se agrego al catalogo y espera sus imagenes.</p>
+            </div>
+          </div>
+        )}
         
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
