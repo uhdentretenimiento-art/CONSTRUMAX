@@ -15,16 +15,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
-
-type FormData = {
-  name: string;
-  phone: string;
-  email: string;
-  city: string;
-  projectType: string;
-  message: string;
-  company: string; // honeypot
-};
+import {
+  emptyContactFormData,
+  validateContactField,
+  validateContactForm,
+  type ContactFieldErrors,
+  type ContactFormData,
+} from "@/lib/contactForm";
 
 export default function ContactSection() {
   const projectTypeOptions = [
@@ -36,69 +33,33 @@ export default function ContactSection() {
     "Otro",
   ];
 
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    phone: "",
-    email: "",
-    city: "",
-    projectType: "",
-    message: "",
-    company: "",
-  });
+  const [formData, setFormData] = useState<ContactFormData>(emptyContactFormData);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validateField = (name: keyof FormData, value: string) => {
-    switch (name) {
-      case "name":
-        return value.trim() ? "" : "El nombre es requerido";
-
-      case "phone": {
-        const v = value.trim();
-        if (!v) return "El teléfono es requerido";
-        if (!/^[1-9][0-9]{9}$/.test(v))
-          return "Debe tener 10 dígitos sin 0 inicial";
-        if (/^15/.test(v)) return "No incluir 15 al inicio";
-        return "";
-      }
-
-      case "message":
-        if (!value.trim()) return "El mensaje es requerido";
-        if (value.trim().length < 10) return "Mínimo 10 caracteres";
-        return "";
-
-      default:
-        return "";
-    }
-  };
+  const [errors, setErrors] = useState<ContactFieldErrors>({});
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({ ...prev, [name]: value } as FormData));
+    setFormData((prev) => ({ ...prev, [name]: value } as ContactFormData));
 
-    if (name === "name" || name === "phone" || name === "message") {
-      const error = validateField(name as keyof FormData, value);
+    if (name === "name" || name === "phone" || name === "email" || name === "message") {
+      const error = validateContactField(name as keyof ContactFormData, value);
       setErrors((prev) => ({ ...prev, [name]: error }));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
 
     // Honeypot
     if (formData.company.trim()) return;
 
-    const newErrors: Record<string, string> = {};
-    (["name", "phone", "message"] as Array<keyof FormData>).forEach((field) => {
-      const error = validateField(field, formData[field]);
-      if (error) newErrors[field] = error;
-    });
+    const newErrors = validateContactForm(formData);
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -107,21 +68,43 @@ export default function ContactSection() {
 
     setLoading(true);
     try {
-      // Envío externo desactivado hasta configurar integración de email.
-      setSuccess(true);
-      toast.success(
-        "Solicitud registrada. El envío por email se habilitará pronto."
-      );
-
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        city: "",
-        projectType: "",
-        message: "",
-        company: "",
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+
+      const result = (await response.json().catch(() => null)) as
+        | {
+            ok?: boolean;
+            message?: string;
+            fieldErrors?: ContactFieldErrors;
+          }
+        | null;
+
+      if (!response.ok) {
+        if (result?.fieldErrors) {
+          setErrors(result.fieldErrors);
+        }
+
+        throw new Error(
+          result?.message ||
+            "No pudimos enviar tu solicitud en este momento."
+        );
+      }
+
+      setSuccess(true);
+      toast.success("Solicitud enviada. Te responderemos a la brevedad.");
+
+      setFormData(emptyContactFormData);
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "No pudimos enviar tu solicitud en este momento."
+      );
     } finally {
       setLoading(false);
     }
@@ -233,8 +216,8 @@ export default function ContactSection() {
                     Solicitud recibida
                   </h3>
                   <p className="mx-auto mb-6 max-w-md text-white/75">
-                    Gracias por completar el formulario. Estamos terminando la
-                    integración de envío por email.
+                    Gracias por escribirnos. Recibimos tu consulta y te
+                    responderemos a la brevedad.
                   </p>
                   <div className="flex justify-center">
                     <Button
@@ -333,6 +316,11 @@ export default function ContactSection() {
                       className={inputBase}
                       placeholder="tu@email.com"
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-red-400">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
