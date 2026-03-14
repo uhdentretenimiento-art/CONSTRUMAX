@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.construmaxpiscinas.com/images/logo/png/construmax_horizontal_color.png",
+        url: "https://www.construmaxpiscinas.com/images/logo/png/construmax_vertical_color.png",
       },
     ],
   },
