@@ -287,18 +287,22 @@ const DESCRIPTIONS: Record<string, ProjectDescription> = {
     ],
   },
   "estacion-alvarado": {
-    heading: "ESTACIÓN ALVARADO: Construcción de piscina residencial.",
+    heading: "ESTACIÓN ALVARADO: Construcción de Piscina en Espacio Reducido.",
     paragraphs: [
-      "El proyecto Estación Alvarado consistió en la construcción de una piscina diseñada para integrarse al entorno del jardín.",
-      "Durante la obra se ejecutaron todas las etapas del proceso constructivo, incluyendo estructura del vaso e impermeabilización.",
-      "El resultado es una piscina funcional, resistente y preparada para el uso cotidiano.",
+      "El proyecto Estación Alvarado consistió en la edificación de una piscina diseñada para integrarse en un entorno limitado. Se logró la ejecución de la piscina, playa húmeda, vereda con solárium atérmico, canalización y sistema de climatización.",
+      "Durante la obra se llevaron a cabo todas las etapas del proceso constructivo, incluyendo la estructura del vaso y la impermeabilización.",
+      "El resultado es una piscina funcional, robusta y apta para el uso cotidiano.",
     ],
     features: [
       "Construcción de piscina residencial",
       "Desarrollo estructural del vaso",
       "Impermeabilización completa",
-      "Terminación duradera",
-      "Integración con el entorno",
+      "Vereda perimetral atérmica",
+      "Solárium atérmico",
+      "Climatización: bomba de calor Vulcano",
+      "Revestimiento: cerámico mix azul, símil Venecita",
+      "Terminación de alta durabilidad",
+      "Integración armónica con el entorno",
     ],
   },
   "joaquin-v-gonzalez": {
