@@ -40,7 +40,7 @@ jobs:
           cp -a .next/standalone/. deploy/nodejs/
           cp -a .next/static deploy/nodejs/.next/
           # Hostinger only needs this post-deploy helper; Lighthouse scripts stay local.
-          cp -a scripts/postdeploy.sh deploy/nodejs/scripts/
+          cp -a scripts/hostinger-symlinks.sh deploy/nodejs/scripts/
 
           tar -czf deploy-nodejs.tar.gz -C deploy nodejs
 
@@ -87,8 +87,8 @@ jobs:
             cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
 
             # Recreate persistent symlinks and permissions after each Hostinger release publish.
-            chmod +x "$DEPLOY_ROOT/scripts/postdeploy.sh"
-            APP="$DEPLOY_ROOT" "$DEPLOY_ROOT/scripts/postdeploy.sh"
+            chmod +x "$DEPLOY_ROOT/scripts/hostinger-symlinks.sh"
+            APP="$DEPLOY_ROOT" "$DEPLOY_ROOT/scripts/hostinger-symlinks.sh"
 
             touch "$DEPLOY_ROOT/tmp/restart.txt"
             sleep 20
