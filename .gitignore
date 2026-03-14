@@ -39,3 +39,7 @@ videos/
 !src/app/images/**
 !src/app/videos/
 !src/app/videos/**
+!src/app/api/storage/images/
+!src/app/api/storage/images/**
+!src/app/api/storage/videos/
+!src/app/api/storage/videos/**
