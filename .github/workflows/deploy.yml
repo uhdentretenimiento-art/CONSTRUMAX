@@ -67,14 +67,14 @@ jobs:
           script: |
             set -euo pipefail
 
-            DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/nodejs"
-            PUBLIC_ROOT="$HOME/domains/construmaxpiscinas.com/public_html"
+            DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/public_html/nodejs"
+            PUBLIC_ROOT="$DEPLOY_ROOT/public"
             UPLOAD_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-upload"
             RELEASE_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-release"
             BUNDLE="$UPLOAD_ROOT/deploy-nodejs.tar.gz"
 
             rm -rf "$RELEASE_ROOT"
-            mkdir -p "$RELEASE_ROOT" "$DEPLOY_ROOT/tmp"
+            mkdir -p "$RELEASE_ROOT" "$DEPLOY_ROOT/tmp" "$PUBLIC_ROOT"
 
             tar -xzf "$BUNDLE" -C "$RELEASE_ROOT"
 
