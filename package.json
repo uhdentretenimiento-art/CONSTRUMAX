@@ -10,14 +10,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "node -e \"const fs=require('fs');const path=require('path');const os=require('os');const domain=process.env.DOMAIN||'construmaxpiscinas.com';const home=process.env.HOME||os.homedir();const base=process.env.BASE||path.join(home,'domains',domain);const persist=process.env.PERSIST||path.join(base,'storage','uploads');const candidates=process.env.APP?[process.env.APP]:[path.join(base,'nodejs'),path.join(base,'public_html','nodejs')];const appDir=candidates.find((dir)=>fs.existsSync(dir));if(!appDir)process.exit(0);for(const name of ['images','videos'])fs.mkdirSync(path.join(persist,name),{recursive:true});for(const name of ['images','videos']){const link=path.join(appDir,name);fs.rmSync(link,{force:true,recursive:true});const target=path.join(persist,name);fs.symlinkSync(path.relative(appDir,target),link,process.platform==='win32'?'junction':'dir');}\"",
-    "hostinger:symlinks": "node -e \"const fs=require('fs');const path=require('path');const os=require('os');const domain=process.env.DOMAIN||'construmaxpiscinas.com';const home=process.env.HOME||os.homedir();const base=process.env.BASE||path.join(home,'domains',domain);const persist=process.env.PERSIST||path.join(base,'storage','uploads');const candidates=process.env.APP?[process.env.APP]:[path.join(base,'nodejs'),path.join(base,'public_html','nodejs')];const appDir=candidates.find((dir)=>fs.existsSync(dir));if(!appDir)process.exit(0);for(const name of ['images','videos'])fs.mkdirSync(path.join(persist,name),{recursive:true});for(const name of ['images','videos']){const link=path.join(appDir,name);fs.rmSync(link,{force:true,recursive:true});const target=path.join(persist,name);fs.symlinkSync(path.relative(appDir,target),link,process.platform==='win32'?'junction':'dir');}\"",
+    "postinstall": "bash ./scripts/postdeploy.sh",
     "check:orphans": "node scripts/check-orphans.mjs",
-    "lh:mobile": "node scripts/lighthouse-mobile.mjs",
-    "lh:mobile:avg": "node scripts/lighthouse-mobile-batch.mjs",
-    "lh:desktop": "node scripts/lighthouse-desktop.mjs",
-    "lh:desktop:avg": "node scripts/lighthouse-desktop-batch.mjs",
-    "lh:compare": "node scripts/compare-lighthouse.mjs"
+    "lh:mobile": "node script-lighthose/lighthouse-mobile.mjs",
+    "lh:mobile:avg": "node script-lighthose/lighthouse-mobile-batch.mjs",
+    "lh:desktop": "node script-lighthose/lighthouse-desktop.mjs",
+    "lh:desktop:avg": "node script-lighthose/lighthouse-desktop-batch.mjs",
+    "lh:compare": "node script-lighthose/compare-lighthouse.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

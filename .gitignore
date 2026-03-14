@@ -31,6 +31,9 @@ next-env.d.ts
 
 # local lighthouse reports
 reports/*.json
+script-lighthose/
+!scripts/
+!scripts/postdeploy.sh
 
 # persistent uploads on hosting
 images/
