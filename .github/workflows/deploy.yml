@@ -86,10 +86,11 @@ jobs:
 
             cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
 
+            touch "$DEPLOY_ROOT/tmp/restart.txt"
+            sleep 20
+
             ln -sfn "$HOME/storage/uploads/images" "$PUBLIC_ROOT/images"
             ln -sfn "$HOME/storage/uploads/videos" "$PUBLIC_ROOT/videos"
-
-            touch "$DEPLOY_ROOT/tmp/restart.txt"
 
             rm -rf "$RELEASE_ROOT"
             rm -f "$BUNDLE"
