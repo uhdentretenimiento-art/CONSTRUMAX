@@ -10,6 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "postinstall": "bash ./scripts/postdeploy.sh",
+    "hostinger:symlinks": "bash ./scripts/postdeploy.sh",
     "check:orphans": "node scripts/check-orphans.mjs",
     "lh:mobile": "node scripts/lighthouse-mobile.mjs",
     "lh:mobile:avg": "node scripts/lighthouse-mobile-batch.mjs",

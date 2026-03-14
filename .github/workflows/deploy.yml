@@ -35,10 +35,12 @@ jobs:
           set -euo pipefail
 
           rm -rf deploy
-          mkdir -p deploy/nodejs/.next
+          mkdir -p deploy/nodejs/.next deploy/nodejs/scripts
 
           cp -a .next/standalone/. deploy/nodejs/
           cp -a .next/static deploy/nodejs/.next/
+          # Hostinger only needs this post-deploy helper; Lighthouse scripts stay local.
+          cp -a scripts/postdeploy.sh deploy/nodejs/scripts/
 
           tar -czf deploy-nodejs.tar.gz -C deploy nodejs
 
@@ -46,7 +48,7 @@ jobs:
         uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME || secrets.USER }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT || '65002' }}
           source: deploy-nodejs.tar.gz
@@ -57,7 +59,7 @@ jobs:
         uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME || secrets.USER }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT || '65002' }}
           timeout: 60s
@@ -66,32 +68,30 @@ jobs:
           script: |
             set -euo pipefail
 
-            DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/public_html/nodejs"
-            PUBLIC_ROOT="$DEPLOY_ROOT/public"
+            DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/nodejs"
             UPLOAD_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-upload"
             RELEASE_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-release"
             BUNDLE="$UPLOAD_ROOT/deploy-nodejs.tar.gz"
 
             rm -rf "$RELEASE_ROOT"
-            mkdir -p "$RELEASE_ROOT" "$DEPLOY_ROOT/tmp" "$PUBLIC_ROOT"
+            mkdir -p "$RELEASE_ROOT" "$DEPLOY_ROOT/tmp"
 
             tar -xzf "$BUNDLE" -C "$RELEASE_ROOT"
 
             find "$DEPLOY_ROOT" -mindepth 1 -maxdepth 1 \
-              ! -name 'public' \
               ! -name 'tmp' \
               ! -name 'console.log' \
               ! -name 'stderr.log' \
               -exec rm -rf {} +
 
             cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
-            mkdir -p "$PUBLIC_ROOT"
+
+            # Recreate persistent symlinks and permissions after each Hostinger release publish.
+            chmod +x "$DEPLOY_ROOT/scripts/postdeploy.sh"
+            APP="$DEPLOY_ROOT" "$DEPLOY_ROOT/scripts/postdeploy.sh"
 
             touch "$DEPLOY_ROOT/tmp/restart.txt"
             sleep 20
-
-            ln -sfn "$HOME/storage/uploads/images" "$PUBLIC_ROOT/images"
-            ln -sfn "$HOME/storage/uploads/videos" "$PUBLIC_ROOT/videos"
 
             rm -rf "$RELEASE_ROOT"
             rm -f "$BUNDLE"
