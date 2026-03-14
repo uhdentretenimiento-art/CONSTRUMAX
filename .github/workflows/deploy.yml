@@ -11,7 +11,50 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build app
+        run: pnpm build
+
+      - name: Prepare deploy bundle
+        run: |
+          set -euo pipefail
+
+          rm -rf deploy
+          mkdir -p deploy/nodejs/.next
+
+          cp -a .next/standalone/. deploy/nodejs/
+          cp -a .next/static deploy/nodejs/.next/
+
+          tar -czf deploy-nodejs.tar.gz -C deploy nodejs
+
+      - name: Upload bundle to server
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME || secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT || '65002' }}
+          source: deploy-nodejs.tar.gz
+          target: ~/domains/construmaxpiscinas.com/.deploy-upload
+          overwrite: true
+
+      - name: Publish bundle on server
         uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.HOST }}
@@ -24,29 +67,15 @@ jobs:
           script: |
             set -euo pipefail
 
-            export PATH="/opt/alt/alt-nodejs24/root/usr/bin:$PATH"
-
-            APP_ROOT="$HOME/domains/construmaxpiscinas.com/repo"
             DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/nodejs"
-            REPO_URL="https://github.com/uhdentretenimiento-art/CONSTRUMAX.git"
-            BRANCH="main"
+            UPLOAD_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-upload"
+            RELEASE_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-release"
+            BUNDLE="$UPLOAD_ROOT/deploy-nodejs.tar.gz"
 
-            if [ ! -d "$APP_ROOT/.git" ]; then
-              rm -rf "$APP_ROOT"
-              git clone --branch "$BRANCH" --depth 1 "$REPO_URL" "$APP_ROOT"
-            fi
+            rm -rf "$RELEASE_ROOT"
+            mkdir -p "$RELEASE_ROOT" "$DEPLOY_ROOT/tmp"
 
-            cd "$APP_ROOT"
-            git fetch origin "$BRANCH"
-            git checkout "$BRANCH"
-            git reset --hard "origin/$BRANCH"
-
-            corepack enable
-            corepack prepare pnpm@latest --activate
-            pnpm install --frozen-lockfile
-            pnpm build
-
-            mkdir -p "$DEPLOY_ROOT/.next" "$DEPLOY_ROOT/tmp"
+            tar -xzf "$BUNDLE" -C "$RELEASE_ROOT"
 
             find "$DEPLOY_ROOT" -mindepth 1 -maxdepth 1 \
               ! -name 'tmp' \
@@ -54,21 +83,9 @@ jobs:
               ! -name 'stderr.log' \
               -exec rm -rf {} +
 
-            cp -a "$APP_ROOT/.next/standalone/." "$DEPLOY_ROOT/"
-            mkdir -p "$DEPLOY_ROOT/.next"
-            cp -a "$APP_ROOT/.next/static" "$DEPLOY_ROOT/.next/"
-
-            if [ -d "$APP_ROOT/public" ]; then
-              mkdir -p "$DEPLOY_ROOT/public"
-              find "$DEPLOY_ROOT/public" -mindepth 1 -maxdepth 1 \
-                ! -name 'images' \
-                ! -name 'videos' \
-                -exec rm -rf {} +
-
-              find "$APP_ROOT/public" -mindepth 1 -maxdepth 1 \
-                ! -name 'images' \
-                ! -name 'videos' \
-                -exec cp -a {} "$DEPLOY_ROOT/public/" \;
-            fi
+            cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
 
             touch "$DEPLOY_ROOT/tmp/restart.txt"
+
+            rm -rf "$RELEASE_ROOT"
+            rm -f "$BUNDLE"
