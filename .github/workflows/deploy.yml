@@ -4,19 +4,24 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          username: ${{ secrets.USERNAME || secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: 65002
+          port: ${{ secrets.PORT || '65002' }}
+          timeout: 30s
+          command_timeout: 10m
+          debug: true
           script: |
+            set -e
             cd ~/domains/construmaxpiscinas.com/public_html
             git pull
