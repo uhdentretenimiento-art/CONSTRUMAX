@@ -31,3 +31,7 @@ next-env.d.ts
 
 # local lighthouse reports
 reports/*.json
+
+# persistent uploads on hosting
+images/
+videos/
