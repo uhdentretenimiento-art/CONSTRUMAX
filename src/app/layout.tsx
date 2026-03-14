@@ -80,10 +80,6 @@ export const metadata: Metadata = {
 };
 
 const SITE_URL = "https://www.construmaxpiscinas.com";
-const HERO_MOBILE_IMAGE =
-  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
-const HERO_DESKTOP_IMAGE =
-  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif";
 const IMAGE_PROTECTION_SCRIPT = `(function () {
   const handleDragStart = (event) => {
     const target = event.target;
@@ -231,20 +227,6 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://www.construmaxpiscinas.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://www.construmaxpiscinas.com" />
-        <link
-          rel="preload"
-          as="image"
-          href={HERO_MOBILE_IMAGE}
-          media="(max-width: 767px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href={HERO_DESKTOP_IMAGE}
-          media="(min-width: 768px)"
-          fetchPriority="high"
-        />
       </head>
       <body className={`${manrope.variable} ${sora.variable} min-h-dvh antialiased`}>
 
