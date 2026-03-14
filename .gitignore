@@ -35,3 +35,7 @@ reports/*.json
 # persistent uploads on hosting
 images/
 videos/
+!src/app/images/
+!src/app/images/**
+!src/app/videos/
+!src/app/videos/**
