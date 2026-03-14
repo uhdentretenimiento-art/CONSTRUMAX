@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "mkdir -p ../storage/uploads/images ../storage/uploads/videos && ln -sfn ../storage/uploads/images images && ln -sfn ../storage/uploads/videos videos && ln -sfn ../storage/uploads/images ../public_html/images && ln -sfn ../storage/uploads/videos ../public_html/videos",
+    "postinstall": "mkdir -p ../storage/uploads/images ../storage/uploads/videos public && ln -sfn ../../storage/uploads/images public/images && ln -sfn ../../storage/uploads/videos public/videos",
     "check:orphans": "node scripts/check-orphans.mjs",
     "lh:mobile": "node script-lighthose/lighthouse-mobile.mjs",
     "lh:mobile:avg": "node script-lighthose/lighthouse-mobile-batch.mjs",

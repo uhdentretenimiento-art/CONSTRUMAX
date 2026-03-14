@@ -32,6 +32,8 @@ next-env.d.ts
 # local lighthouse reports
 reports/*.json
 script-lighthose/
+public/images
+public/videos
 !scripts/
 !scripts/postdeploy.sh
 
