@@ -68,6 +68,7 @@ jobs:
             set -euo pipefail
 
             DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/nodejs"
+            PUBLIC_ROOT="$HOME/domains/construmaxpiscinas.com/public_html"
             UPLOAD_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-upload"
             RELEASE_ROOT="$HOME/domains/construmaxpiscinas.com/.deploy-release"
             BUNDLE="$UPLOAD_ROOT/deploy-nodejs.tar.gz"
@@ -84,6 +85,9 @@ jobs:
               -exec rm -rf {} +
 
             cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
+
+            ln -sfn "$HOME/storage/uploads/images" "$PUBLIC_ROOT/images"
+            ln -sfn "$HOME/storage/uploads/videos" "$PUBLIC_ROOT/videos"
 
             touch "$DEPLOY_ROOT/tmp/restart.txt"
 
