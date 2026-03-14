@@ -18,10 +18,57 @@ jobs:
           username: ${{ secrets.USERNAME || secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.PORT || '65002' }}
-          timeout: 30s
-          command_timeout: 10m
+          timeout: 60s
+          command_timeout: 30m
           debug: true
           script: |
-            set -e
-            cd ~/domains/construmaxpiscinas.com/public_html
-            git pull
+            set -euo pipefail
+
+            export PATH="/opt/alt/alt-nodejs24/root/usr/bin:$PATH"
+
+            APP_ROOT="$HOME/domains/construmaxpiscinas.com/repo"
+            DEPLOY_ROOT="$HOME/domains/construmaxpiscinas.com/nodejs"
+            REPO_URL="https://github.com/uhdentretenimiento-art/CONSTRUMAX.git"
+            BRANCH="main"
+
+            if [ ! -d "$APP_ROOT/.git" ]; then
+              rm -rf "$APP_ROOT"
+              git clone --branch "$BRANCH" --depth 1 "$REPO_URL" "$APP_ROOT"
+            fi
+
+            cd "$APP_ROOT"
+            git fetch origin "$BRANCH"
+            git checkout "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+
+            corepack enable
+            corepack prepare pnpm@latest --activate
+            pnpm install --frozen-lockfile
+            pnpm build
+
+            mkdir -p "$DEPLOY_ROOT/.next" "$DEPLOY_ROOT/tmp"
+
+            find "$DEPLOY_ROOT" -mindepth 1 -maxdepth 1 \
+              ! -name 'tmp' \
+              ! -name 'console.log' \
+              ! -name 'stderr.log' \
+              -exec rm -rf {} +
+
+            cp -a "$APP_ROOT/.next/standalone/." "$DEPLOY_ROOT/"
+            mkdir -p "$DEPLOY_ROOT/.next"
+            cp -a "$APP_ROOT/.next/static" "$DEPLOY_ROOT/.next/"
+
+            if [ -d "$APP_ROOT/public" ]; then
+              mkdir -p "$DEPLOY_ROOT/public"
+              find "$DEPLOY_ROOT/public" -mindepth 1 -maxdepth 1 \
+                ! -name 'images' \
+                ! -name 'videos' \
+                -exec rm -rf {} +
+
+              find "$APP_ROOT/public" -mindepth 1 -maxdepth 1 \
+                ! -name 'images' \
+                ! -name 'videos' \
+                -exec cp -a {} "$DEPLOY_ROOT/public/" \;
+            fi
+
+            touch "$DEPLOY_ROOT/tmp/restart.txt"
