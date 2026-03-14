@@ -79,12 +79,14 @@ jobs:
             tar -xzf "$BUNDLE" -C "$RELEASE_ROOT"
 
             find "$DEPLOY_ROOT" -mindepth 1 -maxdepth 1 \
+              ! -name 'public' \
               ! -name 'tmp' \
               ! -name 'console.log' \
               ! -name 'stderr.log' \
               -exec rm -rf {} +
 
             cp -a "$RELEASE_ROOT/nodejs/." "$DEPLOY_ROOT/"
+            mkdir -p "$PUBLIC_ROOT"
 
             touch "$DEPLOY_ROOT/tmp/restart.txt"
             sleep 20
