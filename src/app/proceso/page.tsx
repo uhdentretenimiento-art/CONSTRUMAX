@@ -72,7 +72,7 @@ export default function ProcesoPage() {
               variant="outline"
               className="h-11 rounded-full border-white/30 bg-white/5 px-6 font-semibold text-white hover:bg-white/15 hover:text-white"
             >
-              <Link href="/proyectos">Ver proyectos realizados</Link>
+              <Link href="/proyectos" prefetch={false}>Ver proyectos realizados</Link>
             </Button>
           </div>
         </div>

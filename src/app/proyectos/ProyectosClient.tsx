@@ -684,6 +684,7 @@ export default function ProyectosClient() {
 
                           <Link
                             href="/proyectos"
+                            prefetch={false}
                             onClick={() => setSelectedProject(null)}
                             className={`inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-2 font-semibold text-white/90 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/50 lg:justify-self-center ${styles.portfolioLink}`}
                           >

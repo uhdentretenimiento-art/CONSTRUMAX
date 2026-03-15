@@ -161,6 +161,7 @@ export default function ProjectsSection() {
         <div className="mt-8 text-center">
           <Link
             href="/proyectos"
+            prefetch={false}
             className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] px-8 py-3 text-base font-semibold text-white transition hover:bg-white/[0.10] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
           >
             Ver todos los proyectos

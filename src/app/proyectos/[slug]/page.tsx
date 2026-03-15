@@ -217,6 +217,7 @@ export default async function ProyectoDetallePage({
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/proyectos"
+                prefetch={false}
                 className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2DD4BF]/50"
               >
                 Volver a proyectos
