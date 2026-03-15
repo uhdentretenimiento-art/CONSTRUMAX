@@ -34,8 +34,6 @@ reports/*.json
 script-lighthose/
 public/images
 public/videos
-!scripts/
-!scripts/postdeploy.sh
 
 # persistent uploads on hosting
 images/

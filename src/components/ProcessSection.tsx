@@ -15,11 +15,11 @@ import { GlowOrb } from "@/components/ui/FloatingElement";
 import { useScrollProgress } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 
-const VIDEO_AVIF =
+const VIDEO_DESKTOP_WEBM =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.webm";
 
 const VIDEO_MOBILE_WEBM =
-  "/api/media/proceso-mobile-webm";
+  "https://www.construmaxpiscinas.com/videos/hero/video-proceso-mobile.webm";
 
 const VIDEO_MP4 =
   "https://www.construmaxpiscinas.com/videos/hero/video-proceso.mp4";
@@ -167,7 +167,7 @@ export default function ProcessSection({
             >
               {isDesktop ? (
                 <>
-                  <source src={VIDEO_AVIF} type="video/webm" />
+                  <source src={VIDEO_DESKTOP_WEBM} type="video/webm" />
                   <source src={VIDEO_MP4} type="video/mp4" />
                 </>
               ) : (
