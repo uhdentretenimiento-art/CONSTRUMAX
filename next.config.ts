@@ -8,10 +8,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "www.construmaxpiscinas.com",
       },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
     ],
   },
 };

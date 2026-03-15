@@ -7,6 +7,12 @@ import {
 
 export const runtime = "nodejs";
 
+const RATE_WINDOW_MS = 30_000;
+const SMTP_CONNECTION_TIMEOUT_MS = 10_000;
+const SMTP_GREETING_TIMEOUT_MS = 10_000;
+const SMTP_SOCKET_TIMEOUT_MS = 15_000;
+const ipHits = new Map<string, number>();
+
 function getEnv(name: string) {
   const value = process.env[name]?.trim();
   if (!value) {
@@ -24,6 +30,19 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+function getIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  return (forwardedFor?.split(",")[0]?.trim() || "unknown").slice(0, 64);
+}
+
+function pruneRateLimitEntries(now: number) {
+  for (const [ip, timestamp] of ipHits) {
+    if (now - timestamp >= RATE_WINDOW_MS) {
+      ipHits.delete(ip);
+    }
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
@@ -32,6 +51,24 @@ export async function POST(request: Request) {
     if (formData.company) {
       return NextResponse.json({ ok: true });
     }
+
+    const now = Date.now();
+    const ip = getIp(request);
+
+    pruneRateLimitEntries(now);
+
+    const lastHit = ipHits.get(ip) ?? 0;
+    if (now - lastHit < RATE_WINDOW_MS) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: "Demasiadas solicitudes. Proba de nuevo en unos segundos.",
+        },
+        { status: 429 }
+      );
+    }
+
+    ipHits.set(ip, now);
 
     const fieldErrors = validateContactForm(formData);
 
@@ -49,9 +86,9 @@ export async function POST(request: Request) {
     const smtpHost = getEnv("SMTP_HOST");
     const smtpUser = getEnv("SMTP_USER");
     const smtpPass = getEnv("SMTP_PASS");
-    const smtpFrom = getEnv("SMTP_FROM");
-    const smtpTo = getEnv("SMTP_TO");
-    const smtpPort = Number(process.env.SMTP_PORT ?? "587");
+    const smtpFrom = process.env.SMTP_FROM?.trim() || smtpUser;
+    const smtpTo = process.env.SMTP_TO?.trim() || smtpUser;
+    const smtpPort = Number(process.env.SMTP_PORT ?? "465");
 
     if (!Number.isFinite(smtpPort)) {
       throw new Error("Invalid SMTP_PORT value");
@@ -65,6 +102,9 @@ export async function POST(request: Request) {
         user: smtpUser,
         pass: smtpPass,
       },
+      connectionTimeout: SMTP_CONNECTION_TIMEOUT_MS,
+      greetingTimeout: SMTP_GREETING_TIMEOUT_MS,
+      socketTimeout: SMTP_SOCKET_TIMEOUT_MS,
     });
 
     const lines = [
@@ -118,11 +158,33 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error sending contact form", error);
 
+    const errorMessage =
+      error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
+    const errorCode =
+      typeof error === "object" && error !== null && "code" in error
+        ? String((error as { code?: unknown }).code || "")
+        : "";
+
+    if (
+      errorCode.includes("ETIMEDOUT") ||
+      errorCode.includes("ESOCKET") ||
+      errorMessage.includes("timeout")
+    ) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message:
+            "No pudimos enviar tu solicitud en este momento. Proba nuevamente en unos minutos o escribinos por WhatsApp.",
+        },
+        { status: 504 }
+      );
+    }
+
     return NextResponse.json(
       {
         ok: false,
         message:
-          "No pudimos enviar tu solicitud en este momento. Probá nuevamente en unos minutos o escribinos por WhatsApp.",
+          "No pudimos enviar tu solicitud en este momento. Proba nuevamente en unos minutos o escribinos por WhatsApp.",
       },
       { status: 500 }
     );
