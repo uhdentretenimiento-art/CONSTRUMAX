@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import StructuredData from "@/components/StructuredData";
@@ -29,9 +28,7 @@ export default function ProyectosPage() {
   return (
     <>
       <StructuredData data={getProjectsListSchema(projects)} />
-      <Suspense fallback={null}>
-        <ProyectosClient />
-      </Suspense>
+      <ProyectosClient />
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
 import ProjectSuggestions from "@/components/ProjectSuggestions";
@@ -106,7 +105,6 @@ function MiniaturaConFallback({
 }
 
 export default function ProyectosClient() {
-  const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCity, setSelectedCity] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -188,12 +186,6 @@ export default function ProyectosClient() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [selectedProject]);
-
-  useEffect(() => {
-    if (searchParams.get("view") === "list") {
-      setSelectedProject(null);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     const handleShowList = () => {

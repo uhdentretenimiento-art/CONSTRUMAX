@@ -1,9 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
-import type { ProjectImage } from "@/data/projects";
+import type { ImageFormats, ProjectImage } from "@/data/projects";
 import { getProjectImageSrc } from "@/data/projects";
 
 interface ProjectCardProps {
@@ -27,80 +24,17 @@ export default function ProjectCard({
   onClick,
   variant = "dark",
 }: ProjectCardProps) {
-  const reduceMotion = useReducedMotion();
   const isDark = variant === "dark";
   const cover = images[0];
   const imageSrc = cover ? getProjectImageSrc(cover, { prefer: "avif", small: true }) : "";
-
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setMousePosition({ x, y });
-
-    // Calculate tilt
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -6;
-    const rotateY = ((x - centerX) / centerX) * 6;
-    setTilt({ rotateX, rotateY });
-  }, []);
-
-  const handleMouseEnter = useCallback(() => {
-    setIsHovering(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    setTilt({ rotateX: 0, rotateY: 0 });
-  }, []);
-
-  useEffect(() => {
-    const element = cardRef.current;
-    if (!element || reduceMotion) return;
-
-    element.addEventListener("mousemove", handleMouseMove);
-    element.addEventListener("mouseenter", handleMouseEnter);
-    element.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      element.removeEventListener("mousemove", handleMouseMove);
-      element.removeEventListener("mouseenter", handleMouseEnter);
-      element.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [handleMouseMove, handleMouseEnter, handleMouseLeave, reduceMotion]);
-
-
+  const imageSrcSet =
+    cover && typeof cover !== "string" ? buildCardSrcSet(cover) : undefined;
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.6,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1] as const,
-      }}
-      whileHover={{ y: -8 }}
-      animate={{
-        rotateX: reduceMotion ? 0 : tilt.rotateX,
-        rotateY: reduceMotion ? 0 : tilt.rotateY,
-      }}
+    <div
       onClick={onClick}
-      style={{
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-      }}
       className={[
-        "group relative cursor-pointer overflow-hidden rounded-3xl",
+        "group relative cursor-pointer overflow-hidden rounded-3xl transition-transform duration-300 hover:-translate-y-2",
         isDark
           ? "border border-white/12 bg-white/[0.05]"
           : "border border-slate-200/70 bg-white",
@@ -108,24 +42,19 @@ export default function ProjectCard({
         "hover:shadow-[0_28px_90px_-46px_rgba(0,0,0,0.85)]",
       ].join(" ")}
     >
-      {/* Spotlight effect */}
-      <div
-        className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(45, 212, 191, 0.12), transparent 50%)`,
-          opacity: isHovering ? 1 : 0,
-        }}
-      />
-
       {/* Image Container */}
       <div className="relative aspect-[4/3] overflow-hidden">
         {imageSrc ? (
-          <Image
+          <img
             src={imageSrc}
-            alt={title}
-            fill
+            srcSet={imageSrcSet}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            alt={title}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+            loading={index < 3 ? "eager" : "lazy"}
+            decoding={index < 3 ? "sync" : "async"}
+            fetchPriority={index < 3 ? "high" : "auto"}
+            referrerPolicy="no-referrer"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-center text-sm text-white/60">
@@ -140,28 +69,19 @@ export default function ProjectCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         {/* Category Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 + index * 0.1 }}
-          className="absolute left-4 top-4 z-10"
-        >
+        <div className="absolute left-4 top-4 z-10">
           <span className="inline-flex items-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-3 py-1 text-xs font-medium text-white/90">
             {categoryLabel}
           </span>
-        </motion.div>
+        </div>
 
         {/* Hover overlay with result */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          className="absolute inset-0 flex items-end justify-start bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        >
+        <div className="absolute inset-0 flex items-end justify-start bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <div className="transform transition-transform duration-300 group-hover:translate-y-0 translate-y-4">
             <p className="text-sm font-medium text-[#2DD4BF]">Resultado</p>
             <p className="mt-1 text-sm text-white/80 line-clamp-2">{resultSnippet}</p>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Content */}
@@ -186,10 +106,7 @@ export default function ProjectCard({
           </div>
           
           {/* Arrow indicator */}
-          <motion.div
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] transition-all duration-300 group-hover:border-[#2DD4BF]/30 group-hover:bg-[#2DD4BF]/10"
-            whileHover={{ scale: 1.1 }}
-          >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] transition-all duration-300 group-hover:scale-110 group-hover:border-[#2DD4BF]/30 group-hover:bg-[#2DD4BF]/10">
             <svg
               className="h-4 w-4 text-white/60 transition-colors duration-300 group-hover:text-[#2DD4BF]"
               fill="none"
@@ -198,18 +115,23 @@ export default function ProjectCard({
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom border glow */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300"
-        style={{
-          background: `linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.5), transparent)`,
-          opacity: isHovering ? 1 : 0,
-        }}
-      />
-    </motion.div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,rgba(45,212,191,0.5),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    </div>
   );
+}
+
+function buildCardSrcSet(image: ImageFormats) {
+  const entries = [
+    image.smWebp ? `${image.smWebp} 320w` : undefined,
+    image.smAvif ? `${image.smAvif} 480w` : undefined,
+    image.src768 ? `${image.src768} 768w` : undefined,
+    image.webp ? `${image.webp} 1280w` : undefined,
+  ];
+
+  const srcSet = entries.filter(Boolean).join(", ");
+  return srcSet || undefined;
 }
