@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { trackGoogleLead } from "@/lib/googleTag";
 import { trackMetaLead } from "@/lib/metaPixel";
 
 function isWhatsAppHref(href: string) {
@@ -27,6 +28,10 @@ export default function MetaPixelEvents() {
       if (!isWhatsAppHref(href)) return;
 
       trackMetaLead("whatsapp_click", {
+        link_url: href,
+        link_text: link.textContent?.trim() || "WhatsApp",
+      });
+      trackGoogleLead("whatsapp_click", {
         link_url: href,
         link_text: link.textContent?.trim() || "WhatsApp",
       });

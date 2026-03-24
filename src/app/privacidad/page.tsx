@@ -82,7 +82,11 @@ const sections = [
     blocks: [
       {
         type: "p",
-        text: `Nuestro sitio puede usar cookies para mejorar la experiencia del usuario. Podés configurar tu navegador para rechazar cookies, aunque esto podría afectar el funcionamiento de algunas partes del sitio.`,
+        text: `Nuestro sitio utiliza cookies esenciales para su funcionamiento y puede utilizar cookies de medición o marketing para analizar visitas y conversiones, por ejemplo mediante Meta Pixel. Estas cookies opcionales solo se activan si otorgás tu consentimiento desde el banner de preferencias.`,
+      },
+      {
+        type: "p",
+        text: `Podés aceptar o rechazar las cookies opcionales y volver a cambiar tu decisión en cualquier momento desde el acceso de preferencias disponible en el sitio. También podés configurar tu navegador para bloquear cookies, aunque eso podría afectar algunas funciones.`,
       },
     ],
   },

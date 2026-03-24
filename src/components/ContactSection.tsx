@@ -22,6 +22,7 @@ import {
   type ContactFieldErrors,
   type ContactFormData,
 } from "@/lib/contactForm";
+import { trackGoogleLead } from "@/lib/googleTag";
 import { trackMetaLead } from "@/lib/metaPixel";
 
 export default function ContactSection() {
@@ -97,6 +98,10 @@ export default function ContactSection() {
       }
 
       trackMetaLead("contact_form_success", {
+        city: formData.city || undefined,
+        project_type: formData.projectType || undefined,
+      });
+      trackGoogleLead("contact_form_success", {
         city: formData.city || undefined,
         project_type: formData.projectType || undefined,
       });

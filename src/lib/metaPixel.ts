@@ -2,11 +2,21 @@
 
 declare global {
   interface Window {
-    fbq?: (...args: unknown[]) => void;
+    fbq?: MetaPixelFn;
+    _fbq?: MetaPixelFn;
   }
 }
 
 export type MetaLeadSource = "whatsapp_click" | "contact_form_success";
+const META_PIXEL_SCRIPT_ID = "meta-pixel-sdk";
+
+type MetaPixelFn = ((...args: unknown[]) => void) & {
+  callMethod?: (...args: unknown[]) => void;
+  queue: unknown[][];
+  push: MetaPixelFn;
+  loaded?: boolean;
+  version?: string;
+};
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -20,6 +30,46 @@ export function trackMetaEvent(
   if (typeof window.fbq !== "function") return;
 
   window.fbq("track", eventName, params);
+}
+
+export function initMetaPixel(pixelId: string) {
+  if (!isBrowser()) return;
+  if (typeof window.fbq === "function") return;
+
+  if (!document.getElementById(META_PIXEL_SCRIPT_ID)) {
+    const script = document.createElement("script");
+    script.id = META_PIXEL_SCRIPT_ID;
+    script.async = true;
+    script.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(script);
+  }
+
+  const fbq: MetaPixelFn =
+    window.fbq ??
+    ((...args: unknown[]) => {
+      if (fbq.callMethod) {
+        fbq.callMethod(...args);
+        return;
+      }
+
+      fbq.queue.push(args);
+    });
+
+  fbq.push = fbq;
+  fbq.loaded = true;
+  fbq.version = "2.0";
+  fbq.queue = fbq.queue || [];
+  window.fbq = fbq;
+
+  if (!window._fbq) {
+    window._fbq = fbq;
+  }
+
+  window.fbq("init", pixelId);
+}
+
+export function trackMetaPageView() {
+  trackMetaEvent("PageView");
 }
 
 export function trackMetaLead(
