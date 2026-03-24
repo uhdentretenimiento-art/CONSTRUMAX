@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Manrope, Sora } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
@@ -238,7 +239,9 @@ export default function RootLayout({
         <div className="pt-16">{children}</div>
         <Footer />
         <ScrollToTop />
-        <script dangerouslySetInnerHTML={{ __html: IMAGE_PROTECTION_SCRIPT }} />
+        <Script id="image-protection" strategy="lazyOnload">
+          {IMAGE_PROTECTION_SCRIPT}
+        </Script>
       </body>
     </html>
   );

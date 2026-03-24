@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Award, CheckCircle2, Clock3, Users } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { GlowOrb } from "@/components/ui/FloatingElement";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { MotionProvider, m } from "@/components/ui/MotionProvider";
 import { useParallax } from "@/hooks";
 
 const features = [
@@ -66,14 +66,15 @@ export default function AboutUsSection() {
   };
 
   return (
-    <section className="relative overflow-hidden py-24 text-white">
+    <MotionProvider>
+      <section className="relative overflow-hidden py-24 text-white">
       {/* Glow Orbs */}
       <GlowOrb className="absolute top-1/4 -left-20 hidden md:block" color="#2DD4BF" size={400} blur={150} duration={7} />
       <GlowOrb className="absolute bottom-1/4 -right-20 hidden md:block" color="#1D4ED8" size={500} blur={180} duration={9} />
 
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-4 lg:grid-cols-2 lg:gap-16">
         {/* Image Side */}
-        <motion.div
+        <m.div
           className="relative"
           style={{ y: imageY }}
         >
@@ -110,7 +111,7 @@ export default function AboutUsSection() {
           </SpotlightCard>
 
           {/* Stats Card */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -118,7 +119,7 @@ export default function AboutUsSection() {
             className="mx-auto mt-4 grid w-full grid-cols-3 gap-3 rounded-2xl border border-white/12 bg-black/35 p-4 shadow-[0_24px_80px_-60px_rgba(0,0,0,0.9)] md:-mt-10 md:w-[94%] md:bg-white/[0.06] md:backdrop-blur-xl md:gap-4 md:p-5"
           >
             {stats.map((item, index) => (
-              <motion.div
+              <m.div
                 key={item.label}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -138,13 +139,13 @@ export default function AboutUsSection() {
                 <p className="text-[11px] text-white/60 md:text-xs">
                   {item.label}
                 </p>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* Content Side */}
-        <motion.div
+        <m.div
           className="flex flex-col justify-center"
           style={{ y: contentY }}
           variants={containerVariants}
@@ -152,14 +153,14 @@ export default function AboutUsSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.p
+          <m.p
             variants={itemVariants}
             className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65"
           >
             Sobre nosotros
-          </motion.p>
+          </m.p>
 
-          <motion.h2
+          <m.h2
             variants={itemVariants}
             className="mt-4 text-4xl font-semibold leading-[1.1] md:text-5xl"
           >
@@ -168,23 +169,23 @@ export default function AboutUsSection() {
               piscina ideal
             </span>{" "}
             con estándar premium
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             variants={itemVariants}
             className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg"
           >
             En Construmax combinamos experiencia, ingeniería y diseño para crear
             piscinas y espacios exteriores de alto nivel. Ejecutamos cada
             proyecto con foco en durabilidad, estética y valor a largo plazo.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2"
           >
             {features.map((feature, index) => (
-              <motion.div
+              <m.div
                 key={feature}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -199,11 +200,11 @@ export default function AboutUsSection() {
                 <p className="text-sm text-white/75 group-hover:text-white/90 transition-colors">
                   {feature}
                 </p>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <m.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <MagneticButton
               href="/contacto"
               variant="primary"
@@ -220,9 +221,11 @@ export default function AboutUsSection() {
             >
               Ver proyectos
             </MagneticButton>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
-    </section>
+      </section>
+    </MotionProvider>
   );
 }
+

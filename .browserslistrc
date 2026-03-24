@@ -1,0 +1,14 @@
+[production]
+last 2 Chrome major versions
+last 2 Edge major versions
+last 2 Firefox major versions
+last 2 Safari major versions
+last 2 iOS major versions
+not dead
+not op_mini all
+
+[development]
+last 1 Chrome major version
+last 1 Edge major version
+last 1 Firefox major version
+last 1 Safari major version

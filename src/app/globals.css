@@ -38,7 +38,6 @@ body {
   background: var(--cm-bg);
   color: var(--cm-text);
   font-family: var(--font-body), "Segoe UI", sans-serif;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -168,47 +167,6 @@ video {
   touch-action: pan-y pinch-zoom;
 }
 
-/* Text utilities */
-.text-gradient {
-  background: linear-gradient(135deg, #2DD4BF 0%, #1D4ED8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #b45309 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glow effects */
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(45, 212, 191, 0.3),
-              0 0 40px rgba(45, 212, 191, 0.1);
-}
-
-.glow-blue {
-  box-shadow: 0 0 20px rgba(29, 78, 216, 0.3),
-              0 0 40px rgba(29, 78, 216, 0.1);
-}
-
-.glow-gold {
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3),
-              0 0 40px rgba(251, 191, 36, 0.1);
-}
-
-/* Hover glow */
-.hover-glow {
-  transition: box-shadow 0.3s var(--ease-smooth);
-}
-
-.hover-glow:hover {
-  box-shadow: 0 0 30px rgba(45, 212, 191, 0.25),
-              0 0 60px rgba(45, 212, 191, 0.1);
-}
-
 /* Premium button styles */
 .btn-premium {
   position: relative;
@@ -233,17 +191,6 @@ video {
 
 .btn-premium:hover::before {
   left: 100%;
-}
-
-/* Noise texture overlay */
-.noise-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 1;
 }
 
 /* Scrollbar styling */

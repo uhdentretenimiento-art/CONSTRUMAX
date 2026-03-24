@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
   Droplet,
@@ -25,6 +24,7 @@ import ThermalFloorsIcon from "@/components/ui/ThermalFloorsIcon";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { GlowOrb } from "@/components/ui/FloatingElement";
+import { MotionProvider, m } from "@/components/ui/MotionProvider";
 import { useParallax } from "@/hooks";
 
 type ServiceIcon = React.ComponentType<{ className?: string }>;
@@ -427,7 +427,8 @@ export default function ServicesSection({
   const isFeaturedMode = typeof maxItems === "number";
 
   return (
-    <>
+    <MotionProvider>
+      <>
       <section ref={sectionRef} className="relative overflow-hidden py-24 text-white">
         {/* Background */}
         {!inheritBackground ? (
@@ -441,12 +442,12 @@ export default function ServicesSection({
                   : "none",
               }}
             />
-            <motion.div
+            <m.div
               className="absolute inset-0 -z-30 opacity-[0.55]"
               style={{ y: backgroundY }}
             >
               <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_18%_10%,rgba(45,212,191,0.16),transparent_60%),radial-gradient(55%_55%_at_86%_20%,rgba(29,78,216,0.14),transparent_60%)]" />
-            </motion.div>
+            </m.div>
             <div className="absolute inset-x-0 bottom-0 -z-20 h-32 bg-gradient-to-t from-black/60 to-transparent" />
           </>
         ) : null}
@@ -461,13 +462,13 @@ export default function ServicesSection({
 
         <div className="mx-auto max-w-6xl px-6 text-center">
           {/* Header */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            <motion.p
+            <m.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -475,9 +476,9 @@ export default function ServicesSection({
               className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65"
             >
               {isFeaturedMode ? "Servicios destacados" : "Nuestros servicios"}
-            </motion.p>
+            </m.p>
 
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -488,9 +489,9 @@ export default function ServicesSection({
               <span className="bg-gradient-to-r from-[#2DD4BF] via-[#1D4ED8] to-[#2DD4BF] bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
                 piscina
               </span>
-            </motion.h2>
+            </m.h2>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -500,11 +501,11 @@ export default function ServicesSection({
               {isFeaturedMode
                 ? "Una selección de servicios de alto impacto para construir o renovar tu proyecto con estándar premium."
                 : "Una propuesta integral para diseñar, construir y mantener tu piscina con ejecución técnica y terminaciones de alto nivel."}
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
 
           {/* Services Grid */}
-          <motion.div
+          <m.div
             className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
             variants={containerVariants}
             initial="hidden"
@@ -512,7 +513,7 @@ export default function ServicesSection({
             viewport={{ once: true, amount: 0.1 }}
           >
             {visibleServices.map((service, index) => (
-              <motion.div
+              <m.div
                 key={index}
                 variants={itemVariants}
                 id={service.anchorId}
@@ -527,13 +528,13 @@ export default function ServicesSection({
                   iconBgColor={service.iconBgColor}
                   iconColor={service.iconColor}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
 
           {/* View All Button */}
           {isFeaturedMode ? (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -548,21 +549,21 @@ export default function ServicesSection({
               >
                 Ver todos los servicios
               </MagneticButton>
-            </motion.div>
+            </m.div>
           ) : null}
         </div>
       </section>
 
       {/* Service Detail Modal */}
       {selected && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
           onClick={() => setSelected(null)}
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.94, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 30 }}
@@ -679,9 +680,11 @@ export default function ServicesSection({
                 </Button>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
-    </>
+      </>
+    </MotionProvider>
   );
 }
+

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import ProcessStepCard from "@/components/ProcessStepCard";
 import {
   ClipboardList,
@@ -12,6 +11,7 @@ import {
 } from "lucide-react";
 import ExcavatorIcon from "@/components/ui/ExcavatorIcon";
 import { GlowOrb } from "@/components/ui/FloatingElement";
+import { MotionProvider, m } from "@/components/ui/MotionProvider";
 import { useScrollProgress } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 
@@ -174,7 +174,8 @@ export default function ProcessSection({
   };
 
   return (
-    <section
+    <MotionProvider>
+      <section
       ref={sectionRef}
       className={[
         "relative overflow-hidden text-white",
@@ -184,7 +185,7 @@ export default function ProcessSection({
       {!disableBackgroundMedia ? (
         <>
           {/* Video with parallax */}
-          <motion.div
+          <m.div
             className="absolute inset-0 -z-30 bg-black"
             style={{ scale: videoScale }}
           >
@@ -207,14 +208,14 @@ export default function ProcessSection({
                 <source src={VIDEO_MOBILE_WEBM} type="video/webm" />
               ) : null}
             </video>
-          </motion.div>
+          </m.div>
         </>
       ) : null}
 
       {!disableBackgroundMedia ? (
         <>
           {/* Overlays */}
-          <motion.div
+          <m.div
             className="absolute inset-0 -z-20 bg-black"
             style={{ opacity: overlayOpacity }}
           />
@@ -229,21 +230,21 @@ export default function ProcessSection({
 
       <div className="mx-auto max-w-6xl px-4 relative z-10">
         {!hideHeader ? (
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             className="mb-10 text-center md:mb-16"
           >
-            <motion.p
+            <m.p
               variants={itemVariants}
               className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2DD4BF]"
             >
               Nuestro proceso
-            </motion.p>
+            </m.p>
 
-            <motion.h2
+            <m.h2
               variants={itemVariants}
               className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl lg:text-6xl"
             >
@@ -251,22 +252,22 @@ export default function ProcessSection({
               <span className="bg-gradient-to-r from-[#2DD4BF] via-[#1D4ED8] to-[#2DD4BF] bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
                 realidad
               </span>
-            </motion.h2>
+            </m.h2>
 
-            <motion.p
+            <m.p
               variants={itemVariants}
               className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base"
             >
               Transformamos tu idea en una obra impecable con un proceso
               optimizado durante más de 25 años, lo que garantiza que sea
               ordenado, transparente y enfocado en excelentes resultados.
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
         ) : null}
 
         <div className="relative">
           {/* Timeline line */}
-          <motion.div
+          <m.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
@@ -275,7 +276,7 @@ export default function ProcessSection({
             className="pointer-events-none absolute left-[18px] top-0 hidden h-full w-px bg-gradient-to-b from-[#2DD4BF]/70 via-white/25 to-transparent origin-top sm:block lg:left-1/2"
           />
 
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -283,19 +284,19 @@ export default function ProcessSection({
             className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3"
           >
             {steps.map((step, index) => (
-              <motion.div
+              <m.div
                 key={step.stepNumber}
                 variants={itemVariants}
                 custom={index}
               >
                 <ProcessStepCard {...step} />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
         {!hideHeader ? (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -312,9 +313,11 @@ export default function ProcessSection({
                 (según dimensiones, equipamiento y condiciones del terreno)
               </span>
             </p>
-          </motion.div>
+          </m.div>
         ) : null}
       </div>
-    </section>
+      </section>
+    </MotionProvider>
   );
 }
+
