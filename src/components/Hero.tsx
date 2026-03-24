@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Award, Clock3, Users } from "lucide-react";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { site } from "@/data/site";
 
 const HERO_MOBILE_IMAGE =
@@ -8,9 +10,9 @@ export default function Hero() {
   const h = site.hero;
 
   const quickStats = [
-    { value: "25+", label: "Años de trayectoria" },
-    { value: "500+", label: "Proyectos entregados" },
-    { value: "10 años", label: "Garantía de calidad" },
+    { icon: Award, value: 25, suffix: "+", label: "Años de trayectoria" },
+    { icon: Users, value: 500, suffix: "+", label: "Proyectos entregados" },
+    { icon: Clock3, value: 10, suffix: " años", label: "Garantía de calidad" },
   ];
 
   const title = h.title;
@@ -29,7 +31,8 @@ export default function Hero() {
             alt={h.image.alt}
             fetchPriority="high"
             loading="eager"
-            decoding="async"
+            decoding="sync"
+            sizes="100vw"
             width={1040}
             height={975}
             className="h-full w-full object-cover object-top md:object-cover"
@@ -89,13 +92,20 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+          <div className="mt-10 hidden gap-3 sm:grid sm:grid-cols-3 sm:max-w-[38rem]">
             {quickStats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/12 bg-black/30 p-4 md:bg-white/[0.05] md:backdrop-blur-md"
+                className="rounded-2xl border border-white/12 bg-black/30 p-3 md:bg-white/[0.05] md:backdrop-blur-md"
               >
-                <p className="text-2xl font-bold text-white">{stat.value}</p>
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.07] text-[#2DD4BF]">
+                  <stat.icon className="h-5 w-5" />
+                </div>
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  className="text-2xl font-bold text-white"
+                />
                 <p className="mt-1 text-xs text-white/60">{stat.label}</p>
               </div>
             ))}

@@ -122,8 +122,8 @@ export default function ProcessSection({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
+        staggerChildren: 0.04,
+        delayChildren: 0,
       },
     },
   };
@@ -135,7 +135,7 @@ export default function ProcessSection({
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.35,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     },
@@ -237,7 +237,7 @@ export default function ProcessSection({
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             aria-hidden="true"
             className="pointer-events-none absolute left-[18px] top-0 hidden h-full w-px bg-gradient-to-b from-[#2DD4BF]/70 via-white/25 to-transparent origin-top sm:block lg:left-1/2"
           />
@@ -266,7 +266,7 @@ export default function ProcessSection({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ delay: 0.08, duration: 0.35 }}
             className="mx-auto mt-10 max-w-3xl rounded-2xl border border-white/20 bg-black/30 px-6 py-4 text-center md:mt-12 md:bg-white/10 md:backdrop-blur"
           >
             <p className="text-sm text-white/80 md:text-base">

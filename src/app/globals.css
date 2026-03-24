@@ -165,7 +165,7 @@ picture {
 img,
 picture,
 video {
-  touch-action: none;
+  touch-action: pan-y pinch-zoom;
 }
 
 /* Text utilities */

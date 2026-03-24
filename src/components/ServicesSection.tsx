@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -48,7 +48,7 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.04, delayChildren: 0 },
   },
 };
 
@@ -58,7 +58,7 @@ const itemVariants: Variants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -71,8 +71,17 @@ export default function ServicesSection({
   maxItems,
   inheritBackground = false,
 }: ServicesSectionProps) {
+  const [isDesktop, setIsDesktop] = useState(false);
   const [selected, setSelected] = useState<Service | null>(null);
-  const backgroundY = useParallax(-0.012);
+  const backgroundY = useParallax(-0.012, isDesktop);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const services = useMemo<Service[]>(
     () => [
@@ -423,13 +432,13 @@ export default function ServicesSection({
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0 }}
               className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65"
             >
               {isFeaturedMode ? "Servicios destacados" : "Nuestros servicios"}
@@ -439,7 +448,7 @@ export default function ServicesSection({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              transition={{ delay: 0, duration: 0.35 }}
               className="mt-4 text-4xl font-semibold md:text-5xl lg:text-6xl"
             >
               Soluciones {isFeaturedMode ? "clave" : "completas"} para tu{" "}
@@ -452,7 +461,7 @@ export default function ServicesSection({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.04, duration: 0.35 }}
               className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg"
             >
               {isFeaturedMode
@@ -495,7 +504,7 @@ export default function ServicesSection({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.08, duration: 0.3 }}
               className="mt-12 text-center"
             >
               <MagneticButton

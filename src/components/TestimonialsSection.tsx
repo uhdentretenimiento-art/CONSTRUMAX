@@ -7,8 +7,17 @@ import { GlowOrb } from "@/components/ui/FloatingElement";
 import { useParallax } from "@/hooks";
 
 export default function TestimonialsSection() {
-  const backgroundY = useParallax(-0.015);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const backgroundY = useParallax(-0.015, isDesktop);
   const visibleTestimonials = useMemo(() => site.testimonials.slice(0, 6), []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   return (
     <section className="relative overflow-hidden py-24 text-white">
@@ -32,11 +41,11 @@ export default function TestimonialsSection() {
 
       <div className="mx-auto max-w-6xl px-4">
         {/* Header */}
-        <Reveal className="text-center" distance={30} amount={0.3} duration={700}>
+        <Reveal className="text-center" distance={30} amount={0.3} duration={320}>
           <Reveal
             as="p"
-            delay={100}
-            duration={500}
+            delay={0}
+            duration={280}
             className="text-xs font-semibold uppercase tracking-[0.22em] text-white/65"
           >
             Testimonios
@@ -44,8 +53,8 @@ export default function TestimonialsSection() {
 
           <Reveal
             as="h2"
-            delay={200}
-            duration={500}
+            delay={0}
+            duration={300}
             className="mt-4 text-4xl font-semibold leading-[1.1] md:text-5xl lg:text-6xl"
           >
             Lo que dicen nuestros{" "}
@@ -56,8 +65,8 @@ export default function TestimonialsSection() {
 
           <Reveal
             as="p"
-            delay={300}
-            duration={500}
+            delay={40}
+            duration={300}
             className="mx-auto mt-5 max-w-3xl text-base text-white/75 md:text-lg"
           >
             Familias y empresas que confiaron en Construmax para transformar
@@ -70,8 +79,8 @@ export default function TestimonialsSection() {
           {visibleTestimonials.map((testimonial, index) => (
             <Reveal
               key={`${testimonial.name}-${testimonial.location ?? ""}`}
-              delay={120 + index * 70}
-              duration={600}
+              delay={index * 20}
+              duration={300}
               distance={30}
               scaleFrom={0.95}
             >
@@ -91,8 +100,8 @@ export default function TestimonialsSection() {
         {/* Trust indicators */}
         <Reveal
           className="mt-16 flex flex-col items-center justify-center gap-6 sm:flex-row"
-          delay={300}
-          duration={600}
+          delay={60}
+          duration={300}
           distance={30}
         >
           <div className="text-center sm:text-left">
@@ -161,7 +170,7 @@ function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: amount }
+      { threshold: amount, rootMargin: "160px 0px" }
     );
 
     observer.observe(element);

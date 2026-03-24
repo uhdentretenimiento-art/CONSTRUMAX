@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Award, CheckCircle2, Clock3, Users } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
@@ -29,16 +30,25 @@ const ABOUT_IMAGE_MOBILE_384 =
   "https://www.construmaxpiscinas.com/images/index/about-nuevo-mobile-w384.avif";
 
 export default function AboutUsSection() {
-  const imageY = useParallax(-0.01);
-  const contentY = useParallax(-0.007);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const imageY = useParallax(-0.01, isDesktop);
+  const contentY = useParallax(-0.007, isDesktop);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.04,
+        delayChildren: 0,
       },
     },
   };
@@ -49,7 +59,7 @@ export default function AboutUsSection() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.35,
         ease: [0.16, 1, 0.3, 1] as const,
       },
     },
@@ -104,7 +114,7 @@ export default function AboutUsSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.05, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mt-4 grid w-full grid-cols-3 gap-3 rounded-2xl border border-white/12 bg-black/35 p-4 shadow-[0_24px_80px_-60px_rgba(0,0,0,0.9)] md:-mt-10 md:w-[94%] md:bg-white/[0.06] md:backdrop-blur-xl md:gap-4 md:p-5"
           >
             {stats.map((item, index) => (
@@ -113,7 +123,7 @@ export default function AboutUsSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                transition={{ delay: index * 0.03, duration: 0.28 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="text-center group cursor-default"
               >
@@ -179,7 +189,7 @@ export default function AboutUsSection() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}
+                transition={{ delay: index * 0.02, duration: 0.28 }}
                 whileHover={{ x: 4, backgroundColor: "rgba(255,255,255,0.08)" }}
                 className="group flex items-start gap-2.5 rounded-2xl border border-white/12 bg-black/20 px-4 py-3 transition-all duration-300 cursor-default md:bg-white/[0.04] md:backdrop-blur"
               >

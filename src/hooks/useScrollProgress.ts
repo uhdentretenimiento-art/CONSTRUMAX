@@ -24,17 +24,23 @@ export function useScrollProgress() {
   return { progress, scrollY };
 }
 
-export function useParallax(speed: number = 0.5) {
+export function useParallax(speed: number = 0.5, enabled: boolean = true) {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
+    if (!enabled) {
+      setOffset(0);
+      return;
+    }
+
     const handleScroll = () => {
       setOffset(window.scrollY * speed);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [speed]);
+  }, [enabled, speed]);
 
   return offset;
 }

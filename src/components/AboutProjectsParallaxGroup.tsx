@@ -11,8 +11,8 @@ const ABOUT_BG_MOBILE =
   "https://www.construmaxpiscinas.com/videos/hero/video-about-mobile.mp4";
 
 export default function AboutProjectsParallaxGroup() {
-  const backgroundY = useParallax(-0.04);
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+  const backgroundY = useParallax(-0.04, isDesktop === true);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 768px)");
@@ -46,13 +46,13 @@ export default function AboutProjectsParallaxGroup() {
 
         {isDesktop === false ? (
           <video
-            className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
-            style={{ transform: `translateY(${backgroundY}px)` }}
+            className="absolute inset-0 h-full w-full scale-[1.03] object-cover"
             autoPlay
             loop
             muted
             playsInline
             preload="metadata"
+            aria-hidden="true"
           >
             <source src={ABOUT_BG_MOBILE} type="video/mp4" />
           </video>
