@@ -22,6 +22,7 @@ import {
   type ContactFieldErrors,
   type ContactFormData,
 } from "@/lib/contactForm";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 export default function ContactSection() {
   const projectTypeOptions = [
@@ -94,6 +95,11 @@ export default function ContactSection() {
             "No pudimos enviar tu solicitud en este momento."
         );
       }
+
+      trackMetaLead("contact_form_success", {
+        city: formData.city || undefined,
+        project_type: formData.projectType || undefined,
+      });
 
       setSuccess(true);
       toast.success("Solicitud enviada. Te responderemos a la brevedad.");

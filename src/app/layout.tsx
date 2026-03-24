@@ -4,6 +4,7 @@ import { Manrope, Sora } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import MetaPixelEvents from "@/components/MetaPixelEvents";
 
 const Footer = dynamic(() => import("@/components/Footer"));
 const ScrollToTop = dynamic(() => import("@/components/ScrollToTop"));
@@ -250,15 +251,18 @@ export default function RootLayout({
       </head>
       <body className={`${manrope.variable} ${sora.variable} min-h-dvh antialiased`}>
         {isProduction ? (
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: "none" }}
-              src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-              alt=""
-            />
-          </noscript>
+          <>
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+                alt=""
+              />
+            </noscript>
+            <MetaPixelEvents />
+          </>
         ) : null}
         <script
           type="application/ld+json"
