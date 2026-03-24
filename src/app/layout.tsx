@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.construmaxpiscinas.com/images/logo/png/construmax_vertical_color.png",
+        url: "/api/storage/images/logo/png/construmax_vertical_color.png",
       },
     ],
   },
@@ -46,33 +46,33 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/favicon.ico",
+        url: "/api/storage/images/favicon/favicon.ico",
         type: "image/x-icon",
       },
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/favicon-16x16.png",
+        url: "/api/storage/images/favicon/favicon-16x16.png",
         sizes: "16x16",
         type: "image/png",
       },
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/favicon-32x32.png",
+        url: "/api/storage/images/favicon/favicon-32x32.png",
         sizes: "32x32",
         type: "image/png",
       },
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/android-chrome-192x192.png",
+        url: "/api/storage/images/favicon/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
       },
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/android-chrome-512x512.png",
+        url: "/api/storage/images/favicon/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
       },
     ],
     apple: [
       {
-        url: "https://www.construmaxpiscinas.com/images/favicon/apple-touch-icon.png",
+        url: "/api/storage/images/favicon/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
       },
@@ -246,3 +246,4 @@ export default function RootLayout({
     </html>
   );
 }
+

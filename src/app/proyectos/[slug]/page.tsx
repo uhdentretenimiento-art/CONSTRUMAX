@@ -114,7 +114,7 @@ function getProjectSchema(project: any, slug: string) {
         logo: {
           "@type": "ImageObject",
           url: toAbsoluteUrl(
-            "https://www.construmaxpiscinas.com/images/logo/png/construmax_horizontal_color.png"
+            "/api/storage/images/logo/png/construmax_horizontal_color.png"
           ),
         },
       },

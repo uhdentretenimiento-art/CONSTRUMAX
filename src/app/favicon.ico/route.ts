@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
-const FAVICON_URL =
-  "https://www.construmaxpiscinas.com/images/favicon/favicon.ico";
+const FAVICON_PATH = "/api/storage/images/favicon/favicon.ico";
 
-export function GET() {
-  return NextResponse.redirect(FAVICON_URL, 308);
+export function GET(request: Request) {
+  return NextResponse.redirect(new URL(FAVICON_PATH, request.url), 308);
 }
+

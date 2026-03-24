@@ -87,15 +87,15 @@ El costo aumenta proporcionalmente con el tamaño, pero no solo en construcción
 En CONSTRUMAX, te asesoramos personalmente para encontrar el tamaño perfecto que se adapte a tus necesidades y espacio disponible. ¡Contáctanos para una consulta gratuita!
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/1280w/los-psicologos-002-1280w.avif",
+      "/api/storage/images/portfolio/los-psicologos/responsive/1280w/los-psicologos-002-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/768w/los-psicologos-002-768w.avif",
+      "/api/storage/images/portfolio/los-psicologos/responsive/768w/los-psicologos-002-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/thumbnails/480w/sm-los-psicologos-002-480w.avif",
+      "/api/storage/images/portfolio/los-psicologos/thumbnails/480w/sm-los-psicologos-002-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/thumbnails/320w/sm-los-psicologos-002-320w.avif",
+      "/api/storage/images/portfolio/los-psicologos/thumbnails/320w/sm-los-psicologos-002-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/768w/los-psicologos-002-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/1280w/los-psicologos-002-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/los-psicologos/responsive/1920w/los-psicologos-002-1920w.avif 1920w",
+      "/api/storage/images/portfolio/los-psicologos/responsive/768w/los-psicologos-002-768w.avif 768w, /api/storage/images/portfolio/los-psicologos/responsive/1280w/los-psicologos-002-1280w.avif 1280w, /api/storage/images/portfolio/los-psicologos/responsive/1920w/los-psicologos-002-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Guías",
@@ -199,15 +199,15 @@ Prepara tu piscina para el uso:
 En CONSTRUMAX ofrecemos servicios de mantenimiento profesional para que disfrutes tu piscina sin preocupaciones.
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif",
+      "/api/storage/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif",
+      "/api/storage/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/480w/sm-club-ate-001-480w.avif",
+      "/api/storage/images/portfolio/club-ate/thumbnails/480w/sm-club-ate-001-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/thumbnails/320w/sm-club-ate-001-320w.avif",
+      "/api/storage/images/portfolio/club-ate/thumbnails/320w/sm-club-ate-001-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/club-ate/responsive/1920w/club-ate-001-1920w.avif 1920w",
+      "/api/storage/images/portfolio/club-ate/responsive/768w/club-ate-001-768w.avif 768w, /api/storage/images/portfolio/club-ate/responsive/1280w/club-ate-001-1280w.avif 1280w, /api/storage/images/portfolio/club-ate/responsive/1920w/club-ate-001-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Mantenimiento",
@@ -314,15 +314,15 @@ Protección sin sacrificar estética:
 En CONSTRUMAX estamos al día con las últimas tendencias para crear la piscina de tus sueños. ¿Tienes alguna idea en mente? ¡Conversemos!
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/1280w/mirasoles-004-1280w.avif",
+      "/api/storage/images/portfolio/mirasoles/responsive/1280w/mirasoles-004-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/768w/mirasoles-004-768w.avif",
+      "/api/storage/images/portfolio/mirasoles/responsive/768w/mirasoles-004-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/thumbnails/480w/sm-mirasoles-004-480w.avif",
+      "/api/storage/images/portfolio/mirasoles/thumbnails/480w/sm-mirasoles-004-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/thumbnails/320w/sm-mirasoles-004-320w.avif",
+      "/api/storage/images/portfolio/mirasoles/thumbnails/320w/sm-mirasoles-004-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/768w/mirasoles-004-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/1280w/mirasoles-004-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/mirasoles/responsive/1920w/mirasoles-004-1920w.avif 1920w",
+      "/api/storage/images/portfolio/mirasoles/responsive/768w/mirasoles-004-768w.avif 768w, /api/storage/images/portfolio/mirasoles/responsive/1280w/mirasoles-004-1280w.avif 1280w, /api/storage/images/portfolio/mirasoles/responsive/1920w/mirasoles-004-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Tendencias",
@@ -438,15 +438,15 @@ Imagina poder usar tu piscina en pleno invierno mientras afuera hace frío. La c
 En CONSTRUMAX te asesoramos para elegir el sistema de climatización ideal para tu piscina y presupuesto. ¡Consúltanos!
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif",
+      "/api/storage/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif",
+      "/api/storage/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/480w/sm-hosteria-cabra-corral-001-480w.avif",
+      "/api/storage/images/portfolio/hosteria-cabra-corral/thumbnails/480w/sm-hosteria-cabra-corral-001-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/thumbnails/320w/sm-hosteria-cabra-corral-001-320w.avif",
+      "/api/storage/images/portfolio/hosteria-cabra-corral/thumbnails/320w/sm-hosteria-cabra-corral-001-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/hosteria-cabra-corral/responsive/1920w/hosteria-cabra-corral-001-1920w.avif 1920w",
+      "/api/storage/images/portfolio/hosteria-cabra-corral/responsive/768w/hosteria-cabra-corral-001-768w.avif 768w, /api/storage/images/portfolio/hosteria-cabra-corral/responsive/1280w/hosteria-cabra-corral-001-1280w.avif 1280w, /api/storage/images/portfolio/hosteria-cabra-corral/responsive/1920w/hosteria-cabra-corral-001-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Equipamiento",
@@ -633,15 +633,15 @@ En CONSTRUMAX recomendamos:
 ¿Necesitas asesoramiento personalizado? ¡Contáctanos y te ayudamos a elegir!
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/1280w/la-almudena-001-1280w.avif",
+      "/api/storage/images/portfolio/la-almudena/responsive/1280w/la-almudena-001-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/768w/la-almudena-001-768w.avif",
+      "/api/storage/images/portfolio/la-almudena/responsive/768w/la-almudena-001-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/thumbnails/480w/sm-la-almudena-001-480w.avif",
+      "/api/storage/images/portfolio/la-almudena/thumbnails/480w/sm-la-almudena-001-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/thumbnails/320w/sm-la-almudena-001-320w.avif",
+      "/api/storage/images/portfolio/la-almudena/thumbnails/320w/sm-la-almudena-001-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/768w/la-almudena-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/1280w/la-almudena-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/la-almudena/responsive/1920w/la-almudena-001-1920w.avif 1920w",
+      "/api/storage/images/portfolio/la-almudena/responsive/768w/la-almudena-001-768w.avif 768w, /api/storage/images/portfolio/la-almudena/responsive/1280w/la-almudena-001-1280w.avif 1280w, /api/storage/images/portfolio/la-almudena/responsive/1920w/la-almudena-001-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Materiales",
@@ -793,15 +793,15 @@ Recuerda: **La prevención es la mejor protección.** Una piscina segura es una 
 En CONSTRUMAX podemos asesorarte en sistemas de seguridad para tu piscina. ¡La tranquilidad de tu familia es lo primero!
     `,
     image:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif",
+      "/api/storage/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif",
     imageMobile:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif",
+      "/api/storage/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif",
     imageThumbnail:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/480w/sm-agropecuaria-el-guanaco-metan-001-480w.avif",
+      "/api/storage/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/480w/sm-agropecuaria-el-guanaco-metan-001-480w.avif",
     imageThumbnailSmall:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/320w/sm-agropecuaria-el-guanaco-metan-001-320w.avif",
+      "/api/storage/images/portfolio/agropecuaria-el-guanaco-metan/thumbnails/320w/sm-agropecuaria-el-guanaco-metan-001-320w.avif",
     imageSrcSet:
-      "https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif 768w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif 1280w, https://www.construmaxpiscinas.com/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1920w/agropecuaria-el-guanaco-metan-001-1920w.avif 1920w",
+      "/api/storage/images/portfolio/agropecuaria-el-guanaco-metan/responsive/768w/agropecuaria-el-guanaco-metan-001-768w.avif 768w, /api/storage/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1280w/agropecuaria-el-guanaco-metan-001-1280w.avif 1280w, /api/storage/images/portfolio/agropecuaria-el-guanaco-metan/responsive/1920w/agropecuaria-el-guanaco-metan-001-1920w.avif 1920w",
     author: "Equipo CONSTRUMAX",
     date: "2026-03-06",
     category: "Seguridad",
@@ -835,3 +835,4 @@ export const getRelatedPosts = (
     )
     .slice(0, limit);
 };
+

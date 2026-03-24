@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { useScrollProgress } from "@/hooks";
 
 const VIDEO_DESKTOP_WEBM =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.webm";
+  "/api/storage/videos/hero/video-proceso.webm";
 
 const VIDEO_MOBILE_WEBM =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso-mobile.webm";
+  "/api/storage/videos/hero/video-proceso-mobile.webm";
 
 const VIDEO_MP4 =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.mp4";
+  "/api/storage/videos/hero/video-proceso.mp4";
 
 export default function ProcesoHeroBackground() {
   const { scrollY } = useScrollProgress();
@@ -86,3 +86,4 @@ export default function ProcesoHeroBackground() {
     </>
   );
 }
+

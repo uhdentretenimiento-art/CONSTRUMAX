@@ -126,7 +126,7 @@ export default function ServicesSection({
           "Diseño y construcción tradicional con los más altos estándares de calidad y experiencia comprobable que nos avalan.",
         fullDescription:
           "Construimos piscinas personalizadas adaptadas a tus necesidades y espacio disponible. Utilizamos materiales de primera calidad y técnicas constructivas probadas que garantizan durabilidad y resistencia. Nuestro equipo de arquitectos e ingenieros trabaja contigo desde el diseño inicial hasta la entrega final.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Diseño 3D personalizado",
           "Materiales de alta calidad",
@@ -152,7 +152,7 @@ export default function ServicesSection({
           "Servicio integral de mantenimiento y reparación de sistemas de filtrado. Reparación de bombas, filtros y accesorios.",
         fullDescription:
           "Ofrecemos servicios completos de mantenimiento para mantener tu piscina en condiciones óptimas durante todo el año. Desde limpieza regular hasta reparaciones complejas de equipos de filtración.",
-        image: "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif",
+        image: "/api/storage/images/index/about-nuevo.avif",
         features: [
           "Limpieza semanal/quincenal",
           "Control de químicos",
@@ -177,7 +177,7 @@ export default function ServicesSection({
           "Venta e instalación de equipos profesionales: bombas, filtros, sistemas de control y automatización para tu piscina.",
         fullDescription:
           "Proveemos e instalamos equipamiento de primera calidad para garantizar el funcionamiento óptimo de tu piscina. Trabajamos con las mejores marcas del mercado y ofrecemos asesoramiento personalizado para elegir el equipo adecuado según tus necesidades.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Bombas de filtrado de alta eficiencia",
           "Filtros de arena y cartucho",
@@ -202,7 +202,7 @@ export default function ServicesSection({
           "Construcción de jacuzzi e hidromasajes para convertir tu hogar en un verdadero spa.",
         fullDescription:
           "Diseñamos y construimos hidromasajes y spa de lujo que transforman tu espacio en un oasis de relajación. Sistemas de hidromasaje terapéutico con múltiples jets configurables.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Sistemas de hidromasaje terapéutico",
           "Control de temperatura digital",
@@ -227,7 +227,7 @@ export default function ServicesSection({
           "Renovamos y modernizamos, adecuando un nuevo diseño a tu piscina existente con nuevos acabados.",
         fullDescription:
           "¿Tu piscina necesita una renovación? Ofrecemos servicios completos de remodelación para actualizar el aspecto y funcionalidad de tu piscina existente, sin necesidad de construir una nueva.",
-        image: "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif",
+        image: "/api/storage/images/index/about-nuevo.avif",
         features: [
           "Cambio de revestimiento",
           "Modernización de equipos",
@@ -251,7 +251,7 @@ export default function ServicesSection({
           "Sistemas de calefacción para disfrutar tu piscina durante todo el año. Instalación de calderas y bombas de calor.",
         fullDescription:
           "Extiende la temporada de uso de tu piscina con nuestros sistemas de climatización. Ofrecemos soluciones eficientes para mantener el agua a la temperatura ideal, reduciendo costos operativos.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Bombas de calor de alta eficiencia",
           "Calderas a gas",
@@ -275,7 +275,7 @@ export default function ServicesSection({
           "Iluminación subacuática que transforma tu piscina en un espectáculo nocturno.",
         fullDescription:
           "Transforma tu piscina en un espectáculo visual con nuestras soluciones de iluminación LED. Colores vibrantes, control remoto y tecnología de bajo consumo para crear el ambiente perfecto.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Luces LED sumergibles",
           "Control por app/remoto",
@@ -299,7 +299,7 @@ export default function ServicesSection({
           "Bordes y solárium atérmicos/antideslizantes para confort y seguridad.",
         fullDescription:
           "Nuestros pisos atérmicos y antideslizantes son la solución perfecta para el área alrededor de tu piscina. No absorben el calor del sol, manteniéndose frescos incluso en los días más calurosos.",
-        image: "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif",
+        image: "/api/storage/images/index/about-nuevo.avif",
         features: [
           "Material atérmico avanzado",
           "Acabado antideslizante",
@@ -323,7 +323,7 @@ export default function ServicesSection({
           "Cascadas decorativas e instalación de opciones en acero inoxidable.",
         fullDescription:
           "Agregá un toque de elegancia y relajación con nuestras cascadas decorativas. Diseños personalizados que se integran perfectamente con tu piscina y paisajismo.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Cascadas de acero inoxidable",
           "Diseños de piedra natural",
@@ -354,7 +354,7 @@ export default function ServicesSection({
         ),
         fullDescription:
           "Ofrecemos una amplia variedad de revestimientos de alta calidad para el interior de tu piscina. Desde clásicas venecitas hasta modernos sistemas de desborde infinito que crean un efecto visual impresionante.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Venecitas de colores variados",
           "Piedra Bali natural",
@@ -379,7 +379,7 @@ export default function ServicesSection({
           "Permite nadar sin fin en un espacio reducido, ideal para entrenamiento y beneficios cardiovasculares.",
         fullDescription:
           "El sistema de nado contracorriente permite nadar de forma continua en un espacio reducido. Ideal para ejercicio cardiovascular, entrenamiento de resistencia y terapia física.",
-        image: "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif",
+        image: "/api/storage/images/index/about-nuevo.avif",
         features: [
           "Generador de corriente ajustable",
           "Múltiples niveles de intensidad",
@@ -402,7 +402,7 @@ export default function ServicesSection({
         shortDescription: "Quinchos, fogoneros, pérgolas y ampliaciones.",
         fullDescription:
           "Complementamos tu piscina con construcciones adicionales que crean el ambiente perfecto para el entretenimiento al aire libre. Desde quinchos completos hasta pérgolas elegantes.",
-        image: "https://www.construmaxpiscinas.com/images/hero/nuevo-hero.avif",
+        image: "/api/storage/images/hero/nuevo-hero.avif",
         features: [
           "Quinchos con parrilla",
           "Fogoneros y hogares",
@@ -438,7 +438,7 @@ export default function ServicesSection({
               className="absolute inset-0 -z-40 bg-cover bg-center opacity-10"
               style={{
                 backgroundImage: shouldLoadBgImage
-                  ? "url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)"
+                  ? "url(/api/storage/images/index/img-servicios-section.avif)"
                   : "none",
               }}
             />
@@ -687,4 +687,5 @@ export default function ServicesSection({
     </MotionProvider>
   );
 }
+
 

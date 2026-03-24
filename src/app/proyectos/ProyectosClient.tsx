@@ -34,9 +34,9 @@ import styles from "./ProyectosClient.module.css";
 
 const RESUME_DELAY_MS = 900;
 const PROJECTS_HERO_BG =
-  "https://www.construmaxpiscinas.com/images/hero/hero-proyectos.avif";
+  "/api/storage/images/hero/hero-proyectos.avif";
 const PROJECTS_HERO_BG_MOBILE =
-  "https://www.construmaxpiscinas.com/images/hero/hero-proyectos-mobile.avif";
+  "/api/storage/images/hero/hero-proyectos-mobile.avif";
 const PROJECTS_LIST_EVENT = "projects:show-list";
 
 const getUniqueCities = () => {
@@ -753,3 +753,4 @@ export default function ProyectosClient() {
     </section>
   );
 }
+

@@ -6,9 +6,9 @@ import ProjectsSection from "@/components/ProjectsSection";
 import { useParallax } from "@/hooks";
 
 const ABOUT_BG_DESKTOP =
-  "https://www.construmaxpiscinas.com/videos/hero/video-about.webm";
+  "/api/storage/videos/hero/video-about.webm";
 const ABOUT_BG_MOBILE =
-  "https://www.construmaxpiscinas.com/videos/hero/video-about-mobile.mp4";
+  "/api/storage/videos/hero/video-about-mobile.mp4";
 
 export default function AboutProjectsParallaxGroup() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -97,3 +97,4 @@ export default function AboutProjectsParallaxGroup() {
     </section>
   );
 }
+

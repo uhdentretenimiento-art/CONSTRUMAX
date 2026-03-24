@@ -9,6 +9,8 @@ const STORAGE_ROOT_CANDIDATES = [
   "/home/u307066029/domains/construmaxpiscinas.com/storage/uploads",
   "/home/u307066029/storage/uploads",
 ].filter((value): value is string => Boolean(value && value.trim()));
+const REMOTE_ASSET_ORIGIN =
+  process.env.ASSET_ORIGIN || "https://www.construmaxpiscinas.com";
 
 const MIME_TYPES: Record<string, string> = {
   ".avif": "image/avif",
@@ -53,6 +55,45 @@ function getContentType(filePath: string) {
   return MIME_TYPES[extension] || "application/octet-stream";
 }
 
+async function buildRemoteFallbackResponse(
+  kind: "images" | "videos",
+  segments: string[],
+  method: "GET" | "HEAD"
+) {
+  const encodedPath = segments.map((segment) => encodeURIComponent(segment)).join("/");
+  const remoteUrl = `${REMOTE_ASSET_ORIGIN}/${kind}/${encodedPath}`;
+  const upstream = await fetch(remoteUrl, {
+    method,
+    cache: "no-store",
+  });
+
+  if (!upstream.ok) {
+    return new Response("Not found", { status: 404 });
+  }
+
+  const upstreamType = upstream.headers.get("content-type");
+  const inferredType = getContentType(segments.join("/"));
+  const contentType =
+    !upstreamType ||
+    upstreamType.startsWith("text/plain") ||
+    upstreamType === "application/octet-stream"
+      ? inferredType
+      : upstreamType;
+  const headers = new Headers({
+    "cache-control": "public, max-age=31536000, immutable",
+    "content-type": contentType,
+  });
+
+  if (method === "HEAD") {
+    return new Response(null, { status: 200, headers });
+  }
+
+  return new Response(upstream.body, {
+    status: 200,
+    headers,
+  });
+}
+
 export async function buildStorageAssetResponse(
   kind: "images" | "videos",
   segments: string[],
@@ -77,7 +118,7 @@ export async function buildStorageAssetResponse(
     }
 
     if (!resolvedPath || !assetStat) {
-      return new Response("Not found", { status: 404 });
+      return buildRemoteFallbackResponse(kind, segments, method);
     }
 
     const headers = new Headers({
@@ -96,6 +137,10 @@ export async function buildStorageAssetResponse(
       headers,
     });
   } catch {
-    return new Response("Not found", { status: 404 });
+    try {
+      return await buildRemoteFallbackResponse(kind, segments, method);
+    } catch {
+      return new Response("Not found", { status: 404 });
+    }
   }
 }

@@ -25,9 +25,9 @@ const stats = [
 ];
 
 const ABOUT_IMAGE_DESKTOP =
-  "https://www.construmaxpiscinas.com/images/index/about-nuevo.avif";
+  "/api/storage/images/index/about-nuevo.avif";
 const ABOUT_IMAGE_MOBILE_384 =
-  "https://www.construmaxpiscinas.com/images/index/about-nuevo-mobile-w384.avif";
+  "/api/storage/images/index/about-nuevo-mobile-w384.avif";
 
 export default function AboutUsSection() {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -228,4 +228,5 @@ export default function AboutUsSection() {
     </MotionProvider>
   );
 }
+
 

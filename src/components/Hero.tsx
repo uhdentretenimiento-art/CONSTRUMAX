@@ -4,7 +4,7 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { site } from "@/data/site";
 
 const HERO_MOBILE_IMAGE =
-  "https://www.construmaxpiscinas.com/images/hero/nuevo-hero-mobile.avif";
+  "/api/storage/images/hero/nuevo-hero-mobile.avif";
 
 export default function Hero() {
   const h = site.hero;
@@ -117,3 +117,4 @@ export default function Hero() {
     </section>
   );
 }
+

@@ -16,7 +16,7 @@ export default function ServicesPageContent() {
         className="absolute inset-0 -z-40 bg-cover bg-center opacity-10"
         style={{
           backgroundImage:
-            "url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)",
+            "url(/api/storage/images/index/img-servicios-section.avif)",
         }}
       />
       <motion.div
@@ -54,3 +54,4 @@ export default function ServicesPageContent() {
     </div>
   );
 }
+

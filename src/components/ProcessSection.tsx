@@ -16,13 +16,13 @@ import { useScrollProgress } from "@/hooks";
 import { useEffect, useRef, useState } from "react";
 
 const VIDEO_DESKTOP_WEBM =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.webm";
+  "/api/storage/videos/hero/video-proceso.webm";
 
 const VIDEO_MOBILE_WEBM =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso-mobile.webm";
+  "/api/storage/videos/hero/video-proceso-mobile.webm";
 
 const VIDEO_MP4 =
-  "https://www.construmaxpiscinas.com/videos/hero/video-proceso.mp4";
+  "/api/storage/videos/hero/video-proceso.mp4";
 
 type ProcessSectionProps = {
   hideHeader?: boolean;
@@ -320,4 +320,5 @@ export default function ProcessSection({
     </MotionProvider>
   );
 }
+
 

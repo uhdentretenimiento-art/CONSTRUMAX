@@ -120,7 +120,7 @@ export default function Navbar() {
   const shrink = scrolled;
 
   const NAVBAR_LOGO =
-    "https://www.construmaxpiscinas.com/images/logo/svg/logo-navbar-mix.svg";
+    "/api/storage/images/logo/svg/logo-navbar-mix.svg";
 
   function updateIndicator() {
     const wrap = navWrapRef.current;
@@ -426,3 +426,4 @@ export default function Navbar() {
     </>
   );
 }
+
