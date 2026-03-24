@@ -33,11 +33,43 @@ export default function ProcessSection({
   hideHeader = false,
   disableBackgroundMedia = false,
 }: ProcessSectionProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const { scrollY } = useScrollProgress();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [shouldLoadMedia, setShouldLoadMedia] = useState(false);
   const videoScale = Math.max(1, 1.08 - scrollY * 0.00006);
   const overlayOpacity = Math.max(0.7, 0.9 - scrollY * 0.00015);
+
+  useEffect(() => {
+    if (disableBackgroundMedia) {
+      return;
+    }
+
+    const target = sectionRef.current;
+    if (!target || shouldLoadMedia) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadMedia(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          setShouldLoadMedia(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "640px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [disableBackgroundMedia, shouldLoadMedia]);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 768px)");
@@ -49,14 +81,14 @@ export default function ProcessSection({
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !shouldLoadMedia) return;
 
     video.load();
 
     void video.play().catch(() => {
       // If autoplay is blocked, the black background remains visible.
     });
-  }, [isDesktop]);
+  }, [isDesktop, shouldLoadMedia]);
 
   const steps = [
     {
@@ -143,6 +175,7 @@ export default function ProcessSection({
 
   return (
     <section
+      ref={sectionRef}
       className={[
         "relative overflow-hidden text-white",
         hideHeader ? "pb-16 pt-2 md:pb-20 md:pt-4" : "py-16 md:py-24",
@@ -159,20 +192,20 @@ export default function ProcessSection({
               key={isDesktop ? "desktop" : "mobile-webm"}
               ref={videoRef}
               className="h-full w-full object-cover"
-              autoPlay
+              autoPlay={shouldLoadMedia}
               muted
               loop
               playsInline
-              preload="auto"
+              preload={shouldLoadMedia ? "metadata" : "none"}
             >
-              {isDesktop ? (
+              {shouldLoadMedia && isDesktop ? (
                 <>
                   <source src={VIDEO_DESKTOP_WEBM} type="video/webm" />
                   <source src={VIDEO_MP4} type="video/mp4" />
                 </>
-              ) : (
+              ) : shouldLoadMedia ? (
                 <source src={VIDEO_MOBILE_WEBM} type="video/webm" />
-              )}
+              ) : null}
             </video>
           </motion.div>
         </>

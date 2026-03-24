@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AboutUsSection from "@/components/AboutUsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import { useParallax } from "@/hooks";
@@ -11,8 +11,36 @@ const ABOUT_BG_MOBILE =
   "https://www.construmaxpiscinas.com/videos/hero/video-about-mobile.mp4";
 
 export default function AboutProjectsParallaxGroup() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+  const [shouldLoadMedia, setShouldLoadMedia] = useState(false);
   const backgroundY = useParallax(-0.04, isDesktop === true);
+
+  useEffect(() => {
+    const target = sectionRef.current;
+    if (!target || shouldLoadMedia) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadMedia(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          setShouldLoadMedia(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "520px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [shouldLoadMedia]);
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 768px)");
@@ -27,9 +55,9 @@ export default function AboutProjectsParallaxGroup() {
   }, []);
 
   return (
-    <section className="relative isolate overflow-hidden">
+    <section ref={sectionRef} className="relative isolate overflow-hidden">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {isDesktop === true ? (
+        {isDesktop === true && shouldLoadMedia ? (
           <video
             className="absolute inset-0 h-full w-full scale-[1.15] object-cover"
             style={{ transform: `translateY(${backgroundY}px)` }}
@@ -44,7 +72,7 @@ export default function AboutProjectsParallaxGroup() {
           </video>
         ) : null}
 
-        {isDesktop === false ? (
+        {isDesktop === false && shouldLoadMedia ? (
           <video
             className="absolute inset-0 h-full w-full scale-[1.03] object-cover"
             autoPlay

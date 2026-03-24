@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -71,7 +71,9 @@ export default function ServicesSection({
   maxItems,
   inheritBackground = false,
 }: ServicesSectionProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [shouldLoadBgImage, setShouldLoadBgImage] = useState(false);
   const [selected, setSelected] = useState<Service | null>(null);
   const backgroundY = useParallax(-0.012, isDesktop);
 
@@ -82,6 +84,36 @@ export default function ServicesSection({
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
+
+  useEffect(() => {
+    if (inheritBackground) {
+      return;
+    }
+
+    const target = sectionRef.current;
+    if (!target || shouldLoadBgImage) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadBgImage(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (visible) {
+          setShouldLoadBgImage(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "640px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [inheritBackground, shouldLoadBgImage]);
 
   const services = useMemo<Service[]>(
     () => [
@@ -396,7 +428,7 @@ export default function ServicesSection({
 
   return (
     <>
-      <section className="relative overflow-hidden py-24 text-white">
+      <section ref={sectionRef} className="relative overflow-hidden py-24 text-white">
         {/* Background */}
         {!inheritBackground ? (
           <>
@@ -404,8 +436,9 @@ export default function ServicesSection({
             <div
               className="absolute inset-0 -z-40 bg-cover bg-center opacity-10"
               style={{
-                backgroundImage:
-                  "url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)",
+                backgroundImage: shouldLoadBgImage
+                  ? "url(https://www.construmaxpiscinas.com/images/index/img-servicios-section.avif)"
+                  : "none",
               }}
             />
             <motion.div
