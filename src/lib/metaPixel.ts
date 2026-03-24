@@ -44,16 +44,16 @@ export function initMetaPixel(pixelId: string) {
     document.head.appendChild(script);
   }
 
-  const fbq: MetaPixelFn =
+  const fbq =
     window.fbq ??
-    ((...args: unknown[]) => {
+    (((...args: unknown[]) => {
       if (fbq.callMethod) {
         fbq.callMethod(...args);
         return;
       }
 
       fbq.queue.push(args);
-    });
+    }) as MetaPixelFn);
 
   fbq.push = fbq;
   fbq.loaded = true;

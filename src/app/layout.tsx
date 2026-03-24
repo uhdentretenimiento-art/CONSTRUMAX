@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Manrope, Sora } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
@@ -239,10 +240,10 @@ export default function RootLayout({
       </head>
       <body className={`${manrope.variable} ${sora.variable} min-h-dvh antialiased`}>
         {isProduction ? (
-          <>
+          <Suspense fallback={null}>
             <GoogleTagBootstrap />
             <MetaPixelBootstrap />
-          </>
+          </Suspense>
         ) : null}
         <script
           type="application/ld+json"
