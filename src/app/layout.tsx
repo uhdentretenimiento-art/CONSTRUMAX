@@ -109,6 +109,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isProduction = process.env.NODE_ENV === "production";
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -226,8 +227,12 @@ export default function RootLayout({
   return (
     <html lang="es-AR" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://www.construmaxpiscinas.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://www.construmaxpiscinas.com" />
+        {isProduction ? (
+          <>
+            <link rel="preconnect" href="https://www.construmaxpiscinas.com" crossOrigin="" />
+            <link rel="dns-prefetch" href="https://www.construmaxpiscinas.com" />
+          </>
+        ) : null}
       </head>
       <body className={`${manrope.variable} ${sora.variable} min-h-dvh antialiased`}>
 
