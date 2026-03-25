@@ -150,7 +150,7 @@ export default function RootLayout({
       ],
       sameAs: [
         "https://www.facebook.com/construmaxsalta",
-        "https://www.instagram.com/construmaxsalta",
+        "https://www.instagram.com/construmaxpiscinas",
       ],
       contactPoint: [
         {

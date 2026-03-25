@@ -111,7 +111,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://www.instagram.com/construmaxsalta"
+                href="https://www.instagram.com/construmaxpiscinas"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visitar Instagram de Construmax"

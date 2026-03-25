@@ -4,7 +4,7 @@ export const site = {
     city: "Salta",
     country: "Argentina",
     email: "info@construmaxpiscinas.com",
-    instagramUrl: "https://www.instagram.com/construmaxsalta",
+    instagramUrl: "https://www.instagram.com/construmaxpiscinas",
   },
 
   hero: {
